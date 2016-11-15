@@ -1,11 +1,9 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CapaDatos.Entidades
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     [Table("guia")]
     public partial class guia
     {
@@ -16,14 +14,12 @@ namespace CapaDatos.Entidades
             guias = new HashSet<idioma_guia>();
         }
 
+        [Key]
+        public string usuario_id { get; set; }
+
         [Column(TypeName = "text")]
         [StringLength(65535)]
         public string nota { get; set; }
-
-        [Key]
-        [Column(TypeName = "uint")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long usuario_id { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<calendarioexcursion_guia> excursiones { get; set; }

@@ -38,6 +38,38 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -50,9 +82,19 @@
       <HintPath>..\packages\MySql.Web.6.9.9\lib\net45\MySql.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -67,6 +109,7 @@
     <Compile Include="ConfiguracionEntidades\ConfiguracionAlquilerVehiculo.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionCategoriaActividad.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionCategoriaExcursion.cs" />
+    <Compile Include="ConfiguracionEntidades\ConfiguracionClaim.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionCliente.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionColaborador.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionConfiguracion.cs" />
@@ -77,6 +120,7 @@
     <Compile Include="ConfiguracionEntidades\ConfiguracionGuia.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionIdioma.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionLocalidad.cs" />
+    <Compile Include="ConfiguracionEntidades\ConfiguracionLogin.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionPais.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionProveedor.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionProvincia.cs" />
@@ -84,10 +128,12 @@
     <Compile Include="ConfiguracionEntidades\ConfiguracionRecogidaDevolucion.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionReserva.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionReservaExcursionActividad.cs" />
+    <Compile Include="ConfiguracionEntidades\ConfiguracionRol.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionTipoVehiculo.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionUsuario.cs" />
+    <Compile Include="ConfiguracionEntidades\ConfiguracionUsuarioRol.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionVehiculo.cs" />
-    <Compile Include="ConfiguracionEntidades\ConfiguraionItem.cs" />
+    <Compile Include="ConfiguracionEntidades\ConfiguracionItem.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="Entidades\alquilervehiculo.cs" />
     <Compile Include="Entidades\calendarioexcursion.cs" />
@@ -120,12 +166,23 @@
     <Compile Include="Entidades\tipovehiculo.cs" />
     <Compile Include="Entidades\usuario.cs" />
     <Compile Include="Entidades\vehiculo.cs" />
+    <Compile Include="Identity\AdministradorUsuario.cs" />
+    <Compile Include="Interceptor.cs" />
     <Compile Include="Migrations\201611052134451_Initial.cs" />
     <Compile Include="Migrations\201611052134451_Initial.Designer.cs">
       <DependentUpon>201611052134451_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611101901547_fix provincia_id1.cs" />
+    <Compile Include="Migrations\201611101901547_fix provincia_id1.Designer.cs">
+      <DependentUpon>201611101901547_fix provincia_id1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611132032252_ChangeTypeofPrimaryKey.cs" />
+    <Compile Include="Migrations\201611132032252_ChangeTypeofPrimaryKey.Designer.cs">
+      <DependentUpon>201611132032252_ChangeTypeofPrimaryKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -138,9 +195,17 @@
     <EmbeddedResource Include="Migrations\201611052134451_Initial.resx">
       <DependentUpon>201611052134451_Initial.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611101901547_fix provincia_id1.resx">
+      <DependentUpon>201611101901547_fix provincia_id1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611132032252_ChangeTypeofPrimaryKey.resx">
+      <DependentUpon>201611132032252_ChangeTypeofPrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Migrations\SQLScripts\201611052134451_Initial.sql" />
+    <Content Include="Migrations\SQLScripts\201611101901547_fix provincia_id1.sql" />
+    <Content Include="Migrations\SQLScripts\201611132032252_ChangeTypeofPrimaryKey.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

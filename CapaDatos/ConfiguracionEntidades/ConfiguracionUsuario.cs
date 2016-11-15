@@ -7,53 +7,32 @@ namespace CapaDatos.ConfiguracionEntidades
     {
         public ConfiguracionUsuario()
         {
-           
-              Property(e => e.nombre)
-              .IsUnicode(false);
-
-           
-                Property(e => e.primerapellido)
-                .IsUnicode(false);
-
-           
-                Property(e => e.segundoapellido)
-                .IsUnicode(false);
-
-           
-                Property(e => e.email)
-                .IsUnicode(false);
-
-           
-                Property(e => e.direccion1)
-                .IsUnicode(false);
-
-           
-                Property(e => e.direccion2)
-                .IsUnicode(false);
-
-           
-                Property(e => e.telefono1)
-                .IsUnicode(false);
-
-           
-                Property(e => e.telefono2)
-                .IsUnicode(false);
-
-           
-                HasOptional(e => e.cliente)
-                .WithRequired(e => e.usuario);
-
-           
-                HasOptional(e => e.colaborador)
-                .WithRequired(e => e.usuario);
-
-           
-                HasOptional(e => e.guia)
-                .WithRequired(e => e.usuario);
-
-           
-                HasOptional(e => e.proveedor)
-                .WithRequired(e => e.usuario);
+            ToTable("usuario");
+            HasKey(e => e.Id);
+            Property(e => e.Id).HasColumnName("id");
+            Property(e => e.Email).HasColumnName("mail").IsRequired().HasMaxLength(60).HasColumnType("varchar");
+            Property(e => e.EmailConfirmed).HasColumnName("confirmacionemail").IsRequired();
+            Property(e => e.PasswordHash).HasColumnName("contrasena").IsRequired().HasColumnType("text");
+            Property(e => e.SecurityStamp).HasColumnName("securitystamp").HasColumnType("text").IsOptional();
+            Property(e => e.PhoneNumber).HasColumnName("telefono").IsRequired().HasColumnType("varchar").HasMaxLength(30);
+            Property(e => e.PhoneNumberConfirmed).HasColumnName("confirmaciontelefono").IsRequired();
+            Property(e => e.TwoFactorEnabled).HasColumnName("twofactorenabled").IsRequired();
+            Property(e => e.LockoutEndDateUtc).HasColumnName("lockoutenddateutc").HasColumnType("DateTime").IsOptional();
+            Property(e => e.LockoutEnabled).HasColumnName("lockoutenabled").IsRequired();
+            Property(e => e.AccessFailedCount).HasColumnName("numaccesosfallidos").HasColumnType("int").IsRequired();
+            Property(e => e.UserName).HasColumnName("username").IsRequired().HasColumnType("varchar").HasMaxLength(50);
+            Property(e => e.nombre).IsUnicode(false);
+            Property(e => e.primerapellido).IsUnicode(false);
+            Property(e => e.segundoapellido).IsUnicode(false);
+            Property(e => e.direccion1).IsUnicode(false);
+            Property(e => e.direccion2).IsUnicode(false);
+            HasOptional(e => e.cliente).WithRequired(e => e.usuario);
+            HasOptional(e => e.colaborador).WithRequired(e => e.usuario);
+            HasOptional(e => e.guia).WithRequired(e => e.usuario);
+            HasOptional(e => e.proveedor).WithRequired(e => e.usuario);
+            HasMany(e => e.Claims).WithRequired().HasForeignKey(e => e.UserId).WillCascadeOnDelete(false);
+            HasMany(e => e.Logins).WithRequired().HasForeignKey(e => e.UserId).WillCascadeOnDelete(false);
+            HasMany(e => e.Roles).WithRequired().HasForeignKey(e => e.UserId).WillCascadeOnDelete(false);
         }
     }
 }

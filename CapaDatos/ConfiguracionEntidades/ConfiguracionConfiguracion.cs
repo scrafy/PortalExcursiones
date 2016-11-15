@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using CapaDatos.Entidades;
+
 namespace CapaDatos.ConfiguracionEntidades
 {
     public class ConfiguracionConfiguracion : EntityTypeConfiguration<configuracion>

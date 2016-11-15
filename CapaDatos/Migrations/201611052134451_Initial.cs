@@ -497,7 +497,7 @@ namespace CapaDatos.Migrations
             DropForeignKey("dbo.puntorecogida", "localidad_id", "dbo.localidad");
             DropForeignKey("dbo.calendarioexcursion_puntorecogida", "puntorecogida_id", "dbo.puntorecogida");
             DropForeignKey("dbo.provincia", "pais_id", "dbo.pais");
-            DropForeignKey("dbo.localidad", "provincia_id1", "dbo.provincia");
+            DropForeignKey("dbo.localidad", "provincia_id", "dbo.provincia");
             DropForeignKey("dbo.reserva", "proveedor_id", "dbo.proveedor");
             DropForeignKey("dbo.configuracion", "proveedor_id", "dbo.proveedor");
             DropForeignKey("dbo.reserva", "colaborador_id", "dbo.colaborador");
@@ -525,7 +525,7 @@ namespace CapaDatos.Migrations
             DropIndex("dbo.calendarioexcursion_puntorecogida", new[] { "exact_id", "fecha" });
             DropIndex("dbo.puntorecogida", new[] { "localidad_id" });
             DropIndex("dbo.provincia", new[] { "pais_id" });
-            DropIndex("dbo.localidad", new[] { "provincia_id1" });
+            DropIndex("dbo.localidad", new[] { "provincia_id" });
             DropIndex("dbo.reservaexcursionactividad", new[] { "exact_id", "fecha" });
             DropIndex("dbo.reservaexcursionactividad", new[] { "localidad_id" });
             DropIndex("dbo.reservaexcursionactividad", new[] { "reserva_id" });

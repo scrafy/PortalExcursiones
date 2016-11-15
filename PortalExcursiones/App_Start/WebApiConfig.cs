@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace PortalExcursiones
 {
@@ -20,5 +17,6 @@ namespace PortalExcursiones
                 defaults: new { id = RouteParameter.Optional }
             );
         }
+
     }
 }

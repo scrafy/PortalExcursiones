@@ -1,11 +1,9 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CapaDatos.Entidades
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     [Table("proveedor")]
     public partial class proveedor
     {
@@ -17,9 +15,7 @@ namespace CapaDatos.Entidades
         }
 
         [Key]
-        [Column(TypeName = "uint")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long usuario_id { get; set; }
+        public string usuario_id { get; set; }
 
         [Required]
         [StringLength(45)]

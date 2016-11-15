@@ -1,83 +1,155 @@
 ﻿using System.Web.Http;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using CapaDatos.Identity;
 using CapaDatos.Entidades;
-using System.Web.Http.Results;
-using System;
-using System.Web.Http.ModelBinding;
-using PortalExcursiones.Modelos.ModelosSalida.Errores;
-using System.Net.Http;
-using System.Text;
-using System.Data.Entity;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-using System.IO;
-using System.Net;
-
+using Microsoft.AspNet.Identity;
 
 namespace PortalExcursiones.Controladores
 {
-    [RoutePrefix("api/clients")]
+    [RoutePrefix("api/clientes")]
     public class ClienteController : BaseController
     {
 
-        //Obtiene un listado de todos los clientes registrados en la base de datos 
-        [Route("register")]
-        [HttpPost]
-        public HttpResponseMessage Registro([FromBody] cliente cliente)
-        {
-            try
-            { 
-                if (ModelState.IsValid)
-                {
-                    context.usuario.Add(cliente.usuario);
-                    context.SaveChanges();
-                    context.cliente.Add(cliente);
-                    context.SaveChanges();
-                    HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
-                    return resp;
-                }
-                else
-                {
-                    return this.ObjectoRespuesta(HttpStatusCode.BadRequest,new ErrorValidacionFormulario(ModelState));
-                }
-            }
-            catch(Exception ex)
-            {
-                return this.ObjectoRespuesta(HttpStatusCode.InternalServerError,new ErrorGenerico(ex));
-            }
-        }
-
-
-        [Route("all")]
-        [HttpGet]
-        public HttpResponseMessage All()
-        {
-            try
-            {
-                var clientes = context.usuario.Select(x => new
-                {
-                    id = x.id,
-                    numeroidentificacion = x.cliente.numidentificacion,
-                    infadicional = x.cliente.infadicional,
-                    direccion1 = x.direccion1,
-                    direccion2 = x.direccion2,
-                    email = x.email,
-                    telefono1 = x.telefono1,
-                    telefono2 = x.telefono2,
-                    nombre = x.nombre,
-                    primerapellido = x.primerapellido,
-                    segundopellido = x.segundoapellido,
-                    localidad =  x.localidad
-
-                }).ToList();
+        //[Route]
+        //public async void Post([FromBody] AppUser user)
+        //{
+        //    var mgr = HttpContext.Current.GetOwinContext().GetUserManager<AdministradorUsuario>();
+        //    IdentityResult result = await mgr.CreateAsync(user);
             
+            
+        //}
 
-                return this.ObjectoRespuesta(HttpStatusCode.OK, clientes);
-            }
-            catch(Exception ex)
-            {
-                return this.ObjectoRespuesta(HttpStatusCode.InternalServerError, new ErrorGenerico(ex));
-            }
-        }
+
+        //[Route]
+        //public HttpResponseMessage Post([FromBody] cliente cliente)
+        //{
+        //    try
+        //    {
+        //        if(ModelState.IsValid)
+        //        {
+        //            context.usuario.Add(cliente.usuario);
+        //            context.SaveChanges();
+        //            context.cliente.Add(cliente);
+        //            context.SaveChanges();
+        //            return this.ObjectoRespuesta(Codigos.OK, null, null, null,null);
+        //        }
+        //        else
+        //        {
+        //            return this.ObjectoRespuesta(Codigos.ERROR_DE_VALIDACION, null, null, null, ModelState);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return this.ObjectoRespuesta(Codigos.ERROR_DE_SERVIDOR, null, ex, null, null);
+        //    }
+        //}
+
+        //[Route]
+        //public HttpResponseMessage Put([FromBody] cliente cliente)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            cliente aux = context.cliente.Find(cliente.usuario_id);
+        //            if (aux != null)
+        //            {
+        //                context.Entry(aux).State = EntityState.Detached;
+        //                cliente.usuario.id = cliente.usuario_id;
+        //                context.Entry(cliente).State = EntityState.Modified;
+        //                context.Entry(cliente.usuario).State = EntityState.Modified;
+        //                context.SaveChanges();
+        //                return this.ObjectoRespuesta(Codigos.OK, null, null, null, null);
+        //            }
+        //            else
+        //            {
+        //                return this.ObjectoRespuesta(Codigos.REGISTRO_NO_ENCONTRADO,null, null,Errores.error1, ModelState);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            return this.ObjectoRespuesta(Codigos.ERROR_DE_VALIDACION, null, null, null, ModelState);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return this.ObjectoRespuesta(Codigos.ERROR_DE_SERVIDOR, null, ex, null, null);
+        //    }
+        //}
+
+        //[Route]
+        //public HttpResponseMessage Get()
+        //{
+        //    try
+        //    {
+        //        var query = context.cliente.Select(x => new
+        //        {
+        //            id = x.usuario_id,
+        //            numero_identificacion = x.numidentificacion,
+        //            inf_adicional = x.infadicional,
+        //            direccion1 = x.usuario.direccion1,
+        //            direccion2 = x.usuario.direccion2,
+        //            email = x.usuario.email,
+        //            telefono1 = x.usuario.telefono1,
+        //            telefono2 = x.usuario.telefono2,
+        //            nombre = x.usuario.nombre,
+        //            primerapellido = x.usuario.primerapellido,
+        //            segundopellido = x.usuario.segundoapellido,
+        //            localidad = x.usuario.localidad.nombre,
+        //            codigo_postal = x.usuario.localidad.cp,
+        //            provincia = x.usuario.localidad.provincia.nombre,
+        //            pais = x.usuario.localidad.provincia.pais.nombre
+
+        //        });
+
+        //        var clientes = query.ToList();
+
+        //        return this.ObjectoRespuesta(Codigos.OK,clientes, null, null, null, null);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return this.ObjectoRespuesta(Codigos.ERROR_DE_SERVIDOR, null, ex, null, null);
+        //    }
+        //}
+
+        //[Route("{id}")]
+        //public HttpResponseMessage Get(int id)
+        //{
+        //    try
+        //    {
+        //        var cliente = context.cliente.Include("usuario").Where(x => x.usuario_id == id).Select(x => new
+        //        {
+        //            id = x.usuario_id,
+        //            numero_identificacion = x.numidentificacion,
+        //            inf_adicional = x.infadicional,
+        //            direccion1 = x.usuario.direccion1,
+        //            direccion2 = x.usuario.direccion2,
+        //            email = x.usuario.email,
+        //            telefono1 = x.usuario.telefono1,
+        //            telefono2 = x.usuario.telefono2,
+        //            nombre = x.usuario.nombre,
+        //            primerapellido = x.usuario.primerapellido,
+        //            segundopellido = x.usuario.segundoapellido,
+        //            localidad = x.usuario.localidad.nombre,
+        //            codigo_postal = x.usuario.localidad.cp,
+        //            provincia = x.usuario.localidad.provincia.nombre,
+        //            pais = x.usuario.localidad.provincia.pais.nombre
+        //        }).FirstOrDefault();
+        //        if (cliente != null)
+        //        {
+        //            return this.ObjectoRespuesta(Codigos.OK, cliente, null, null, null, null);
+        //        }
+        //        else
+        //        {
+        //            return this.ObjectoRespuesta(Codigos.REGISTRO_NO_ENCONTRADO, null, null, Errores.error1, ModelState);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return this.ObjectoRespuesta(Codigos.ERROR_DE_SERVIDOR, null, ex, null, null);
+        //    }
+        //}
+
     }
 }

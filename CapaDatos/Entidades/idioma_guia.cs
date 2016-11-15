@@ -1,11 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CapaDatos.Entidades
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     [Table("idioma_guia")]
     public partial class idioma_guia
     {
@@ -15,9 +12,9 @@ namespace CapaDatos.Entidades
         public int idioma_id { get; set; }
 
         [Key]
-        [Column(Order = 1, TypeName = "uint")]
+        [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long guia_id { get; set; }
+        public string guia_id { get; set; }
 
         public virtual guia guia { get; set; }
 

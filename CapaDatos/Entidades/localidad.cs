@@ -1,10 +1,9 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CapaDatos.Entidades
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("localidad")]
     public partial class localidad
@@ -28,8 +27,10 @@ namespace CapaDatos.Entidades
         public int cp { get; set; }
 
         [Column(TypeName = "uint")]
+        
         public long provincia_id { get; set; }
 
+        [ForeignKey("provincia_id")]
         public virtual provincia provincia { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
