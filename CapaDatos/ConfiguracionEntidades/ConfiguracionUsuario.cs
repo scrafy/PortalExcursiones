@@ -10,7 +10,6 @@ namespace CapaDatos.ConfiguracionEntidades
             ToTable("usuario");
             HasKey(e => e.Id);
             Property(e => e.Id).HasColumnName("id");
-            Property(e => e.Email).HasColumnName("mail").IsRequired().HasMaxLength(60).HasColumnType("varchar");
             Property(e => e.EmailConfirmed).HasColumnName("confirmacionemail").IsRequired();
             Property(e => e.PasswordHash).HasColumnName("contrasena").IsRequired().HasColumnType("text");
             Property(e => e.SecurityStamp).HasColumnName("securitystamp").HasColumnType("text").IsOptional();
@@ -20,7 +19,6 @@ namespace CapaDatos.ConfiguracionEntidades
             Property(e => e.LockoutEndDateUtc).HasColumnName("lockoutenddateutc").HasColumnType("DateTime").IsOptional();
             Property(e => e.LockoutEnabled).HasColumnName("lockoutenabled").IsRequired();
             Property(e => e.AccessFailedCount).HasColumnName("numaccesosfallidos").HasColumnType("int").IsRequired();
-            Property(e => e.UserName).HasColumnName("username").IsRequired().HasColumnType("varchar").HasMaxLength(50);
             Property(e => e.nombre).IsUnicode(false);
             Property(e => e.primerapellido).IsUnicode(false);
             Property(e => e.segundoapellido).IsUnicode(false);

@@ -109,7 +109,6 @@
     <Compile Include="ConfiguracionEntidades\ConfiguracionAlquilerVehiculo.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionCategoriaActividad.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionCategoriaExcursion.cs" />
-    <Compile Include="ConfiguracionEntidades\ConfiguracionClaim.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionCliente.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionColaborador.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionConfiguracion.cs" />
@@ -120,7 +119,6 @@
     <Compile Include="ConfiguracionEntidades\ConfiguracionGuia.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionIdioma.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionLocalidad.cs" />
-    <Compile Include="ConfiguracionEntidades\ConfiguracionLogin.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionPais.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionProveedor.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionProvincia.cs" />
@@ -128,10 +126,8 @@
     <Compile Include="ConfiguracionEntidades\ConfiguracionRecogidaDevolucion.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionReserva.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionReservaExcursionActividad.cs" />
-    <Compile Include="ConfiguracionEntidades\ConfiguracionRol.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionTipoVehiculo.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionUsuario.cs" />
-    <Compile Include="ConfiguracionEntidades\ConfiguracionUsuarioRol.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionVehiculo.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionItem.cs" />
     <Compile Include="Contexto.cs" />
@@ -180,6 +176,10 @@
     <Compile Include="Migrations\201611132032252_ChangeTypeofPrimaryKey.Designer.cs">
       <DependentUpon>201611132032252_ChangeTypeofPrimaryKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611151447567_Identity.cs" />
+    <Compile Include="Migrations\201611151447567_Identity.Designer.cs">
+      <DependentUpon>201611151447567_Identity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -201,11 +201,15 @@
     <EmbeddedResource Include="Migrations\201611132032252_ChangeTypeofPrimaryKey.resx">
       <DependentUpon>201611132032252_ChangeTypeofPrimaryKey.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611151447567_Identity.resx">
+      <DependentUpon>201611151447567_Identity.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Migrations\SQLScripts\201611052134451_Initial.sql" />
     <Content Include="Migrations\SQLScripts\201611101901547_fix provincia_id1.sql" />
     <Content Include="Migrations\SQLScripts\201611132032252_ChangeTypeofPrimaryKey.sql" />
+    <Content Include="Migrations\SQLScripts\201611151433123_Identity.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

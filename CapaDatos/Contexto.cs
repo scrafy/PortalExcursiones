@@ -49,6 +49,7 @@ namespace CapaDatos
         public virtual DbSet<tipovehiculo> tipovehiculo { get; set; }
         public virtual DbSet<vehiculo> vehiculo { get; set; }
 
+       
         protected override void OnModelCreating(DbModelBuilder modelo)
         {
            
@@ -78,13 +79,37 @@ namespace CapaDatos
             modelo.Configurations.Add(new ConfiguracionTipoVehiculo());
             modelo.Configurations.Add(new ConfiguracionUsuario());
             modelo.Configurations.Add(new ConfiguracionVehiculo());
-            modelo.Configurations.Add(new ConfiguracionClaim());
-            modelo.Configurations.Add(new ConfiguracionRol());
-            modelo.Configurations.Add(new ConfiguracionLogin());
-            modelo.Configurations.Add(new ConfiguracionUsuarioRol());
-
+            ConfiguracionIdentity(modelo);
+   
         }
         
+        private void ConfiguracionIdentity(DbModelBuilder modelo)
+        {
+            modelo.Entity<IdentityUserClaim>().ToTable("claim");
+            modelo.Entity<IdentityUserClaim>().HasKey(e => e.Id);
+            modelo.Entity<IdentityUserClaim>().Property(e => e.Id).HasColumnName("id");
+            modelo.Entity<IdentityUserClaim>().Property(e => e.UserId).HasColumnName("usuario_id").IsRequired();
+            modelo.Entity<IdentityUserClaim>().Property(e => e.ClaimType).HasColumnName("tipo").IsOptional().HasColumnType("text").HasColumnType("varchar").HasMaxLength(255);
+            modelo.Entity<IdentityUserClaim>().Property(e => e.ClaimValue).HasColumnName("valor").IsOptional().HasColumnType("text").HasColumnType("varchar").HasMaxLength(255);
+
+            modelo.Entity<IdentityRole>().ToTable("rol");
+            modelo.Entity<IdentityRole>().HasKey(e => e.Id);
+            modelo.Entity<IdentityRole>().Property(e => e.Id).HasColumnName("id");
+            modelo.Entity<IdentityRole>().Property(e => e.Name).HasColumnName("nombre").IsRequired().HasMaxLength(60);
+            modelo.Entity<IdentityRole>().HasMany(e => e.Users).WithRequired().HasForeignKey(e => e.RoleId).WillCascadeOnDelete(false);
+
+            modelo.Entity<IdentityUserRole>().ToTable("usuario_rol");
+            modelo.Entity<IdentityUserRole>().HasKey(e => new { e.UserId, e.RoleId });
+            modelo.Entity<IdentityUserRole>().Property(e => e.RoleId).HasColumnName("role_id");
+            modelo.Entity<IdentityUserRole>().Property(e => e.UserId).HasColumnName("usuario_id");
+
+            modelo.Entity<IdentityUserLogin>().ToTable("login");
+            modelo.Entity<IdentityUserLogin>().ToTable("login").HasKey(e => new { e.LoginProvider, e.ProviderKey, e.UserId });
+            modelo.Entity<IdentityUserLogin>().ToTable("login").Property(e => e.LoginProvider).HasColumnName("proveedor");
+            modelo.Entity<IdentityUserLogin>().ToTable("login").Property(e => e.ProviderKey).HasColumnName("key");
+            modelo.Entity<IdentityUserLogin>().ToTable("login").Property(e => e.UserId).HasColumnName("usuario_id");
+        }
+
         public static Contexto Crear()
         {
             return new Contexto();

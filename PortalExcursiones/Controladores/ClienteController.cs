@@ -1,9 +1,9 @@
 ﻿using System.Web.Http;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
-using CapaDatos.Identity;
 using CapaDatos.Entidades;
 using Microsoft.AspNet.Identity;
+using CapaDatos.Identity;
 
 namespace PortalExcursiones.Controladores
 {
@@ -11,14 +11,14 @@ namespace PortalExcursiones.Controladores
     public class ClienteController : BaseController
     {
 
-        //[Route]
-        //public async void Post([FromBody] AppUser user)
-        //{
-        //    var mgr = HttpContext.Current.GetOwinContext().GetUserManager<AdministradorUsuario>();
-        //    IdentityResult result = await mgr.CreateAsync(user);
-            
-            
-        //}
+        [Route]
+        public async void Post([FromBody] usuario user)
+        {
+            var mgr = HttpContext.Current.GetOwinContext().GetUserManager<AdministradorUsuario>();
+            IdentityResult result = await mgr.CreateAsync(user);
+
+
+        }
 
 
         //[Route]

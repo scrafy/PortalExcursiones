@@ -22,14 +22,17 @@ namespace CapaDatos.Entidades
 
         }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<usuario> manager, string authenticationType)
-        {
-            // Tenga en cuenta que el valor de authenticationType debe coincidir con el definido en CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
-            // Agregar aquí notificaciones personalizadas de usuario
-            return userIdentity;
-        }
+        [Required]
+        [StringLength(60)]
+        [Column("mail",TypeName ="varchar")]
+        [Index(IsUnique =true)]
+        public override string Email { get; set; }
 
+        [Required]
+        [StringLength(60)]
+        [Column("username", TypeName = "varchar")]
+        [Index(IsUnique = true)]
+        public override string UserName { get; set; }
 
         [Required]
         [StringLength(45)]

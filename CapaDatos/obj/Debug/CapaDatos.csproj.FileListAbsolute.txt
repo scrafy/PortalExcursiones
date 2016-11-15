@@ -103,10 +103,11 @@ E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.Helpers.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\Microsoft.Web.Infrastructure.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.Razor.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.WebPages.Deployment.xml
-E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.Initial.resources
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.fixprovincia_id1.resources
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.ChangeTypeofPrimaryKey.resources
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csproj.GenerateResource.Cache
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.dll
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.pdb
+E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.Identity.resources
+E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
