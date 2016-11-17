@@ -16,7 +16,7 @@ namespace CapaDatos.Entidades
         [Key]
         public string usuario_id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Campo numero de identificacion requerido")]
         [StringLength(30)]
         public string numidentificacion { get; set; }
 

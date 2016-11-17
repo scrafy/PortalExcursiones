@@ -11,9 +11,7 @@ namespace CapaDatos.ConfiguracionEntidades
             HasKey(e => e.Id);
             Property(e => e.Id).HasColumnName("id");
             Property(e => e.EmailConfirmed).HasColumnName("confirmacionemail").IsRequired();
-            Property(e => e.PasswordHash).HasColumnName("contrasena").IsRequired().HasColumnType("text");
             Property(e => e.SecurityStamp).HasColumnName("securitystamp").HasColumnType("text").IsOptional();
-            Property(e => e.PhoneNumber).HasColumnName("telefono").IsRequired().HasColumnType("varchar").HasMaxLength(30);
             Property(e => e.PhoneNumberConfirmed).HasColumnName("confirmaciontelefono").IsRequired();
             Property(e => e.TwoFactorEnabled).HasColumnName("twofactorenabled").IsRequired();
             Property(e => e.LockoutEndDateUtc).HasColumnName("lockoutenddateutc").HasColumnType("DateTime").IsOptional();

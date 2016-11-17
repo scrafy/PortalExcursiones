@@ -1,25 +1,73 @@
 ﻿using System.Web.Http;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
 using CapaDatos.Entidades;
 using Microsoft.AspNet.Identity;
 using CapaDatos.Identity;
+using PortalExcursiones.Modelos.ModelosSalida;
+using System.Net.Http;
+using System;
+using CapaDatos;
 
 namespace PortalExcursiones.Controladores
 {
     [RoutePrefix("api/clientes")]
     public class ClienteController : BaseController
     {
-
+        
         [Route]
-        public async void Post([FromBody] usuario user)
+        public HttpResponseMessage  Post([FromBody] cliente cliente)
         {
-            var mgr = HttpContext.Current.GetOwinContext().GetUserManager<AdministradorUsuario>();
-            IdentityResult result = await mgr.CreateAsync(user);
+            if (ModelState.IsValid)
+            {
+                cliente.usuario_id = cliente.usuario.Id;
+                try
+                {
+                    IdentityResult result = mgr.CreateAsync(cliente.usuario, cliente.usuario.PasswordHash).Result;
+                    if(!result.Succeeded)
+                    {
+                        Respuesta res = new Respuesta()
+                        {
+                            Codigo = (int)Codigos.ERROR_DE_VALIDACION,
+                            Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION),
+                            Errores = result.Errors
+                        };
+                        return res.ObjectoRespuesta();
 
+                    }
+                    else { 
+                    Respuesta res = new Respuesta()
+                    {
+                        Codigo = (int)Codigos.OK,
+                        Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK),
+                    };
+                    return res.ObjectoRespuesta();
+                    }
 
+                }
+                catch(Exception ex)
+                {
+                    Respuesta res = new Respuesta()
+                    {
+                        Codigo = (int)Codigos.ERROR_DE_SERVIDOR,
+                        Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR),
+                        Excepcion = Excepcion.Create(ex)
+                    };
+                    return res.ObjectoRespuesta();
+                }
+              
+            }
+            else
+            {
+                Respuesta res = new Respuesta()
+                {
+                    Codigo = (int)Codigos.ERROR_DE_VALIDACION,
+                    Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION),
+                    Errores = ModelState
+                };
+                return res.ObjectoRespuesta();
+            }
         }
 
+       
 
         //[Route]
         //public HttpResponseMessage Post([FromBody] cliente cliente)

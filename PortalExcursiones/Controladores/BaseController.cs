@@ -8,33 +8,17 @@ using System.Text;
 using PortalExcursiones.Modelos.ModelosSalida;
 using System;
 using System.Web.Http.ModelBinding;
+using System.Collections.Generic;
+using CapaDatos.Identity;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace PortalExcursiones.Controladores
 {
     public abstract class BaseController : ApiController
     {
-        protected Contexto context = new Contexto();
-               
-        protected HttpResponseMessage ObjectoRespuesta(Codigos codigo,object o=null,Exception ex=null,string mensaje_error=null, ModelStateDictionary model =null,string mime="application/json")
-        {
-
-            Respuesta res = new Respuesta()
-            {
-                Codigo = (int)codigo,
-                Mensaje = Enum.GetName(typeof(Codigos), (int)codigo),
-                Mensaje_error = mensaje_error,
-                Excepcion = Excepcion.Create(ex),
-                Erroresvalidacion = Respuesta.ObtenerErroresValidacion(model),
-                Contenido = o
-            };
-            HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
-            resp.Headers.Add("ContentType", mime);
-            MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(res)));
-            ms.Position = 0;
-            StreamContent content = new StreamContent(ms);
-            resp.Content = content;
-            return resp;
-        }
-       
+        protected AdministradorUsuario mgr = HttpContext.Current.GetOwinContext().GetUserManager<AdministradorUsuario>();
+        protected Respuesta resp = null;
+    
     }
 }

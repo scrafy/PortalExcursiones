@@ -76,8 +76,10 @@ E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\MySql.Data.Entity.EF6.dll
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\MySql.Web.dll
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\Newtonsoft.Json.dll
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\Owin.dll
+E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.Http.dll
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\WebMatrix.WebData.dll
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.WebPages.dll
+E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Net.Http.Formatting.dll
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\WebMatrix.Data.dll
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.WebPages.Razor.dll
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.Helpers.dll
@@ -95,8 +97,10 @@ E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\Microsoft.Owin.Security.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\Microsoft.Owin.Security.OAuth.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\Newtonsoft.Json.xml
+E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.Http.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\WebMatrix.WebData.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.WebPages.xml
+E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Net.Http.Formatting.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\WebMatrix.Data.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.WebPages.Razor.xml
 E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.Helpers.xml
@@ -106,8 +110,7 @@ E:\PROYECTOS\PortalExcursiones\CapaDatos\bin\Debug\System.Web.WebPages.Deploymen
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.Initial.resources
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.fixprovincia_id1.resources
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.ChangeTypeofPrimaryKey.resources
+E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.Identity.resources
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csproj.GenerateResource.Cache
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.dll
 E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.pdb
-E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.Identity.resources
-E:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache

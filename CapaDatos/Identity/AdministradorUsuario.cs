@@ -8,6 +8,7 @@ namespace CapaDatos.Identity
 {
     public class AdministradorUsuario : UserManager<usuario>
     {
+       
         public AdministradorUsuario(IUserStore<usuario> almacen)
         : base(almacen)
         {
@@ -17,22 +18,8 @@ namespace CapaDatos.Identity
         public static AdministradorUsuario Crear(IdentityFactoryOptions<AdministradorUsuario> opciones, IOwinContext contexto)
         {
             var administrador = new AdministradorUsuario(new UserStore<usuario>(contexto.Get<Contexto>()));
-            administrador.UserValidator = new UserValidator<usuario>(administrador)
-            {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
-                
-            };
-
-
-            administrador.PasswordValidator = new PasswordValidator
-            {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
-            };
+            administrador.UserValidator = new ValidadorUsuario(administrador);
+                       
 
             return administrador;
         }
