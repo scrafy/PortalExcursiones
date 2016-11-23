@@ -23,7 +23,11 @@ namespace CapaDatos.Identity
             var errors = new List<string>();
 
             var usuario = Contexto.Crear().Users.Where(e => e.UserName == item.UserName || e.Email == item.Email).FirstOrDefault();
-            if(usuario.UserName == item.UserName)
+
+            if (usuario==null)
+                return IdentityResult.Success;
+
+            if (usuario.UserName == item.UserName)
             {
                 errors.Add(String.Format("El nombre de usuario {0} ya existe,por favor,elija otro diferente",item.UserName));
             }

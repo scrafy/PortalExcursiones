@@ -86,3 +86,13 @@ E:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.csp
 E:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\en\PortalExcursiones.resources.dll
 E:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.dll
 E:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.pdb
+E:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.Practices.ServiceLocation.dll
+E:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.Practices.Unity.Configuration.dll
+E:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.Practices.Unity.dll
+E:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.Practices.ServiceLocation.pdb
+E:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.Practices.ServiceLocation.xml
+E:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.Practices.Unity.xml
+E:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.Practices.Unity.Configuration.xml
+E:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
+E:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Unity.WebApi.dll
+E:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml

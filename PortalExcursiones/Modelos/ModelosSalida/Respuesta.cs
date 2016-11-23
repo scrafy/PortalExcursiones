@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,14 +8,14 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http.ModelBinding;
 
-namespace PortalExcursiones.Modelos.ModelosSalida
+namespace PortalExcursiones.Modelos.ModelosSalida 
 {
-    public class Respuesta
-    {
+    public class Respuesta 
+{
         private int codigo;
         private string mensaje = null;
         private string mensaje_error = null;
-        private Object errores = null;
+        private Object objetoerror = null;
         private List<string> erroresvalidacion = null;
         private Excepcion excepcion = null;
         private object contenido = null;
@@ -60,17 +61,19 @@ namespace PortalExcursiones.Modelos.ModelosSalida
         }
 
         [JsonIgnore]
-        public Object Errores
+        public Object Objetoerror
         {
             get
             {
-                return errores;
+                return objetoerror;
             }
 
             set
             {
-               if(value.GetType() == typeof(ModelStateDictionary))
+                if (value.GetType() == typeof(ModelStateDictionary))
                     Erroresvalidacion = ModelStateErrores((ModelStateDictionary)value);
+                else
+                    Erroresvalidacion = new List<string>((string[])value);
             }
         }
 
@@ -152,6 +155,8 @@ namespace PortalExcursiones.Modelos.ModelosSalida
             resp.Content = content;
             return resp;
         }
+
+      
 
         public Respuesta()
         {

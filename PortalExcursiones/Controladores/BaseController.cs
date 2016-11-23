@@ -17,8 +17,6 @@ namespace PortalExcursiones.Controladores
 {
     public abstract class BaseController : ApiController
     {
-        protected AdministradorUsuario mgr = HttpContext.Current.GetOwinContext().GetUserManager<AdministradorUsuario>();
-        protected Respuesta resp = null;
-    
+           
     }
 }

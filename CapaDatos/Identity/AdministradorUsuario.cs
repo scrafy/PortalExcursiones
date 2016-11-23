@@ -3,6 +3,8 @@ using CapaDatos.Entidades;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.DataProtection;
+
 
 namespace CapaDatos.Identity
 {
@@ -12,17 +14,21 @@ namespace CapaDatos.Identity
         public AdministradorUsuario(IUserStore<usuario> almacen)
         : base(almacen)
         {
-           
-        }
 
-        public static AdministradorUsuario Crear(IdentityFactoryOptions<AdministradorUsuario> opciones, IOwinContext contexto)
+        }
+        
+
+        public void SetDataProtectionProvider(IDataProtectionProvider p)
         {
-            var administrador = new AdministradorUsuario(new UserStore<usuario>(contexto.Get<Contexto>()));
-            administrador.UserValidator = new ValidadorUsuario(administrador);
-                       
-
-            return administrador;
+            if(p!=null)
+            {
+                var  t = this;
+                IDataProtector dataProtector = p.Create("ASP.NET Identity");
+                t.UserTokenProvider = new DataProtectorTokenProvider<usuario>(dataProtector);
+            }
         }
+
+        
 
     }
 }
