@@ -1,7 +1,5 @@
 using Microsoft.Practices.Unity;
-using PortalExcursiones.Controladores.Interfaces;
 using CapaDatos.Entidades;
-using PortalExcursiones.Controladores.ImplementacionInterfaces;
 using Unity.WebApi;
 using System.Web.Http;
 using PortalExcursiones.Modelos.ModelosSalida;
@@ -14,6 +12,10 @@ using System.Web.Http.Dependencies;
 using System.Collections.Generic;
 using System.Web;
 using Microsoft.Owin.Security.DataProtection;
+using PortalExcursiones.Infraestructura.Interfaces;
+using PortalExcursiones.Infraestructura.ImplementacionInterfaces;
+using Microsoft.Owin.Security;
+
 
 namespace PortalExcursiones
 {
@@ -31,12 +33,13 @@ namespace PortalExcursiones
         private static void ConfigurarContenedor()
         {
             contenedor.RegisterType<Contexto>(new CicloVidaObjecto<Contexto>());
+            contenedor.RegisterType<IAuthenticationManager>(new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
             contenedor.RegisterType<AdministradorUsuario>(new CicloVidaObjecto<AdministradorUsuario>(),new InjectionMethod("SetDataProtectionProvider", contenedor.Resolve<IDataProtectionProvider>()));
             contenedor.RegisterType<Respuesta>(new CicloVidaObjecto<Respuesta>());
             contenedor.RegisterType<IUserStore<usuario>, UserStore<usuario>>(new CicloVidaObjecto<UserStore<usuario>>(), new InjectionConstructor(contenedor.Resolve<Contexto>()));
-            contenedor.RegisterType<IOperacionesComunes<cliente>, ClienteServicios>(new CicloVidaObjecto<ClienteServicios>(), new InjectionConstructor(contenedor.Resolve<AdministradorUsuario>(), contenedor.Resolve<Contexto>(), contenedor.Resolve<Respuesta>()));
-            contenedor.RegisterType<IOperacionesComunes<usuario>, UsuarioServicios>(new CicloVidaObjecto<UsuarioServicios>());
-           
+            contenedor.RegisterType<IOperacionesComunes<cliente>, ClienteOperacionesComunes>(new CicloVidaObjecto<ClienteOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<usuario>, UsuarioOperacionesComunes>(new CicloVidaObjecto<UsuarioOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesUsuario, OperacionesUsuario>(new CicloVidaObjecto<OperacionesUsuario>());
         }
 
         public static UnityContainer ObtenerContenedor()

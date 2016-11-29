@@ -27,6 +27,13 @@ namespace CapaDatos.Entidades
 
         }
 
+        [Required(ErrorMessage = "Campo id requerido")]
+        [StringLength(128)]
+        [Key]
+        [Column("id")]
+        [DataMember(Name = "id")]
+        public override string Id { get; set; }
+
         [Required(ErrorMessage = "Campo mail requerido")]
         [StringLength(60)]
         [Column("mail",TypeName ="varchar")]
@@ -79,6 +86,7 @@ namespace CapaDatos.Entidades
 
         [Column(TypeName = "uint")]
         [DataMember(Name = "localidad")]
+        [Range(1, long.MaxValue, ErrorMessage = "Campo localidad requerido")]
         public long localidad_id { get; set; }
 
 

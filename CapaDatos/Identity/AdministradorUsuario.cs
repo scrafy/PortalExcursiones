@@ -4,7 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.DataProtection;
-
+using System;
 
 namespace CapaDatos.Identity
 {
@@ -14,7 +14,8 @@ namespace CapaDatos.Identity
         public AdministradorUsuario(IUserStore<usuario> almacen)
         : base(almacen)
         {
-
+            UserValidator = new ValidadorUsuario(this);
+            EmailService = new ServicioEmail();
         }
         
 
@@ -25,6 +26,7 @@ namespace CapaDatos.Identity
                 var  t = this;
                 IDataProtector dataProtector = p.Create("ASP.NET Identity");
                 t.UserTokenProvider = new DataProtectorTokenProvider<usuario>(dataProtector);
+                
             }
         }
 

@@ -8,8 +8,6 @@ namespace CapaDatos.ConfiguracionEntidades
         public ConfiguracionUsuario()
         {
             ToTable("usuario");
-            HasKey(e => e.Id);
-            Property(e => e.Id).HasColumnName("id");
             Property(e => e.EmailConfirmed).HasColumnName("confirmacionemail").IsRequired();
             Property(e => e.SecurityStamp).HasColumnName("securitystamp").HasColumnType("text").IsOptional();
             Property(e => e.PhoneNumberConfirmed).HasColumnName("confirmaciontelefono").IsRequired();

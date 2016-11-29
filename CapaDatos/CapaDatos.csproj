@@ -165,7 +165,9 @@
     <Compile Include="Entidades\usuario.cs" />
     <Compile Include="Entidades\vehiculo.cs" />
     <Compile Include="Identity\AdministradorUsuario.cs" />
+    <Compile Include="Identity\ServicioEmail.cs" />
     <Compile Include="Identity\ValidadorUsuario.cs" />
+    <Compile Include="Infraestructura\ValidacionContrasenaAttribute.cs" />
     <Compile Include="Interceptor.cs" />
     <Compile Include="Migrations\201611052134451_Initial.cs" />
     <Compile Include="Migrations\201611052134451_Initial.Designer.cs">
@@ -182,6 +184,14 @@
     <Compile Include="Migrations\201611151447567_Identity.cs" />
     <Compile Include="Migrations\201611151447567_Identity.Designer.cs">
       <DependentUpon>201611151447567_Identity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611251818056_Change contrasena field.cs" />
+    <Compile Include="Migrations\201611251818056_Change contrasena field.Designer.cs">
+      <DependentUpon>201611251818056_Change contrasena field.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611251846502_rollback contrasena field.cs" />
+    <Compile Include="Migrations\201611251846502_rollback contrasena field.Designer.cs">
+      <DependentUpon>201611251846502_rollback contrasena field.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,12 +216,20 @@
     <EmbeddedResource Include="Migrations\201611151447567_Identity.resx">
       <DependentUpon>201611151447567_Identity.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611251818056_Change contrasena field.resx">
+      <DependentUpon>201611251818056_Change contrasena field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611251846502_rollback contrasena field.resx">
+      <DependentUpon>201611251846502_rollback contrasena field.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Migrations\SQLScripts\201611052134451_Initial.sql" />
     <Content Include="Migrations\SQLScripts\201611101901547_fix provincia_id1.sql" />
     <Content Include="Migrations\SQLScripts\201611132032252_ChangeTypeofPrimaryKey.sql" />
     <Content Include="Migrations\SQLScripts\201611151433123_Identity.sql" />
+    <Content Include="Migrations\SQLScripts\201611251818056_Change contrasena field.sql" />
+    <Content Include="Migrations\SQLScripts\201611251846502_rollback contrasena field.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

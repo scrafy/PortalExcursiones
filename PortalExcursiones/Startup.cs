@@ -1,8 +1,9 @@
-﻿using CapaDatos.Identity;
-using Microsoft.Owin.Security.Cookies;
+﻿using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataProtection;
 using Owin;
 using Microsoft.Practices.Unity;
+using Microsoft.AspNet.Identity;
+using System;
 
 namespace PortalExcursiones
 {
@@ -14,7 +15,12 @@ namespace PortalExcursiones
         {
             var container = ResolvedorDependencias.ObtenerContenedor();
             container.RegisterInstance<IDataProtectionProvider>(app.GetDataProtectionProvider());
-            app.UseCookieAuthentication(new CookieAuthenticationOptions());
+            app.UseCookieAuthentication(new CookieAuthenticationOptions() {
+
+                 ExpireTimeSpan = TimeSpan.FromMinutes(30),
+                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
+            });
+           
         }
     }
 
