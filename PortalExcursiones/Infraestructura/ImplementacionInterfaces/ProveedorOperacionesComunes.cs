@@ -1,94 +1,40 @@
 ﻿using System;
-using System.Linq;
 using System.Net.Http;
-using CapaDatos.Identity;
-using PortalExcursiones.Modelos.ModelosSalida;
 using System.Web.Http.ModelBinding;
-using Microsoft.AspNet.Identity;
-using CapaDatos;
 using CapaDatos.Entidades;
-using PortalExcursiones.Properties;
-using System.Data.Entity;
 using PortalExcursiones.Infraestructura.Interfaces;
+using CapaDatos.Identity;
+using CapaDatos;
+using PortalExcursiones.Modelos.ModelosSalida;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity;
+using PortalExcursiones.Properties;
+using System.Linq;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class ClienteOperacionesComunes : IOperacionesComunes<cliente>
+    public class ProveedorOperacionesComunes : IOperacionesComunes<proveedor>
     {
         private AdministradorUsuario mgr = null;
         private Contexto contexto = null;
         private Respuesta resp = null;
-       
-        public ClienteOperacionesComunes(AdministradorUsuario _mgr, Contexto _contexto,Respuesta _resp)
+
+        public ProveedorOperacionesComunes(AdministradorUsuario _mgr, Contexto _contexto, Respuesta _resp)
         {
-            mgr = _mgr; 
+            mgr = _mgr;
             contexto = _contexto;
             resp = _resp;
         }
 
-        public HttpResponseMessage Crear(cliente Entidad,ModelStateDictionary modelo)
+        public HttpResponseMessage Actualizar(proveedor Entidad, ModelStateDictionary modelo)
         {
             DbContextTransaction tran = null;
             try
             {
-                if(modelo.IsValid)
-                {
-                    Entidad.usuario_id = Entidad.usuario.Id;
-                    tran = contexto.Database.BeginTransaction();
-                    IdentityResult result = mgr.CreateAsync(Entidad.usuario, Entidad.usuario.PasswordHash).Result;
-                    if(!result.Succeeded)
-                    {
-                        if (contexto.Database.CurrentTransaction != null)
-                            tran.Rollback();
-
-                        resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
-                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
-                        resp.Objetoerror = result.Errors;
-                        return resp.ObjectoRespuesta();
-
-                    }
-                    else
-                    {
-                        Entidad.usuario = null;
-                        contexto.cliente.Add(Entidad);
-                        contexto.SaveChanges();
-                        tran.Commit();
-                        resp.Codigo = (int)Codigos.OK;
-                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                        return resp.ObjectoRespuesta();
-                    }
-
-                }
-                else
-                {
-                    resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
-                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
-                    resp.Objetoerror = modelo;
-                    return resp.ObjectoRespuesta();
-                }
-            }
-            catch(Exception ex)
-            {
-                if(contexto.Database.CurrentTransaction != null)
-                    tran.Rollback();
-
-                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
-                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
-                resp.Excepcion = Excepcion.Create(ex);
-                return resp.ObjectoRespuesta();
-            }
-           
-        }
-
-        public HttpResponseMessage Actualizar(cliente Entidad,ModelStateDictionary modelo)
-        {
-            DbContextTransaction tran = null;
-            try
-            {
-                if(modelo.IsValid)
+                if (modelo.IsValid)
                 {
                     usuario aux = mgr.FindById(Entidad.usuario.Id);
-                    if(aux != null)
+                    if (aux != null)
                     {
                         contexto.Entry(aux).State = EntityState.Detached;
                         Entidad.usuario_id = Entidad.usuario.Id;
@@ -149,52 +95,18 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
-        {
-            try
-            {
-                var clientes = contexto.cliente.Select(x => new
-                {
-                    id = x.usuario_id,
-                    numero_identificacion = x.numidentificacion,
-                    inf_adicional = x.infadicional,
-                    direccion1 = x.usuario.direccion1,
-                    direccion2 = x.usuario.direccion2,
-                    email = x.usuario.Email,
-                    telefono = x.usuario.PhoneNumber,
-                    nombre = x.usuario.nombre,
-                    primerapellido = x.usuario.primerapellido,
-                    segundopellido = x.usuario.segundoapellido,
-                    localidad = x.usuario.localidad.nombre,
-                    codigo_postal = x.usuario.localidad.cp,
-                    provincia = x.usuario.localidad.provincia.nombre,
-                    pais = x.usuario.localidad.provincia.pais.nombre
-
-                }).ToList();
-                resp.Codigo = (int)Codigos.OK;
-                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = clientes;
-                return resp.ObjectoRespuesta();
-
-            }
-            catch (Exception ex)
-            {
-                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
-                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
-                resp.Excepcion = Excepcion.Create(ex);
-                return resp.ObjectoRespuesta();
-            }
-        }
-
         public HttpResponseMessage BusquedaPorId(string id)
         {
             try
             {
-                var cliente = contexto.cliente.Where(x => x.usuario_id == id).Select(x => new
+                var cliente = contexto.proveedor.Where(x => x.usuario_id == id).Select(x => new
                 {
                     id = x.usuario_id,
-                    numero_identificacion = x.numidentificacion,
-                    inf_adicional = x.infadicional,
+                    nombre_empresa = x.nombreempresa,
+                    observaciones = x.observaciones,
+                    latitud = x.lat,
+                    longitud = x.lng,
+                    cif = x.cif,
                     direccion1 = x.usuario.direccion1,
                     direccion2 = x.usuario.direccion2,
                     email = x.usuario.Email,
@@ -231,6 +143,98 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 return resp.ObjectoRespuesta();
             }
         }
+
+        public HttpResponseMessage Crear(proveedor Entidad, ModelStateDictionary modelo)
+        {
+            DbContextTransaction tran = null;
+            try
+            {
+                if (modelo.IsValid)
+                {
+                    Entidad.usuario_id = Entidad.usuario.Id;
+                    tran = contexto.Database.BeginTransaction();
+                    IdentityResult result = mgr.CreateAsync(Entidad.usuario, Entidad.usuario.PasswordHash).Result;
+                    if (!result.Succeeded)
+                    {
+                        if (contexto.Database.CurrentTransaction != null)
+                            tran.Rollback();
+
+                        resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                        resp.Objetoerror = result.Errors;
+                        return resp.ObjectoRespuesta();
+
+                    }
+                    else
+                    {
+                        Entidad.usuario = null;
+                        contexto.proveedor.Add(Entidad);
+                        contexto.SaveChanges();
+                        tran.Commit();
+                        resp.Codigo = (int)Codigos.OK;
+                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                        return resp.ObjectoRespuesta();
+                    }
+
+                }
+                else
+                {
+                    resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                    resp.Objetoerror = modelo;
+                    return resp.ObjectoRespuesta();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (contexto.Database.CurrentTransaction != null)
+                    tran.Rollback();
+
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+
+        public HttpResponseMessage Todos()
+        {
+            try
+            {
+                var clientes = contexto.proveedor.Select(x => new
+                {
+                    id = x.usuario_id,
+                    nombre_empresa = x.nombreempresa,
+                    observaciones = x.observaciones,
+                    latitud = x.lat,
+                    longitud = x.lng,
+                    cif = x.cif,
+                    direccion1 = x.usuario.direccion1,
+                    direccion2 = x.usuario.direccion2,
+                    email = x.usuario.Email,
+                    telefono = x.usuario.PhoneNumber,
+                    nombre = x.usuario.nombre,
+                    primerapellido = x.usuario.primerapellido,
+                    segundopellido = x.usuario.segundoapellido,
+                    localidad = x.usuario.localidad.nombre,
+                    codigo_postal = x.usuario.localidad.cp,
+                    provincia = x.usuario.localidad.provincia.nombre,
+                    pais = x.usuario.localidad.provincia.pais.nombre
+
+                }).ToList();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                resp.Contenido = clientes;
+                return resp.ObjectoRespuesta();
+
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
     }
-    
 }

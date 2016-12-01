@@ -1,3 +1,5 @@
+using CapaDatos.Infraestructura.AtributosValidacion;
+using CapaDatos.Properties;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,23 +19,25 @@ namespace CapaDatos.Entidades
         [Key]
         public string usuario_id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error18", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(45)]
         public string nombreempresa { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error19", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(45)]
+        [Index(IsUnique = true)]
+        [CIF(ErrorMessageResourceName = "error23", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string cif { get; set; }
 
         [Column(TypeName = "text")]
         [StringLength(65535)]
         public string observaciones { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error20", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(60)]
         public string lat { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error21", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(60)]
         public string lng { get; set; }
 

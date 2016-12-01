@@ -155,4 +155,5 @@ D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.rollback
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csproj.GenerateResource.Cache
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.dll
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.pdb
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Properties.ErroresValidacion.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache

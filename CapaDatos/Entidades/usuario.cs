@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http.ModelBinding;
+using CapaDatos.Properties;
 
 namespace CapaDatos.Entidades
 {
@@ -27,55 +28,57 @@ namespace CapaDatos.Entidades
 
         }
 
-        [Required(ErrorMessage = "Campo id requerido")]
+        [Required(ErrorMessageResourceName = "error2",ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(128)]
         [Key]
         [Column("id")]
         [DataMember(Name = "id")]
         public override string Id { get; set; }
 
-        [Required(ErrorMessage = "Campo mail requerido")]
+        [Required(ErrorMessageResourceName = "error3", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [RegularExpression("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$", ErrorMessageResourceName = "error4", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(60)]
         [Column("mail",TypeName ="varchar")]
         [Index(IsUnique =true)]
-        [DataMember(Name = "mail")]
+        [DataMember(Name = "email")]
         public override string Email { get; set; }
 
-        [Required(ErrorMessage = "Campo usuario requerido")]
+        [Required(ErrorMessageResourceName = "error5", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [RegularExpression("^[a-zA-Z0-9]{6,}$", ErrorMessageResourceName = "error6", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(60)]
         [Column("username", TypeName = "varchar")]
         [Index(IsUnique = true)]
         [DataMember(Name = "usuario")]
         public override string UserName { get; set; }
 
-        [Required(ErrorMessage = "Campo password requerido")]
+        //se valida a través del AdministradorUsuario
         [Column("contrasena", TypeName = "text")]
         [DataMember(Name ="password")]
         public override string PasswordHash { get; set; }
 
-        [Required(ErrorMessage = "Campo telefono requerido")]
+        [Required(ErrorMessageResourceName = "error9", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(30)]
         [Column("telefono", TypeName = "varchar")]
         [DataMember(Name = "telefono")]
         public override string PhoneNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error10", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(45)]
         [DataMember(Name = "nombre")]
         public string nombre { get; set; }
 
-        [Required(ErrorMessage = "Campo primer apellido requerido")]
+        [Required(ErrorMessageResourceName = "error11", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(45)]
         [DataMember(Name = "primerapellido")]
         public string primerapellido { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error12", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(45)]
         [DataMember(Name = "segundoapellido")]
         public string segundoapellido { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error13", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(255)]
         [DataMember(Name = "direccion1")]
         public string direccion1 { get; set; }
@@ -86,7 +89,7 @@ namespace CapaDatos.Entidades
 
         [Column(TypeName = "uint")]
         [DataMember(Name = "localidad")]
-        [Range(1, long.MaxValue, ErrorMessage = "Campo localidad requerido")]
+        [Range(1, long.MaxValue, ErrorMessageResourceName = "error14", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public long localidad_id { get; set; }
 
 

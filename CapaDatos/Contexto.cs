@@ -34,7 +34,7 @@ namespace CapaDatos
         public virtual DbSet<foto> foto { get; set; }
         public virtual DbSet<guia> guia { get; set; }
         public virtual DbSet<idioma_guia> idioma_guia { get; set; }
-        public virtual DbSet<idioma> idiomas { get; set; }
+        public virtual DbSet<idioma> idioma { get; set; }
         public virtual DbSet<item> item { get; set; }
         public virtual DbSet<localidad> localidad { get; set; }
         public virtual DbSet<pais> pais { get; set; }

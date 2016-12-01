@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using PortalExcursiones.Infraestructura.Interfaces;
 using System.Linq;
 using PortalExcursiones.Modelos.ModelosEntrada;
+using PortalExcursiones.Properties;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
@@ -72,10 +73,17 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
-                        resp.Mensaje_error = String.Format("El usuario con ID {0} no se ha podido encontrar",Entidad.Id);
+                        resp.Mensaje_error = String.Format(Errores.error1,Entidad.Id);
                         return resp.ObjectoRespuesta();
                     }
                     Entidad.PasswordHash = aux.PasswordHash;
+                    Entidad.EmailConfirmed = aux.EmailConfirmed;
+                    Entidad.SecurityStamp = aux.SecurityStamp;
+                    Entidad.PhoneNumberConfirmed = aux.PhoneNumberConfirmed;
+                    Entidad.TwoFactorEnabled = aux.TwoFactorEnabled;
+                    Entidad.LockoutEnabled = aux.LockoutEnabled;
+                    Entidad.LockoutEndDateUtc = aux.LockoutEndDateUtc;
+                    Entidad.AccessFailedCount = aux.AccessFailedCount;
                     contexto.Entry(aux).State = EntityState.Detached;
                     contexto.Entry(Entidad).State = EntityState.Modified;
                     IdentityResult result = mgr.Update(Entidad);
@@ -119,7 +127,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     direccion1 = e.direccion1,
                     direccion2 = e.direccion2,
                     email = e.Email,
-                    telefono1 = e.PhoneNumber,
+                    telefono = e.PhoneNumber,
                     nombre = e.nombre,
                     primerapellido = e.primerapellido,
                     segundopellido = e.segundoapellido,
@@ -133,7 +141,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
-                    resp.Mensaje_error = String.Format("El usuario con ID {0} no se ha podido encontrar", id);
+                    resp.Mensaje_error = String.Format(Errores.error1, id);
                     return resp.ObjectoRespuesta();
                 }
                 resp.Codigo = (int)Codigos.OK;
@@ -162,7 +170,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     direccion1 = e.direccion1,
                     direccion2 = e.direccion2,
                     email = e.Email,
-                    telefono1 = e.PhoneNumber,
+                    telefono = e.PhoneNumber,
                     nombre = e.nombre,
                     primerapellido = e.primerapellido,
                     segundopellido = e.segundoapellido,

@@ -11,7 +11,7 @@ namespace CapaDatos.Entidades
         public guia()
         {
             excursiones = new HashSet<calendarioexcursion_guia>();
-            guias = new HashSet<idioma_guia>();
+            idiomas = new HashSet<idioma_guia>();
         }
 
         [Key]
@@ -27,6 +27,6 @@ namespace CapaDatos.Entidades
         public virtual usuario usuario { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<idioma_guia> guias { get; set; }
+        public virtual ICollection<idioma_guia> idiomas { get; set; }
     }
 }

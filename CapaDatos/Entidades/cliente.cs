@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CapaDatos.Properties;
+using CapaDatos.Infraestructura.AtributosValidacion;
 
 namespace CapaDatos.Entidades
 {
@@ -16,7 +18,8 @@ namespace CapaDatos.Entidades
         [Key]
         public string usuario_id { get; set; }
 
-        [Required(ErrorMessage ="Campo numero de identificacion requerido")]
+        [Required(ErrorMessageResourceName = "error15", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [DNI(ErrorMessageResourceName ="error22",ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(30)]
         public string numidentificacion { get; set; }
 

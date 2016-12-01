@@ -18,7 +18,7 @@ namespace CapaDatos.ConfiguracionEntidades
                 .WillCascadeOnDelete(false);
 
            
-                HasMany(e => e.guias)
+                HasMany(e => e.idiomas)
                 .WithRequired(e => e.guia)
                 .HasForeignKey(e => e.guia_id)
                 .WillCascadeOnDelete(false);

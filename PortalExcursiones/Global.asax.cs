@@ -12,7 +12,6 @@ namespace PortalExcursiones
             GlobalConfiguration.Configure(WebApiConfig.Register);
            // FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            
         }
 
         protected void Application_BeginRequest()

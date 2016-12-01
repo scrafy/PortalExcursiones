@@ -117,19 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="error1" xml:space="preserve">
-    <value>El usuario con ID {0} no se ha podido encontrar</value>
-  </data>
-  <data name="error2" xml:space="preserve">
-    <value>No se ha encontrado a ningún usuario con las credenciales proporcionadas</value>
-  </data>
-  <data name="error3" xml:space="preserve">
-    <value>El usuario no tenia la sesión iniciada, no es posible realizar un logout</value>
-  </data>
-  <data name="error4" xml:space="preserve">
-    <value>No existe ningún usuario con la direccion de email proporcionada</value>
-  </data>
-  <data name="error5" xml:space="preserve">
-    <value>La dirección de email proporcionada es incorrecta</value>
+  <data name="mensaje1" xml:space="preserve">
+    <value>Renovacion Password</value>
   </data>
 </root>

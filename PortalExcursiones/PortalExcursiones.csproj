@@ -152,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Modelos\Enlazadores\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -160,17 +159,28 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\ResolvedorDependencias.cs" />
     <Compile Include="Controladores\BaseController.cs" />
+    <Compile Include="Controladores\CalendarioExcursionActividadController.cs" />
     <Compile Include="Controladores\ClienteController.cs" />
+    <Compile Include="Controladores\GuiaController.cs" />
+    <Compile Include="Controladores\ProveedorController.cs" />
+    <Compile Include="Infraestructura\AtributosValidacion\FechaCalendarioAttribute.cs" />
+    <Compile Include="Infraestructura\AtributosValidacion\HorariosValidacion.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\CalendarioExcursionOperacionesComunes.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\ClienteOperacionesComunes.cs" />
-    <Compile Include="Infraestructura\ImplementacionInterfaces\OperacionesUsuario.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\GuiaOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\ProveedorOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\UsuarioOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\UsuarioOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\Interfaces\IOperacionesCalendarioExcursionActividad.cs" />
     <Compile Include="Infraestructura\Interfaces\IOperacionesComunes.cs" />
     <Compile Include="Controladores\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infraestructura\Interfaces\IOperacionesUsuario.cs" />
+    <Compile Include="Infraestructura\ProveedorValor\ProveedorValorCalendarioExcursionActividadFactory.cs" />
     <Compile Include="Infraestructura\ProveedorValor\ProveedorValorUsuario.cs" />
+    <Compile Include="Modelos\ModelosEntrada\CalendarioExcursionModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\CambioPasswordModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\LoginModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\RenovacionPasswordModel.cs" />
@@ -178,20 +188,20 @@
     <Compile Include="Modelos\ModelosSalida\Excepcion.cs" />
     <Compile Include="Modelos\ModelosSalida\Respuesta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Errores.en.Designer.cs">
-      <DependentUpon>Errores.en.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Properties\Errores.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Errores.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Properties\Mensajes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Mensajes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\ErroresValidacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErroresValidacion.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -219,17 +229,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Errores.en.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Errores.en.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Errores.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Errores.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Properties\Mensajes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Mensajes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\ErroresValidacion.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErroresValidacion.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

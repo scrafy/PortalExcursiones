@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PortalExcursiones.Properties;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+
 
 namespace PortalExcursiones.Modelos.ModelosEntrada
 {
@@ -12,7 +10,7 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
         private string token;
         private string password;
 
-        [Required(ErrorMessage = "El campo userid es requerido")]
+        [Required(ErrorMessageResourceName = "error5", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string Userid
         {
             get
@@ -26,7 +24,7 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
             }
         }
 
-        [Required(ErrorMessage = "El campo token es requerido")]
+        [Required(ErrorMessageResourceName = "error6", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string Token
         {
             get
@@ -40,7 +38,8 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
             }
         }
 
-        [Required(ErrorMessage = "El campo password es requerido")]
+        [Required(ErrorMessageResourceName = "error7", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [RegularExpression("^[a-zA-Z0-9]{6,}$", ErrorMessageResourceName = "error8", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string Password
         {
             get

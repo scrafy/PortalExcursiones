@@ -39,7 +39,11 @@ namespace PortalExcursiones
             contenedor.RegisterType<IUserStore<usuario>, UserStore<usuario>>(new CicloVidaObjecto<UserStore<usuario>>(), new InjectionConstructor(contenedor.Resolve<Contexto>()));
             contenedor.RegisterType<IOperacionesComunes<cliente>, ClienteOperacionesComunes>(new CicloVidaObjecto<ClienteOperacionesComunes>());
             contenedor.RegisterType<IOperacionesComunes<usuario>, UsuarioOperacionesComunes>(new CicloVidaObjecto<UsuarioOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesUsuario, OperacionesUsuario>(new CicloVidaObjecto<OperacionesUsuario>());
+            contenedor.RegisterType<IOperacionesComunes<guia>, GuiaOperacionesComunes>(new CicloVidaObjecto<GuiaOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<proveedor>, ProveedorOperacionesComunes>(new CicloVidaObjecto<GuiaOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesCalendarioExcursionActividad, CalendarioExcursionOperaciones>(new CicloVidaObjecto<GuiaOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesUsuario, UsuarioOperaciones>(new CicloVidaObjecto<UsuarioOperaciones>());
+
         }
 
         public static UnityContainer ObtenerContenedor()

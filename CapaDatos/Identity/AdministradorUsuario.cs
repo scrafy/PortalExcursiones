@@ -16,6 +16,7 @@ namespace CapaDatos.Identity
         {
             UserValidator = new ValidadorUsuario(this);
             EmailService = new ServicioEmail();
+            PasswordValidator = new ValidadorPassword();
         }
         
 

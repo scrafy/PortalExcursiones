@@ -111,7 +111,6 @@ D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\roslyn\VBCSCompiler.exe.con
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\PortalExcursiones.dll.config
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\PortalExcursiones.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\PortalExcursiones.pdb
-D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\en\PortalExcursiones.resources.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\CapaDatos.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\EntityFramework.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\EntityFramework.SqlServer.dll
@@ -165,9 +164,8 @@ D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\es\System.Web.Http.resource
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\es\System.Web.Http.WebHost.resources.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.csprojResolveAssemblyReference.cache
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.Properties.Errores.resources
-D:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.Properties.Resources.resources
-D:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.Properties.Errores.en.resources
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.csproj.GenerateResource.Cache
-D:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\en\PortalExcursiones.resources.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.pdb
+D:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.Properties.Mensajes.resources
+D:\PROYECTOS\PortalExcursiones\PortalExcursiones\obj\Debug\PortalExcursiones.Properties.ErroresValidacion.resources

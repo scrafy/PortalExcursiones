@@ -4,8 +4,7 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using CapaDatos;
-using System.Web;
+using CapaDatos.Properties;
 
 namespace CapaDatos.Identity
 {
@@ -41,11 +40,11 @@ namespace CapaDatos.Identity
             }
             if (usuarios.Where(e => e.UserName == item.UserName).FirstOrDefault() != null)
             {
-                errors.Add(String.Format("El nombre de usuario {0} ya existe,por favor,elija otro diferente", item.UserName));
+                errors.Add(String.Format(ErroresValidacion.error16, item.UserName));
             }
             if (usuarios.Where(e => e.Email == item.Email).FirstOrDefault() != null)
             {
-                errors.Add(String.Format("La dirección de correo {0} ya existe,por favor,elija otra diferente", item.Email));
+                errors.Add(String.Format(ErroresValidacion.error17, item.Email));
             }
             return errors.Any() ? IdentityResult.Failed(errors.ToArray()) : IdentityResult.Success;
         }

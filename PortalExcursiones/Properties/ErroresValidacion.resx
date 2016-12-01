@@ -117,4 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="error1" xml:space="preserve">
+    <value>El campo password anterior es requerido</value>
+  </data>
+  <data name="error2" xml:space="preserve">
+    <value>El campo password anterior no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>
+  </data>
+  <data name="error3" xml:space="preserve">
+    <value>El campo password nuevo es requerido</value>
+  </data>
+  <data name="error4" xml:space="preserve">
+    <value>El campo password nuevo no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>
+  </data>
+  <data name="error5" xml:space="preserve">
+    <value>El campo userid es requerido</value>
+  </data>
+  <data name="error6" xml:space="preserve">
+    <value>El campo token es requerido</value>
+  </data>
+  <data name="error7" xml:space="preserve">
+    <value>El campo password es requerido</value>
+  </data>
+  <data name="error8" xml:space="preserve">
+    <value>El campo password no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>
+  </data>
 </root>

@@ -118,6 +118,72 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="error1" xml:space="preserve">
-    <value>The use with ID {0} does not exists</value>
+    <value>El usuario con id {0} no existe</value>
+  </data>
+  <data name="error10" xml:space="preserve">
+    <value>El campo nombre es requerido</value>
+  </data>
+  <data name="error11" xml:space="preserve">
+    <value>El campo primerapellido es requerido</value>
+  </data>
+  <data name="error12" xml:space="preserve">
+    <value>El campo segundoapellido es requerido</value>
+  </data>
+  <data name="error13" xml:space="preserve">
+    <value>El campo direccion1 es requerido</value>
+  </data>
+  <data name="error14" xml:space="preserve">
+    <value>El campo localidad es requerido</value>
+  </data>
+  <data name="error15" xml:space="preserve">
+    <value>El campo número de identificación es requerido</value>
+  </data>
+  <data name="error16" xml:space="preserve">
+    <value>El nombre de usuario {0} ya existe,por favor,elija otro diferente</value>
+  </data>
+  <data name="error17" xml:space="preserve">
+    <value>La dirección de correo {0} ya existe,por favor,elija otra diferente</value>
+  </data>
+  <data name="error18" xml:space="preserve">
+    <value>El campo nombre de empresa es requerido</value>
+  </data>
+  <data name="error19" xml:space="preserve">
+    <value>El campo cif es requerido</value>
+  </data>
+  <data name="error2" xml:space="preserve">
+    <value>El campo id es requerido</value>
+  </data>
+  <data name="error20" xml:space="preserve">
+    <value>El campo latitud es requerido</value>
+  </data>
+  <data name="error21" xml:space="preserve">
+    <value>El campo longitud es requerido</value>
+  </data>
+  <data name="error22" xml:space="preserve">
+    <value>El DNI o NIE es incorrecto</value>
+  </data>
+  <data name="error23" xml:space="preserve">
+    <value>El CIF es incorrecto, revise que no hayan guiones</value>
+  </data>
+  <data name="error3" xml:space="preserve">
+    <value>El campo email es requerido</value>
+  </data>
+  <data name="error4" xml:space="preserve">
+    <value>La dirección de email no es válida</value>
+  </data>
+  <data name="error5" xml:space="preserve">
+    <value>El campo usuario es requerido</value>
+  </data>
+  <data name="error6" xml:space="preserve">
+    <value>El campo usuario no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>
+  </data>
+  <data name="error7" xml:space="preserve">
+    <value>El campo password es requerido</value>
+  </data>
+  <data name="error8" xml:space="preserve">
+    <value>El campo password no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>
+  </data>
+  <data name="error9" xml:space="preserve">
+    <value>El campo teléfono es requerido</value>
   </data>
 </root>

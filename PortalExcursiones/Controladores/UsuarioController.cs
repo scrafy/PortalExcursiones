@@ -5,7 +5,7 @@ using System.Web.Http.ValueProviders;
 using PortalExcursiones.Infraestructura.Interfaces;
 using PortalExcursiones.Infraestructura.ProveedorValor;
 using PortalExcursiones.Modelos.ModelosEntrada;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace PortalExcursiones.Controladores
 {

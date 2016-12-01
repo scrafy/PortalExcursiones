@@ -22,14 +22,14 @@ namespace PortalExcursiones.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Errores {
+    public class ErroresValidacion {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Errores() {
+        internal ErroresValidacion() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PortalExcursiones.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PortalExcursiones.Properties.Errores", typeof(Errores).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PortalExcursiones.Properties.ErroresValidacion", typeof(ErroresValidacion).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El usuario con ID {0} no se ha podido encontrar.
+        ///   Busca una cadena traducida similar a El campo password anterior es requerido.
         /// </summary>
         public static string error1 {
             get {
@@ -70,7 +70,7 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se ha encontrado a ningún usuario con las credenciales proporcionadas.
+        ///   Busca una cadena traducida similar a El campo password anterior no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos.
         /// </summary>
         public static string error2 {
             get {
@@ -79,7 +79,7 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El usuario no tenia la sesión iniciada, no es posible realizar un logout.
+        ///   Busca una cadena traducida similar a El campo password nuevo es requerido.
         /// </summary>
         public static string error3 {
             get {
@@ -88,7 +88,7 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No existe ningún usuario con la direccion de email proporcionada.
+        ///   Busca una cadena traducida similar a El campo password nuevo no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos.
         /// </summary>
         public static string error4 {
             get {
@@ -97,11 +97,38 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a La dirección de email proporcionada es incorrecta.
+        ///   Busca una cadena traducida similar a El campo userid es requerido.
         /// </summary>
         public static string error5 {
             get {
                 return ResourceManager.GetString("error5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo token es requerido.
+        /// </summary>
+        public static string error6 {
+            get {
+                return ResourceManager.GetString("error6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo password es requerido.
+        /// </summary>
+        public static string error7 {
+            get {
+                return ResourceManager.GetString("error7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo password no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos.
+        /// </summary>
+        public static string error8 {
+            get {
+                return ResourceManager.GetString("error8", resourceCulture);
             }
         }
     }

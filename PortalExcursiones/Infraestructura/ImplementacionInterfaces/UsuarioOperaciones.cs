@@ -14,16 +14,17 @@ using System.Web.Http.ModelBinding;
 using PortalExcursiones.Modelos.ModelosSalida;
 using System.Web.Http;
 using System.Text.RegularExpressions;
+using PortalExcursiones.Properties;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class OperacionesUsuario : IOperacionesUsuario
+    public class UsuarioOperaciones : IOperacionesUsuario
     {
         private IAuthenticationManager auth;
         private AdministradorUsuario mgr;
         private Respuesta resp;
 
-        public OperacionesUsuario(IAuthenticationManager _auth,AdministradorUsuario _mgr,Respuesta _resp)
+        public UsuarioOperaciones(IAuthenticationManager _auth,AdministradorUsuario _mgr,Respuesta _resp)
         {
             auth = _auth;
             mgr = _mgr;
@@ -42,7 +43,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
-                        resp.Mensaje_error = String.Format("No se ha encontrado a ningún usuario con las credenciales proporcionadas");
+                        resp.Mensaje_error = String.Format(Errores.error2);
                         return resp.ObjectoRespuesta();
                     }
                     else
@@ -87,7 +88,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 }
                 resp.Codigo = (int)Codigos.NO_AUTENTICADO;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.NO_AUTENTICADO);
-                resp.Mensaje_error = "El usuario no tenia la sesión iniciada, no es posible realizar un logout";
+                resp.Mensaje_error = Errores.error3;
                 return resp.ObjectoRespuesta();
             }
             catch (Exception ex)
@@ -147,11 +148,11 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
-                        resp.Mensaje_error = String.Format("No existe ninguún usuario con la direccion de email proporcionada");
+                        resp.Mensaje_error = String.Format(Errores.error4);
                         return resp.ObjectoRespuesta();
                     }
                     var token = mgr.GeneratePasswordResetToken(usuario.Id);
-                    mgr.SendEmail(usuario.Id, "Renovacion Password", String.Format("http://localhost:54656/api/usuarios/renovarpassword?userid={0}&token={1}", usuario.Id, token));
+                    mgr.SendEmail(usuario.Id, Mensajes.mensaje1, String.Format("http://localhost:54656/api/usuarios/renovarpassword?userid={0}&token={1}", usuario.Id, token));
                     resp.Codigo = (int)Codigos.OK;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
                     return resp.ObjectoRespuesta();
@@ -160,7 +161,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 {
                     resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
-                    resp.Objetoerror = new string[] {"La dirección de email proporcionada es incorrecta"};
+                    resp.Objetoerror = new string[] {Errores.error5};
                     return resp.ObjectoRespuesta();
                 }
 
