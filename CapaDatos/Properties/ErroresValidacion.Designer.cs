@@ -205,6 +205,60 @@ namespace CapaDatos.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Es necesario enviar una imagen como portada o logo de la excursión/actividad.
+        /// </summary>
+        public static string error24 {
+            get {
+                return ResourceManager.GetString("error24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo ID de proveedor es requerido.
+        /// </summary>
+        public static string error25 {
+            get {
+                return ResourceManager.GetString("error25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo duración es requerido.
+        /// </summary>
+        public static string error26 {
+            get {
+                return ResourceManager.GetString("error26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo mínimo de personas es requerido.
+        /// </summary>
+        public static string error27 {
+            get {
+                return ResourceManager.GetString("error27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo máximo de personas es requerido.
+        /// </summary>
+        public static string error28 {
+            get {
+                return ResourceManager.GetString("error28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo qué harás es requerido.
+        /// </summary>
+        public static string error29 {
+            get {
+                return ResourceManager.GetString("error29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El campo email es requerido.
         /// </summary>
         public static string error3 {
@@ -214,11 +268,173 @@ namespace CapaDatos.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El campo destino es requerido.
+        /// </summary>
+        public static string error30 {
+            get {
+                return ResourceManager.GetString("error30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo no incluye es requerido.
+        /// </summary>
+        public static string error31 {
+            get {
+                return ResourceManager.GetString("error31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo antes de ir es requerido.
+        /// </summary>
+        public static string error32 {
+            get {
+                return ResourceManager.GetString("error32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo qué esperar es requerido.
+        /// </summary>
+        public static string error33 {
+            get {
+                return ResourceManager.GetString("error33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo pvpadulto es requerido.
+        /// </summary>
+        public static string error34 {
+            get {
+                return ResourceManager.GetString("error34", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo pvpniño es requerido.
+        /// </summary>
+        public static string error35 {
+            get {
+                return ResourceManager.GetString("error35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo pvpinfante es requerido.
+        /// </summary>
+        public static string error36 {
+            get {
+                return ResourceManager.GetString("error36", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo costeadulto es requerido.
+        /// </summary>
+        public static string error37 {
+            get {
+                return ResourceManager.GetString("error37", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo costeanino es requerido.
+        /// </summary>
+        public static string error38 {
+            get {
+                return ResourceManager.GetString("error38", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo costeinfante es requerido.
+        /// </summary>
+        public static string error39 {
+            get {
+                return ResourceManager.GetString("error39", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La dirección de email no es válida.
         /// </summary>
         public static string error4 {
             get {
                 return ResourceManager.GetString("error4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo netoadulto es requerido.
+        /// </summary>
+        public static string error40 {
+            get {
+                return ResourceManager.GetString("error40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo netoniño es requerido.
+        /// </summary>
+        public static string error41 {
+            get {
+                return ResourceManager.GetString("error41", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo netoinfante es requerido.
+        /// </summary>
+        public static string error42 {
+            get {
+                return ResourceManager.GetString("error42", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo exact_id es requerido.
+        /// </summary>
+        public static string error43 {
+            get {
+                return ResourceManager.GetString("error43", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo fecha desde es requerido.
+        /// </summary>
+        public static string error44 {
+            get {
+                return ResourceManager.GetString("error44", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo fecha hasta es requerido.
+        /// </summary>
+        public static string error45 {
+            get {
+                return ResourceManager.GetString("error45", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo dirección es requerido.
+        /// </summary>
+        public static string error46 {
+            get {
+                return ResourceManager.GetString("error46", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo url es requerido.
+        /// </summary>
+        public static string error47 {
+            get {
+                return ResourceManager.GetString("error47", resourceCulture);
             }
         }
         

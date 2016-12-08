@@ -165,11 +165,83 @@
   <data name="error23" xml:space="preserve">
     <value>El CIF es incorrecto, revise que no hayan guiones</value>
   </data>
+  <data name="error24" xml:space="preserve">
+    <value>Es necesario enviar una imagen como portada o logo de la excursión/actividad</value>
+  </data>
+  <data name="error25" xml:space="preserve">
+    <value>El campo ID de proveedor es requerido</value>
+  </data>
+  <data name="error26" xml:space="preserve">
+    <value>El campo duración es requerido</value>
+  </data>
+  <data name="error27" xml:space="preserve">
+    <value>El campo mínimo de personas es requerido</value>
+  </data>
+  <data name="error28" xml:space="preserve">
+    <value>El campo máximo de personas es requerido</value>
+  </data>
+  <data name="error29" xml:space="preserve">
+    <value>El campo qué harás es requerido</value>
+  </data>
   <data name="error3" xml:space="preserve">
     <value>El campo email es requerido</value>
   </data>
+  <data name="error30" xml:space="preserve">
+    <value>El campo destino es requerido</value>
+  </data>
+  <data name="error31" xml:space="preserve">
+    <value>El campo no incluye es requerido</value>
+  </data>
+  <data name="error32" xml:space="preserve">
+    <value>El campo antes de ir es requerido</value>
+  </data>
+  <data name="error33" xml:space="preserve">
+    <value>El campo qué esperar es requerido</value>
+  </data>
+  <data name="error34" xml:space="preserve">
+    <value>El campo pvpadulto es requerido</value>
+  </data>
+  <data name="error35" xml:space="preserve">
+    <value>El campo pvpniño es requerido</value>
+  </data>
+  <data name="error36" xml:space="preserve">
+    <value>El campo pvpinfante es requerido</value>
+  </data>
+  <data name="error37" xml:space="preserve">
+    <value>El campo costeadulto es requerido</value>
+  </data>
+  <data name="error38" xml:space="preserve">
+    <value>El campo costeanino es requerido</value>
+  </data>
+  <data name="error39" xml:space="preserve">
+    <value>El campo costeinfante es requerido</value>
+  </data>
   <data name="error4" xml:space="preserve">
     <value>La dirección de email no es válida</value>
+  </data>
+  <data name="error40" xml:space="preserve">
+    <value>El campo netoadulto es requerido</value>
+  </data>
+  <data name="error41" xml:space="preserve">
+    <value>El campo netoniño es requerido</value>
+  </data>
+  <data name="error42" xml:space="preserve">
+    <value>El campo netoinfante es requerido</value>
+  </data>
+  <data name="error43" xml:space="preserve">
+    <value>El campo exact_id es requerido</value>
+  </data>
+  <data name="error44" xml:space="preserve">
+    <value>El campo fecha desde es requerido</value>
+  </data>
+  <data name="error45" xml:space="preserve">
+    <value>El campo fecha hasta es requerido</value>
+  </data>
+  <data name="error46" xml:space="preserve">
+    <value>El campo dirección es requerido</value>
+  </data>
+  <data name="error47" xml:space="preserve">
+    <value>El campo url es requerido</value>
   </data>
   <data name="error5" xml:space="preserve">
     <value>El campo usuario es requerido</value>

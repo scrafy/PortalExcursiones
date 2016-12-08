@@ -10,6 +10,7 @@ using CapaDatos.Entidades;
 using PortalExcursiones.Properties;
 using System.Data.Entity;
 using PortalExcursiones.Infraestructura.Interfaces;
+using PortalExcursiones.Infraestructura.Enumeraciones;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
@@ -125,7 +126,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                        resp.Mensaje_error = resp.Mensaje_error = String.Format(Errores.error1, Entidad.usuario.Id);
+                        resp.Mensaje_error = String.Format(Errores.error1, Entidad.usuario.Id);
                         return resp.ObjectoRespuesta();
                     }
                 }
@@ -219,7 +220,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
-                    resp.Mensaje_error = resp.Mensaje_error = String.Format(Errores.error1, id);
+                    resp.Mensaje_error = String.Format(Errores.error1, id);
                     return resp.ObjectoRespuesta();
                 }
             }

@@ -70,6 +70,42 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Existe una configuración con el mismo nombre.
+        /// </summary>
+        public static string error10 {
+            get {
+                return ResourceManager.GetString("error10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La fecha nueva desde ser mayo que la fecha actual.
+        /// </summary>
+        public static string error11 {
+            get {
+                return ResourceManager.GetString("error11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El periodo de fechas coincide en parte o completamente con otro periodo..
+        /// </summary>
+        public static string error12 {
+            get {
+                return ResourceManager.GetString("error12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La fecha desde tiene que ser menor que la fecha hasta.
+        /// </summary>
+        public static string error13 {
+            get {
+                return ResourceManager.GetString("error13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se ha encontrado a ningún usuario con las credenciales proporcionadas.
         /// </summary>
         public static string error2 {
@@ -102,6 +138,42 @@ namespace PortalExcursiones.Properties {
         public static string error5 {
             get {
                 return ResourceManager.GetString("error5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No existe ningún registro con el ID proporcionado.
+        /// </summary>
+        public static string error6 {
+            get {
+                return ResourceManager.GetString("error6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El valor del campo hasta es menor que el valor del campo desde.
+        /// </summary>
+        public static string error7 {
+            get {
+                return ResourceManager.GetString("error7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Existe una reserva,un punto de recogida o un guia asociado a dicha fecha, la eliminación no es posible.
+        /// </summary>
+        public static string error8 {
+            get {
+                return ResourceManager.GetString("error8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La excursion/actividad ya tiene asignada la fecha proporcionada, no es posible modificarla.
+        /// </summary>
+        public static string error9 {
+            get {
+                return ResourceManager.GetString("error9", resourceCulture);
             }
         }
     }

@@ -120,6 +120,18 @@
   <data name="error1" xml:space="preserve">
     <value>El usuario con ID {0} no se ha podido encontrar</value>
   </data>
+  <data name="error10" xml:space="preserve">
+    <value>Existe una configuración con el mismo nombre</value>
+  </data>
+  <data name="error11" xml:space="preserve">
+    <value>La fecha nueva desde ser mayo que la fecha actual</value>
+  </data>
+  <data name="error12" xml:space="preserve">
+    <value>El periodo de fechas coincide en parte o completamente con otro periodo.</value>
+  </data>
+  <data name="error13" xml:space="preserve">
+    <value>La fecha desde tiene que ser menor que la fecha hasta</value>
+  </data>
   <data name="error2" xml:space="preserve">
     <value>No se ha encontrado a ningún usuario con las credenciales proporcionadas</value>
   </data>
@@ -131,5 +143,17 @@
   </data>
   <data name="error5" xml:space="preserve">
     <value>La dirección de email proporcionada es incorrecta</value>
+  </data>
+  <data name="error6" xml:space="preserve">
+    <value>No existe ningún registro con el ID proporcionado</value>
+  </data>
+  <data name="error7" xml:space="preserve">
+    <value>El valor del campo hasta es menor que el valor del campo desde</value>
+  </data>
+  <data name="error8" xml:space="preserve">
+    <value>Existe una reserva,un punto de recogida o un guia asociado a dicha fecha, la eliminación no es posible</value>
+  </data>
+  <data name="error9" xml:space="preserve">
+    <value>La excursion/actividad ya tiene asignada la fecha proporcionada, no es posible modificarla</value>
   </data>
 </root>

@@ -40,8 +40,16 @@ namespace PortalExcursiones
             contenedor.RegisterType<IOperacionesComunes<cliente>, ClienteOperacionesComunes>(new CicloVidaObjecto<ClienteOperacionesComunes>());
             contenedor.RegisterType<IOperacionesComunes<usuario>, UsuarioOperacionesComunes>(new CicloVidaObjecto<UsuarioOperacionesComunes>());
             contenedor.RegisterType<IOperacionesComunes<guia>, GuiaOperacionesComunes>(new CicloVidaObjecto<GuiaOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<proveedor>, ProveedorOperacionesComunes>(new CicloVidaObjecto<GuiaOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesCalendarioExcursionActividad, CalendarioExcursionOperaciones>(new CicloVidaObjecto<GuiaOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<proveedor>, ProveedorOperacionesComunes>(new CicloVidaObjecto<ProveedorOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesCalendarioExcursionActividad, CalendarioExcursionOperacionesComunes>(new CicloVidaObjecto<CalendarioExcursionOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<estadoexcursion>, EstadoExcursionOperacionesComunes>(new CicloVidaObjecto<EstadoExcursionOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<categoriaexcursion>, CategoriaExcursionOperacionesComunes>(new CicloVidaObjecto<CategoriaExcursionOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<categoriactividad>, CategoriActividadOperacionesComunes>(new CicloVidaObjecto<CategoriActividadOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<excursionactividad>, ExcursionActividadOperacionesComunes>(new CicloVidaObjecto<ExcursionActividadOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<preciotemporada>, PrecioPorTemporadaOperacionesComunes>(new CicloVidaObjecto<PrecioPorTemporadaOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<puntorecogida>, PuntoRecogidaOperacionesComunes>(new CicloVidaObjecto<PuntoRecogidaOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<item>, ItemOperacionesComunes>(new CicloVidaObjecto<ItemOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<destino>, DestinoOperacionesComunes>(new CicloVidaObjecto<DestinoOperacionesComunes>());
             contenedor.RegisterType<IOperacionesUsuario, UsuarioOperaciones>(new CicloVidaObjecto<UsuarioOperaciones>());
 
         }

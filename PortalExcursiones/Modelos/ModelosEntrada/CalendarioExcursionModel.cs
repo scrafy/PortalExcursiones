@@ -1,4 +1,5 @@
 ﻿using PortalExcursiones.Infraestructura.AtributosValidacion;
+using PortalExcursiones.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,12 +9,13 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
 {
     public class CalendarioExcursionModel
     {
+        private long exact_id;
         private DateTime desde;
         private DateTime hasta;
         private List<string> horarios;
         private List<string> dias;
 
-        [FechaCalendario(ErrorMessage = "El campo fecha desde es requerido")]
+        [Fecha(ErrorMessageResourceName = "error13",ErrorMessageResourceType = typeof(ErroresValidacion))]
         public DateTime Desde
         {
             get
@@ -27,7 +29,7 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
             }
         }
 
-        [FechaCalendario(ErrorMessage = "El campo fecha hasta es requerido")]
+        [Fecha(ErrorMessageResourceName = "error14", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public DateTime Hasta
         {
             get
@@ -41,8 +43,8 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
             }
         }
 
-        [Required(ErrorMessage = "El campo horarios es requerido")]
-        [Horarios(ErrorMessage = "Alguna de las horas introducidas tiene un formato incorrecto")]
+        [Required(ErrorMessageResourceName = "error15", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [HorariosCalendario()]
         public List<string> Horarios
         {
             get
@@ -56,7 +58,8 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
             }
         }
 
-        [Required()]
+        [Required(ErrorMessageResourceName = "error16", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [DiasCalendario()]
         public List<string> Dias
         {
             get
@@ -67,6 +70,20 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
             set
             {
                 dias = value;
+            }
+        }
+
+        [Range(1,Double.MaxValue, ErrorMessageResourceName = "error17", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        public long Exact_id
+        {
+            get
+            {
+                return exact_id;
+            }
+
+            set
+            {
+                exact_id = value;
             }
         }
 

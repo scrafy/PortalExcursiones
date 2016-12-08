@@ -120,8 +120,44 @@
   <data name="error1" xml:space="preserve">
     <value>El campo password anterior es requerido</value>
   </data>
+  <data name="error10" xml:space="preserve">
+    <value>Uno de los dias enviados no se corresponde a un día de la semana</value>
+  </data>
+  <data name="error11" xml:space="preserve">
+    <value>Tiene que enviar al menos un horario</value>
+  </data>
+  <data name="error12" xml:space="preserve">
+    <value>Uno de los horarios enviados tiene un formato incorrecto</value>
+  </data>
+  <data name="error13" xml:space="preserve">
+    <value>El campo fecha desde es requerido</value>
+  </data>
+  <data name="error14" xml:space="preserve">
+    <value>El campo fecha hasta es requerido</value>
+  </data>
+  <data name="error15" xml:space="preserve">
+    <value>El campo horarios es requerido</value>
+  </data>
+  <data name="error16" xml:space="preserve">
+    <value>El campo dias es requerido</value>
+  </data>
+  <data name="error17" xml:space="preserve">
+    <value>El campo ID es obligatorio</value>
+  </data>
+  <data name="error18" xml:space="preserve">
+    <value>Se requiere especificar la categoría a la que pertence la activad/excursión</value>
+  </data>
+  <data name="error19" xml:space="preserve">
+    <value>No se puede enviar al mismo tiempo los campos tipoexcursion y tipoactividad</value>
+  </data>
   <data name="error2" xml:space="preserve">
     <value>El campo password anterior no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>
+  </data>
+  <data name="error20" xml:space="preserve">
+    <value>El campo tipoexcursion es requerido</value>
+  </data>
+  <data name="error21" xml:space="preserve">
+    <value>El campo tipoactividad es requerido</value>
   </data>
   <data name="error3" xml:space="preserve">
     <value>El campo password nuevo es requerido</value>
@@ -140,5 +176,8 @@
   </data>
   <data name="error8" xml:space="preserve">
     <value>El campo password no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>
+  </data>
+  <data name="error9" xml:space="preserve">
+    <value>Tiene que enviar al menos un dia de la semana</value>
   </data>
 </root>

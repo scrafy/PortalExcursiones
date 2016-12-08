@@ -1,3 +1,4 @@
+using CapaDatos.Properties;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,8 +17,9 @@ namespace CapaDatos.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error10", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(45)]
+        [Index(IsUnique = true)]
         public string nombre { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

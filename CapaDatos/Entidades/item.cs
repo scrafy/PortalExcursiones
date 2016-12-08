@@ -1,3 +1,4 @@
+using CapaDatos.Properties;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,11 +17,12 @@ namespace CapaDatos.Entidades
         [Column(TypeName = "uint")]
         public long id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error10", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(45)]
+        [Index(IsUnique = true)]
         public string nombre { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error47", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(150)]
         public string url { get; set; }
 

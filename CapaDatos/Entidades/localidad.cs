@@ -22,6 +22,7 @@ namespace CapaDatos.Entidades
 
         [Required]
         [StringLength(45)]
+        [Index(IsUnique = true)]
         public string nombre { get; set; }
 
         public int cp { get; set; }

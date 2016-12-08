@@ -170,6 +170,7 @@
     <Compile Include="Identity\ValidadorUsuario.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\CIFAttributte.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\DNIAttribute.cs" />
+    <Compile Include="Infraestructura\AtributosValidacion\FechaAttribute.cs" />
     <Compile Include="Interceptor.cs" />
     <Compile Include="Migrations\201611052134451_Initial.cs" />
     <Compile Include="Migrations\201611052134451_Initial.Designer.cs">
@@ -194,6 +195,10 @@
     <Compile Include="Migrations\201611251846502_rollback contrasena field.cs" />
     <Compile Include="Migrations\201611251846502_rollback contrasena field.Designer.cs">
       <DependentUpon>201611251846502_rollback contrasena field.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612081846410_Unique_Indexes.cs" />
+    <Compile Include="Migrations\201612081846410_Unique_Indexes.Designer.cs">
+      <DependentUpon>201612081846410_Unique_Indexes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -228,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611251846502_rollback contrasena field.resx">
       <DependentUpon>201611251846502_rollback contrasena field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612081846410_Unique_Indexes.resx">
+      <DependentUpon>201612081846410_Unique_Indexes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\ErroresValidacion.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

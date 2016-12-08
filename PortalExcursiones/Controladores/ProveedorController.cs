@@ -8,7 +8,7 @@ using PortalExcursiones.Infraestructura.ProveedorValor;
 namespace PortalExcursiones.Controladores
 {
     [RoutePrefix("api/proveedores")]
-    public class ProveedorController : BaseController
+    public class ProveedorController : BaseControllers
     {
         private IOperacionesComunes<proveedor> opcomun = null;
 
@@ -26,7 +26,7 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
-        public HttpResponseMessage Put([ValueProvider(typeof(ProveedorValorUsuarioFactory))]  proveedor proveedor)
+        public HttpResponseMessage Put([ValueProvider(typeof(ProveedorValorFactory))]  proveedor proveedor)
         {
             return opcomun.Actualizar(proveedor, this.ModelState);
         }

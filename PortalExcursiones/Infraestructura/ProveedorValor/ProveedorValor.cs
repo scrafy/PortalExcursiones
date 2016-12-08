@@ -4,16 +4,17 @@ using System.Web.Http.ValueProviders;
 using CapaDatos.Entidades;
 using Newtonsoft.Json;
 using System.Globalization;
-
+using System.Threading;
+using PortalExcursiones.Modelos.ModelosEntrada;
 
 namespace PortalExcursiones.Infraestructura.ProveedorValor
 {
-    public class ProveedorValorUsuario : IValueProvider
+    public class ProveedorValor : IValueProvider
     {
         private HttpActionContext contexto;
       
 
-        public ProveedorValorUsuario(HttpActionContext _contexto)
+        public ProveedorValor(HttpActionContext _contexto)
         {
             contexto = _contexto;
         }
@@ -29,8 +30,7 @@ namespace PortalExcursiones.Infraestructura.ProveedorValor
             string contenido = contexto.Request.Content.ReadAsStringAsync().Result;
             dynamic aux = JsonConvert.DeserializeObject<dynamic>(contenido);
 
-
-            if (contexto.Request.Method.Method.Equals("PUT"))
+            if(contexto.Request.Method.Method.Equals("PUT"))
             {
                 switch (key)
                 {
@@ -70,17 +70,31 @@ namespace PortalExcursiones.Infraestructura.ProveedorValor
 
                 
             }
-           
+            if (contexto.Request.Method.Method.Equals("POST"))
+            {
+                switch(key)
+                {
+                    case "calendarioexcursion":
+                        CalendarioExcursionModel calendario = JsonConvert.DeserializeObject<CalendarioExcursionModel>(contenido);
+                        DateTime dt = new DateTime();
+                        DateTime.TryParse(aux.desde==null ? "01/01/0001 00:00:00": aux.desde.ToString(), Thread.CurrentThread.CurrentCulture, DateTimeStyles.None, out dt);
+                        calendario.Desde = dt;
+                        DateTime.TryParse(aux.hasta == null ? "01/01/0001 00:00:00" : aux.hasta.ToString(), Thread.CurrentThread.CurrentCulture, DateTimeStyles.None, out dt);
+                        calendario.Hasta = dt;
+                        return new ValueProviderResult(calendario, contenido, CultureInfo.InvariantCulture);
+                  
+                }
+            }
             return null;
         }
     }
 
-    public class ProveedorValorUsuarioFactory : ValueProviderFactory
+    public class ProveedorValorFactory : ValueProviderFactory
     {
         
         public override IValueProvider GetValueProvider(HttpActionContext contexto)
         {
-            return new ProveedorValorUsuario(contexto);
+            return new ProveedorValor(contexto);
         }
     }
 }

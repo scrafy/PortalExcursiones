@@ -15,7 +15,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace PortalExcursiones.Controladores
 {
-    public abstract class BaseController : ApiController
+    public abstract class BaseControllers : ApiController
     {
            
     }

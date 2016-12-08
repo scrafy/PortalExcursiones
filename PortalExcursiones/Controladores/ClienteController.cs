@@ -8,7 +8,7 @@ using PortalExcursiones.Infraestructura.ProveedorValor;
 namespace PortalExcursiones.Controladores
 {
     [RoutePrefix("api/clientes")]
-    public class ClienteController : BaseController
+    public class ClienteController : BaseControllers
     {
         private IOperacionesComunes<cliente> opcomun = null;
 
@@ -26,7 +26,7 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
-        public HttpResponseMessage Put([ValueProvider(typeof(ProveedorValorUsuarioFactory))]  cliente cliente)
+        public HttpResponseMessage Put([ValueProvider(typeof(ProveedorValorFactory))]  cliente cliente)
         {
             return opcomun.Actualizar(cliente, this.ModelState);
         }
@@ -42,9 +42,5 @@ namespace PortalExcursiones.Controladores
         {
             return opcomun.BusquedaPorId(id);
         }
-
-
-
-
     }
 }

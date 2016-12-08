@@ -1,3 +1,4 @@
+using CapaDatos.Properties;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,8 +17,9 @@ namespace CapaDatos.Entidades
         [Column(TypeName = "uint")]
         public long id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error10",ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(100)]
+        [Index(IsUnique = true)]
         public string nombre { get; set; }
 
         public bool ocultarweb { get; set; }
@@ -28,19 +30,19 @@ namespace CapaDatos.Entidades
         [StringLength(100)]
         public string tadvisor { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error20", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(50)]
         public string lat { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error21", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(50)]
         public string lng { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error24", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(100)]
         public string logo { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "error25", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string proveedor_id { get; set; }
 
         public virtual alquilervehiculo alquilervehiculo { get; set; }

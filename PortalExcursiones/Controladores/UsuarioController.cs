@@ -10,7 +10,7 @@ using PortalExcursiones.Modelos.ModelosEntrada;
 namespace PortalExcursiones.Controladores
 {
     [RoutePrefix("api/usuarios")]
-    public class UsuarioController : BaseController
+    public class UsuarioController : BaseControllers
     {
         private IOperacionesComunes<usuario> opcomun = null;
         private IOperacionesUsuario opusu = null;
@@ -29,7 +29,7 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
-        public HttpResponseMessage Put([ValueProvider(typeof(ProveedorValorUsuarioFactory))] usuario usuario)
+        public HttpResponseMessage Put([ValueProvider(typeof(ProveedorValorFactory))] usuario usuario)
         {
             return opcomun.Actualizar(usuario, this.ModelState);
         }

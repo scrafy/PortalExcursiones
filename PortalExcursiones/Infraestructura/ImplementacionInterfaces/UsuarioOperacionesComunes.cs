@@ -11,6 +11,7 @@ using PortalExcursiones.Infraestructura.Interfaces;
 using System.Linq;
 using PortalExcursiones.Modelos.ModelosEntrada;
 using PortalExcursiones.Properties;
+using PortalExcursiones.Infraestructura.Enumeraciones;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {

@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Infraestructura\Enlazadores\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -160,15 +161,34 @@
     <Compile Include="App_Start\ResolvedorDependencias.cs" />
     <Compile Include="Controladores\BaseController.cs" />
     <Compile Include="Controladores\CalendarioExcursionActividadController.cs" />
+    <Compile Include="Controladores\CategoriaActividadController.cs" />
+    <Compile Include="Controladores\CategoriaExcursionController.cs" />
     <Compile Include="Controladores\ClienteController.cs" />
+    <Compile Include="Controladores\DestinoController.cs" />
+    <Compile Include="Controladores\EstadoExcursionController.cs" />
+    <Compile Include="Controladores\ExcursionActividadController.cs" />
     <Compile Include="Controladores\GuiaController.cs" />
+    <Compile Include="Controladores\ItemController.cs" />
+    <Compile Include="Controladores\PrecioTemporadaController.cs" />
     <Compile Include="Controladores\ProveedorController.cs" />
-    <Compile Include="Infraestructura\AtributosValidacion\FechaCalendarioAttribute.cs" />
-    <Compile Include="Infraestructura\AtributosValidacion\HorariosValidacion.cs" />
+    <Compile Include="Controladores\PuntoRecogidaController.cs" />
+    <Compile Include="Infraestructura\AtributosValidacion\DiasCalendarioAttribute.cs" />
+    <Compile Include="Infraestructura\AtributosValidacion\FechaAttribute.cs" />
+    <Compile Include="Infraestructura\AtributosValidacion\HorariosCalendarioAttribute.cs" />
+    <Compile Include="Infraestructura\Enumeraciones\DiasSemana.cs" />
+    <Compile Include="Infraestructura\Enumeraciones\EstadoExcursion.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\CalendarioExcursionOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\CategoriaActividadOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\CategoriaExcursionOperacionesComunes.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\ClienteOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\DestinoOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\EstadoExcursionOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\ExcursionActividadOperacionesComunes.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\GuiaOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\ItemOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\PrecioPorTemporadaOperacionesComunes.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\ProveedorOperacionesComunes.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\PuntoRecogidaOperacionesComunes.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\UsuarioOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\UsuarioOperacionesComunes.cs" />
     <Compile Include="Infraestructura\Interfaces\IOperacionesCalendarioExcursionActividad.cs" />
@@ -178,13 +198,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infraestructura\Interfaces\IOperacionesUsuario.cs" />
-    <Compile Include="Infraestructura\ProveedorValor\ProveedorValorCalendarioExcursionActividadFactory.cs" />
-    <Compile Include="Infraestructura\ProveedorValor\ProveedorValorUsuario.cs" />
+    <Compile Include="Infraestructura\ProveedorValor\ProveedorValor.cs" />
     <Compile Include="Modelos\ModelosEntrada\CalendarioExcursionModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\CambioPasswordModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\LoginModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\RenovacionPasswordModel.cs" />
-    <Compile Include="Modelos\ModelosSalida\EnumCodigosSalida.cs" />
+    <Compile Include="Infraestructura\Enumeraciones\CodigosSalida.cs" />
     <Compile Include="Modelos\ModelosSalida\Excepcion.cs" />
     <Compile Include="Modelos\ModelosSalida\Respuesta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

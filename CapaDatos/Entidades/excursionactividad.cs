@@ -1,3 +1,5 @@
+using CapaDatos.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,31 +23,34 @@ namespace CapaDatos.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long exact_id { get; set; }
 
+        [Range(1,Int16.MaxValue,ErrorMessageResourceName = "error26", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public short duracion { get; set; }
 
+        [Range(1, Int16.MaxValue, ErrorMessageResourceName = "error27", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public short minpersonas { get; set; }
 
+        [Range(1, Int16.MaxValue, ErrorMessageResourceName = "error28", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public short maxpersonas { get; set; }
 
         public decimal? descuento { get; set; }
 
         [Column(TypeName = "text")]
-        [Required]
+        [Required(ErrorMessageResourceName = "error29", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(65535)]
         public string queharas { get; set; }
 
         [Column(TypeName = "text")]
-        [Required]
+        [Required(ErrorMessageResourceName = "error33", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(65535)]
         public string queesperar { get; set; }
 
         [Column(TypeName = "text")]
-        [Required]
+        [Required(ErrorMessageResourceName = "error31", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(65535)]
         public string noincluye { get; set; }
 
         [Column(TypeName = "text")]
-        [Required]
+        [Required(ErrorMessageResourceName = "error32", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(65535)]
         public string antesdeir { get; set; }
 
@@ -56,6 +61,7 @@ namespace CapaDatos.Entidades
         public bool pickupservice { get; set; }
 
         [Column(TypeName = "uint")]
+        [Range(1,Int16.MaxValue,ErrorMessageResourceName = "error30", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public long destino_id { get; set; }
 
         public byte? tipoexcursion_id { get; set; }

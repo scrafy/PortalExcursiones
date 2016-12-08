@@ -8,7 +8,7 @@ using PortalExcursiones.Infraestructura.ProveedorValor;
 namespace PortalExcursiones.Controladores
 {
     [RoutePrefix("api/guias")]
-    public class GuiaController : BaseController
+    public class GuiaController : BaseControllers
     {
         private IOperacionesComunes<guia> opcomun = null;
 
@@ -26,7 +26,7 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
-        public HttpResponseMessage Put([ValueProvider(typeof(ProveedorValorUsuarioFactory))]  guia guia)
+        public HttpResponseMessage Put([ValueProvider(typeof(ProveedorValorFactory))]  guia guia)
         {
             return opcomun.Actualizar(guia, this.ModelState);
         }

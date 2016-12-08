@@ -18,6 +18,7 @@ namespace CapaDatos.Entidades
 
         [Required]
         [StringLength(45)]
+        [Index(IsUnique = true)]
         public string nombre { get; set; }
 
         [Column(TypeName = "uint")]

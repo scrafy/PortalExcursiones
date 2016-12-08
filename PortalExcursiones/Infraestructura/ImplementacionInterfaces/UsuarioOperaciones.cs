@@ -15,6 +15,7 @@ using PortalExcursiones.Modelos.ModelosSalida;
 using System.Web.Http;
 using System.Text.RegularExpressions;
 using PortalExcursiones.Properties;
+using PortalExcursiones.Infraestructura.Enumeraciones;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
@@ -43,7 +44,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
-                        resp.Mensaje_error = String.Format(Errores.error2);
+                        resp.Mensaje_error = Errores.error2;
                         return resp.ObjectoRespuesta();
                     }
                     else
@@ -148,7 +149,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
-                        resp.Mensaje_error = String.Format(Errores.error4);
+                        resp.Mensaje_error = Errores.error4;
                         return resp.ObjectoRespuesta();
                     }
                     var token = mgr.GeneratePasswordResetToken(usuario.Id);

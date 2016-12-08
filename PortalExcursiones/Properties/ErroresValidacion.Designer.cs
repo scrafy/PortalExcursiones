@@ -70,11 +70,119 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Uno de los dias enviados no se corresponde a un día de la semana.
+        /// </summary>
+        public static string error10 {
+            get {
+                return ResourceManager.GetString("error10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiene que enviar al menos un horario.
+        /// </summary>
+        public static string error11 {
+            get {
+                return ResourceManager.GetString("error11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Uno de los horarios enviados tiene un formato incorrecto.
+        /// </summary>
+        public static string error12 {
+            get {
+                return ResourceManager.GetString("error12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo fecha desde es requerido.
+        /// </summary>
+        public static string error13 {
+            get {
+                return ResourceManager.GetString("error13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo fecha hasta es requerido.
+        /// </summary>
+        public static string error14 {
+            get {
+                return ResourceManager.GetString("error14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo horarios es requerido.
+        /// </summary>
+        public static string error15 {
+            get {
+                return ResourceManager.GetString("error15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo dias es requerido.
+        /// </summary>
+        public static string error16 {
+            get {
+                return ResourceManager.GetString("error16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo ID es obligatorio.
+        /// </summary>
+        public static string error17 {
+            get {
+                return ResourceManager.GetString("error17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se requiere especificar la categoría a la que pertence la activad/excursión.
+        /// </summary>
+        public static string error18 {
+            get {
+                return ResourceManager.GetString("error18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se puede enviar al mismo tiempo los campos tipoexcursion y tipoactividad.
+        /// </summary>
+        public static string error19 {
+            get {
+                return ResourceManager.GetString("error19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El campo password anterior no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos.
         /// </summary>
         public static string error2 {
             get {
                 return ResourceManager.GetString("error2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo tipoexcursion es requerido.
+        /// </summary>
+        public static string error20 {
+            get {
+                return ResourceManager.GetString("error20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo tipoactividad es requerido.
+        /// </summary>
+        public static string error21 {
+            get {
+                return ResourceManager.GetString("error21", resourceCulture);
             }
         }
         
@@ -129,6 +237,15 @@ namespace PortalExcursiones.Properties {
         public static string error8 {
             get {
                 return ResourceManager.GetString("error8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiene que enviar al menos un dia de la semana.
+        /// </summary>
+        public static string error9 {
+            get {
+                return ResourceManager.GetString("error9", resourceCulture);
             }
         }
     }
