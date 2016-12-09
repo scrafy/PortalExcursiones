@@ -16,12 +16,12 @@ using System.Data.Entity;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class PuntoRecogidaOperacionesComunes : IOperacionesComunes<puntorecogida>
+    public class PuntoRecogidaOperaciones : IOperacionesComunes<puntorecogida>
     {
         private Contexto contexto;
         private Respuesta resp;
 
-        public PuntoRecogidaOperacionesComunes(Contexto _contexto, Respuesta _resp)
+        public PuntoRecogidaOperaciones(Contexto _contexto, Respuesta _resp)
         {
             contexto = _contexto;
             resp = _resp;

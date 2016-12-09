@@ -19,12 +19,12 @@ using System.Data.Entity;
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
    
-    public class CalendarioExcursionOperacionesComunes : IOperacionesCalendarioExcursionActividad
+    public class CalendarioExcursionOperaciones : IOperacionesCalendarioExcursionActividad
     {
         private Contexto contexto = null;
         private Respuesta resp = null;
 
-        public CalendarioExcursionOperacionesComunes(Contexto _contexto, Respuesta _resp)
+        public CalendarioExcursionOperaciones(Contexto _contexto, Respuesta _resp)
         {
             contexto = _contexto;
             resp = _resp;
@@ -194,6 +194,108 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 return resp.ObjectoRespuesta();
             }
 
+        }
+
+        public HttpResponseMessage AnadirGuia(DateTime fecha, long exact_id, string guia_id)
+        {
+            try
+            {
+                if(contexto.calendarioexcursion_guia.Where(x => x.exact_id == exact_id && x.fecha.CompareTo(fecha)==0 && x.guia_id == guia_id).FirstOrDefault() != null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_REPETIDO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_REPETIDO);
+                    return resp.ObjectoRespuesta();
+                }
+                contexto.calendarioexcursion_guia.Add(new calendarioexcursion_guia() { fecha = fecha, exact_id = exact_id,guia_id = guia_id });
+                contexto.SaveChanges();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+
+        public HttpResponseMessage EliminarGuia(DateTime fecha, long exact_id, string guia_id)
+        {
+            try
+            {
+                var guia = contexto.calendarioexcursion_guia.Where(x => x.exact_id == exact_id && x.fecha.CompareTo(fecha) == 0 && x.guia_id == guia_id).FirstOrDefault();
+                if(guia == null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                    return resp.ObjectoRespuesta();
+                }
+                contexto.calendarioexcursion_guia.Remove(guia);
+                contexto.SaveChanges();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+
+        public HttpResponseMessage AnadirPuntoRecogida(DateTime fecha, long exact_id, int punto_id)
+        {
+            try
+            {
+                if (contexto.calendarioexcursion_puntorecogida.Where(x => x.exact_id == exact_id && x.fecha.CompareTo(fecha) == 0 && x.puntorecogida_id == punto_id).FirstOrDefault() != null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_REPETIDO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_REPETIDO);
+                    return resp.ObjectoRespuesta();
+                }
+                contexto.calendarioexcursion_puntorecogida.Add(new calendarioexcursion_puntorecogida() { fecha = fecha, exact_id = exact_id,puntorecogida_id = punto_id });
+                contexto.SaveChanges();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+
+        public HttpResponseMessage EliminarPuntoRecogida(DateTime fecha, long exact_id, int punto_id)
+        {
+            try
+            {
+                var punto = contexto.calendarioexcursion_puntorecogida.Where(x => x.exact_id == exact_id && x.fecha.CompareTo(fecha) == 0 && x.puntorecogida_id == punto_id).FirstOrDefault();
+                if(punto == null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                    return resp.ObjectoRespuesta();
+                }
+                contexto.calendarioexcursion_puntorecogida.Remove(punto);
+                contexto.SaveChanges();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
         }
     }
 }

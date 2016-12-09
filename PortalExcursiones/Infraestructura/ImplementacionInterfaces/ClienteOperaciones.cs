@@ -1,44 +1,43 @@
 ﻿using System;
-using System.Net.Http;
-using System.Web.Http.ModelBinding;
-using CapaDatos.Entidades;
-using PortalExcursiones.Infraestructura.Interfaces;
-using CapaDatos.Identity;
-using CapaDatos;
-using PortalExcursiones.Modelos.ModelosSalida;
-using System.Data.Entity;
-using Microsoft.AspNet.Identity;
-using PortalExcursiones.Properties;
 using System.Linq;
+using System.Net.Http;
+using CapaDatos.Identity;
+using PortalExcursiones.Modelos.ModelosSalida;
+using System.Web.Http.ModelBinding;
+using Microsoft.AspNet.Identity;
+using CapaDatos;
+using CapaDatos.Entidades;
+using PortalExcursiones.Properties;
+using System.Data.Entity;
+using PortalExcursiones.Infraestructura.Interfaces;
 using PortalExcursiones.Infraestructura.Enumeraciones;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class GuiaOperacionesComunes : IOperacionesComunes<guia>
+    public class ClienteOperaciones : IOperacionesComunes<cliente>
     {
-
         private AdministradorUsuario mgr = null;
         private Contexto contexto = null;
         private Respuesta resp = null;
-
-        public GuiaOperacionesComunes(AdministradorUsuario _mgr, Contexto _contexto, Respuesta _resp)
+       
+        public ClienteOperaciones(AdministradorUsuario _mgr, Contexto _contexto,Respuesta _resp)
         {
-            mgr = _mgr;
+            mgr = _mgr; 
             contexto = _contexto;
             resp = _resp;
         }
 
-        public HttpResponseMessage Crear(guia Entidad, ModelStateDictionary modelo)
+        public HttpResponseMessage Crear(cliente Entidad,ModelStateDictionary modelo)
         {
             DbContextTransaction tran = null;
             try
             {
-                if (modelo.IsValid)
+                if(modelo.IsValid)
                 {
                     Entidad.usuario_id = Entidad.usuario.Id;
                     tran = contexto.Database.BeginTransaction();
                     IdentityResult result = mgr.CreateAsync(Entidad.usuario, Entidad.usuario.PasswordHash).Result;
-                    if (!result.Succeeded)
+                    if(!result.Succeeded)
                     {
                         if (contexto.Database.CurrentTransaction != null)
                             tran.Rollback();
@@ -52,7 +51,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     else
                     {
                         Entidad.usuario = null;
-                        contexto.guia.Add(Entidad);
+                        contexto.cliente.Add(Entidad);
                         contexto.SaveChanges();
                         tran.Commit();
                         resp.Codigo = (int)Codigos.OK;
@@ -69,9 +68,9 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     return resp.ObjectoRespuesta();
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                if (contexto.Database.CurrentTransaction != null)
+                if(contexto.Database.CurrentTransaction != null)
                     tran.Rollback();
 
                 resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
@@ -79,17 +78,18 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 resp.Excepcion = Excepcion.Create(ex);
                 return resp.ObjectoRespuesta();
             }
+           
         }
 
-        public HttpResponseMessage Actualizar(guia Entidad, ModelStateDictionary modelo)
+        public HttpResponseMessage Actualizar(cliente Entidad,ModelStateDictionary modelo)
         {
             DbContextTransaction tran = null;
             try
             {
-                if (modelo.IsValid)
+                if(modelo.IsValid)
                 {
                     usuario aux = mgr.FindById(Entidad.usuario.Id);
-                    if (aux != null)
+                    if(aux != null)
                     {
                         contexto.Entry(aux).State = EntityState.Detached;
                         Entidad.usuario_id = Entidad.usuario.Id;
@@ -154,11 +154,11 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                var guias = contexto.guia.Select(x => new
+                var clientes = contexto.cliente.Select(x => new
                 {
                     id = x.usuario_id,
-                    nota = x.nota,
-                    idiomas = x.idiomas.Select(p => p.idioma.nombre),
+                    numero_identificacion = x.numidentificacion,
+                    inf_adicional = x.infadicional,
                     direccion1 = x.usuario.direccion1,
                     direccion2 = x.usuario.direccion2,
                     email = x.usuario.Email,
@@ -172,10 +172,9 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     pais = x.usuario.localidad.provincia.pais.nombre
 
                 }).ToList();
-                
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = guias;
+                resp.Contenido = clientes;
                 return resp.ObjectoRespuesta();
 
             }
@@ -192,11 +191,11 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                var guia = contexto.guia.Where(p => p.usuario_id == id).Select(x => new
+                var cliente = contexto.cliente.Where(x => x.usuario_id == id).Select(x => new
                 {
                     id = x.usuario_id,
-                    nota = x.nota,
-                    idiomas = x.idiomas.Select(p => p.idioma.nombre),
+                    numero_identificacion = x.numidentificacion,
+                    inf_adicional = x.infadicional,
                     direccion1 = x.usuario.direccion1,
                     direccion2 = x.usuario.direccion2,
                     email = x.usuario.Email,
@@ -210,18 +209,18 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     pais = x.usuario.localidad.provincia.pais.nombre
                 }).FirstOrDefault();
 
-                if (guia != null)
+                if (cliente != null)
                 {
                     resp.Codigo = (int)Codigos.OK;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                    resp.Contenido = guia;
+                    resp.Contenido = cliente;
                     return resp.ObjectoRespuesta();
                 }
                 else
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
-                    resp.Mensaje_error  = String.Format(Errores.error1, id);
+                    resp.Mensaje_error = String.Format(Errores.error1, id);
                     return resp.ObjectoRespuesta();
                 }
             }
@@ -233,6 +232,6 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 return resp.ObjectoRespuesta();
             }
         }
-        
     }
+    
 }

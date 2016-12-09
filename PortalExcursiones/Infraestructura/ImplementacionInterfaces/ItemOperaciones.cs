@@ -11,13 +11,13 @@ using CapaDatos;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class ItemOperacionesComunes : IOperacionesComunes<item>
+    public class ItemOperaciones : IOperacionesComunes<item>
     {
 
         private Contexto contexto;
         private Respuesta resp;
 
-        public ItemOperacionesComunes(Contexto _contexto, Respuesta _resp)
+        public ItemOperaciones(Contexto _contexto, Respuesta _resp)
         {
             contexto = _contexto;
             resp = _resp;

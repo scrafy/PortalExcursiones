@@ -37,19 +37,22 @@ namespace PortalExcursiones
             contenedor.RegisterType<AdministradorUsuario>(new CicloVidaObjecto<AdministradorUsuario>(),new InjectionMethod("SetDataProtectionProvider", contenedor.Resolve<IDataProtectionProvider>()));
             contenedor.RegisterType<Respuesta>(new CicloVidaObjecto<Respuesta>());
             contenedor.RegisterType<IUserStore<usuario>, UserStore<usuario>>(new CicloVidaObjecto<UserStore<usuario>>(), new InjectionConstructor(contenedor.Resolve<Contexto>()));
-            contenedor.RegisterType<IOperacionesComunes<cliente>, ClienteOperacionesComunes>(new CicloVidaObjecto<ClienteOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<usuario>, UsuarioOperacionesComunes>(new CicloVidaObjecto<UsuarioOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<guia>, GuiaOperacionesComunes>(new CicloVidaObjecto<GuiaOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<proveedor>, ProveedorOperacionesComunes>(new CicloVidaObjecto<ProveedorOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesCalendarioExcursionActividad, CalendarioExcursionOperacionesComunes>(new CicloVidaObjecto<CalendarioExcursionOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<estadoexcursion>, EstadoExcursionOperacionesComunes>(new CicloVidaObjecto<EstadoExcursionOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<categoriaexcursion>, CategoriaExcursionOperacionesComunes>(new CicloVidaObjecto<CategoriaExcursionOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<cliente>, ClienteOperaciones>(new CicloVidaObjecto<ClienteOperaciones>());
+            contenedor.RegisterType<IOperacionesComunes<usuario>, UsuarioOperaciones>(new CicloVidaObjecto<UsuarioOperaciones>());
+            contenedor.RegisterType<IOperacionesComunes<guia>, GuiaOperaciones>(new CicloVidaObjecto<GuiaOperaciones>());
+            contenedor.RegisterType<IOperacionesGuia, GuiaOperaciones>(new CicloVidaObjecto<GuiaOperaciones>());
+            contenedor.RegisterType<IOperacionesComunes<proveedor>, ProveedorOperaciones>(new CicloVidaObjecto<ProveedorOperaciones>());
+            contenedor.RegisterType<IOperacionesCalendarioExcursionActividad, CalendarioExcursionOperaciones>(new CicloVidaObjecto<CalendarioExcursionOperaciones>());
+            contenedor.RegisterType<IOperacionesComunes<estadoexcursion>, EstadoExcursionOperaciones>(new CicloVidaObjecto<EstadoExcursionOperaciones>());
+            contenedor.RegisterType<IOperacionesComunes<categoriaexcursion>, CategoriaExcursionOperaciones>(new CicloVidaObjecto<CategoriaExcursionOperaciones>());
             contenedor.RegisterType<IOperacionesComunes<categoriactividad>, CategoriActividadOperacionesComunes>(new CicloVidaObjecto<CategoriActividadOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<excursionactividad>, ExcursionActividadOperacionesComunes>(new CicloVidaObjecto<ExcursionActividadOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<preciotemporada>, PrecioPorTemporadaOperacionesComunes>(new CicloVidaObjecto<PrecioPorTemporadaOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<puntorecogida>, PuntoRecogidaOperacionesComunes>(new CicloVidaObjecto<PuntoRecogidaOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<item>, ItemOperacionesComunes>(new CicloVidaObjecto<ItemOperacionesComunes>());
-            contenedor.RegisterType<IOperacionesComunes<destino>, DestinoOperacionesComunes>(new CicloVidaObjecto<DestinoOperacionesComunes>());
+            contenedor.RegisterType<IOperacionesComunes<excursionactividad>, ExcursionActividadOperaciones>(new CicloVidaObjecto<ExcursionActividadOperaciones>());
+            contenedor.RegisterType<IOperacionesExcursionActividad, ExcursionActividadOperaciones>(new CicloVidaObjecto<ExcursionActividadOperaciones>());
+            contenedor.RegisterType<IOperacionesComunes<preciotemporada>, PrecioPorTemporadaOperaciones>(new CicloVidaObjecto<PrecioPorTemporadaOperaciones>());
+            contenedor.RegisterType<IOperacionesComunes<puntorecogida>, PuntoRecogidaOperaciones>(new CicloVidaObjecto<PuntoRecogidaOperaciones>());
+            contenedor.RegisterType<IOperacionesComunes<idioma>, IdiomaOperaciones>(new CicloVidaObjecto<IdiomaOperaciones>());
+            contenedor.RegisterType<IOperacionesComunes<item>, ItemOperaciones>(new CicloVidaObjecto<ItemOperaciones>());
+            contenedor.RegisterType<IOperacionesComunes<destino>, DestinoOperaciones>(new CicloVidaObjecto<DestinoOperaciones>());
             contenedor.RegisterType<IOperacionesUsuario, UsuarioOperaciones>(new CicloVidaObjecto<UsuarioOperaciones>());
 
         }

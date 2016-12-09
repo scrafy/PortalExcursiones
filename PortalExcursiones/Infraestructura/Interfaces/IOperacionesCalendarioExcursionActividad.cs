@@ -10,5 +10,9 @@ namespace PortalExcursiones.Infraestructura.Interfaces
         HttpResponseMessage Crear(CalendarioExcursionModel datos, ModelStateDictionary modelo);
         HttpResponseMessage Eliminar(DateTime fecha, long exact_id);
         HttpResponseMessage Actualizar(DateTime fecha, DateTime fechanueva, long exact_id);
+        HttpResponseMessage AnadirGuia(DateTime fecha, long exact_id,string guia_id);
+        HttpResponseMessage EliminarGuia(DateTime fecha, long exact_id, string guia_id);
+        HttpResponseMessage AnadirPuntoRecogida(DateTime fecha, long exact_id, int punto_id);
+        HttpResponseMessage EliminarPuntoRecogida(DateTime fecha, long exact_id, int punto_id);
     }
 }

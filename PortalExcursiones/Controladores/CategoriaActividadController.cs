@@ -6,7 +6,7 @@ using System.Web.Http;
 
 namespace PortalExcursiones.Controladores
 {
-    [RoutePrefix("api/categoriasactividad")]
+    [RoutePrefix("api/categoriaactividad")]
     public class CategoriaActividadController : BaseControllers
     {
         private IOperacionesComunes<categoriactividad> opcomun = null;

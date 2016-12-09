@@ -12,13 +12,13 @@ using System.Data.Entity;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class ExcursionActividadOperacionesComunes : IOperacionesComunes<excursionactividad>
+    public class ExcursionActividadOperaciones : IOperacionesComunes<excursionactividad>, IOperacionesExcursionActividad
     {
 
         private Contexto contexto;
         private Respuesta resp;
 
-        public ExcursionActividadOperacionesComunes(Contexto _contexto, Respuesta _resp)
+        public ExcursionActividadOperaciones(Contexto _contexto, Respuesta _resp)
         {
             contexto = _contexto;
             resp = _resp;
@@ -376,6 +376,57 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 return resp.ObjectoRespuesta();
             }
             catch(Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+
+        public HttpResponseMessage AnadirItem(long item_id, long exact_id)
+        {
+            try
+            {
+                if(contexto.excursion_contiene_item.Where(x=>x.exact_id == exact_id && x.item_id == item_id).FirstOrDefault() != null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_REPETIDO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_REPETIDO);
+                    return resp.ObjectoRespuesta();
+                }
+                contexto.excursion_contiene_item.Add(new excursion_contiene_item(){item_id = item_id,exact_id = exact_id });
+                contexto.SaveChanges();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch(Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+
+        public HttpResponseMessage EliminarItem(long item_id, long exact_id)
+        {
+            try
+            {
+                var item = contexto.excursion_contiene_item.Where(x => x.exact_id == exact_id && x.item_id == item_id).FirstOrDefault();
+                if(item == null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                    return resp.ObjectoRespuesta();
+                }
+                contexto.excursion_contiene_item.Remove(item);
+                contexto.SaveChanges();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
             {
                 resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);

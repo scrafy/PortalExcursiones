@@ -14,13 +14,13 @@ using PortalExcursiones.Infraestructura.Enumeraciones;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class PrecioPorTemporadaOperacionesComunes : IOperacionesComunes<preciotemporada>
+    public class PrecioPorTemporadaOperaciones : IOperacionesComunes<preciotemporada>
     {
 
         private Contexto contexto;
         private Respuesta resp;
 
-        public PrecioPorTemporadaOperacionesComunes(Contexto _contexto, Respuesta _resp)
+        public PrecioPorTemporadaOperaciones(Contexto _contexto, Respuesta _resp)
         {
             contexto = _contexto;
             resp = _resp;

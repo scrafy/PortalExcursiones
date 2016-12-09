@@ -22,21 +22,49 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
-        public HttpResponseMessage Post(/*[ValueProvider(typeof(ProveedorValorFactory))]*/CalendarioExcursionModel calendarioexcursion)
+        public HttpResponseMessage Post([FromBody]CalendarioExcursionModel calendarioexcursion)
         {
             return op.Crear(calendarioexcursion, this.ModelState);
         }
 
-        [Route("{fecha}/{exact_id}")]
-        public HttpResponseMessage Get(DateTime fecha,long exact_id)
+        [Route()]
+        public HttpResponseMessage Delete([FromBody]CalendarioExcursionActualizarEliminarModel datos)
         {
-            return op.Eliminar(fecha, exact_id);
+            return op.Eliminar(datos.Fecha, datos.Exact_id);
         }
 
-        [Route("{fecha}/{fechanueva}/{exact_id}")]
-        public HttpResponseMessage Get(DateTime fecha, DateTime fechanueva, long exact_id)
+        [Route()]
+        public HttpResponseMessage Put([FromBody]CalendarioExcursionActualizarEliminarModel datos)
         {
-            return op.Actualizar(fecha,fechanueva,exact_id);
+            return op.Actualizar(datos.Fecha,datos.Fechanueva,datos.Exact_id);
+        }
+
+        [Route("anadirguiaexcursion")]
+        [HttpPost]
+        public HttpResponseMessage AnadirGuiaFecha([FromBody]GuiaFechaModel guia)
+        {
+            return op.AnadirGuia(guia.Fecha,guia.Exact_id, guia.Guia_id);
+        }
+
+        [Route("eliminarguiaexcursion")]
+        [HttpDelete]
+        public HttpResponseMessage EliminarGuiaFecha([FromBody]GuiaFechaModel guia)
+        {
+            return op.EliminarGuia(guia.Fecha, guia.Exact_id, guia.Guia_id);
+        }
+
+        [Route("anadirpuntoexcursion")]
+        [HttpPost]
+        public HttpResponseMessage AnadirPuntoRecogidaFecha([FromBody]PuntoRecogidaFechaModel punto)
+        {
+            return op.AnadirPuntoRecogida(punto.Fecha, punto.Exact_id, punto.Punto_id);
+        }
+
+        [Route("eliminarpuntoexcursion")]
+        [HttpDelete]
+        public HttpResponseMessage EliminarPuntoRecogidaFecha([FromBody]PuntoRecogidaFechaModel punto)
+        {
+            return op.EliminarPuntoRecogida(punto.Fecha, punto.Exact_id, punto.Punto_id);
         }
     }
 }

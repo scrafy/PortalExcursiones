@@ -4,18 +4,20 @@ using System.Net.Http;
 using PortalExcursiones.Infraestructura.Interfaces;
 using System.Web.Http.ValueProviders;
 using PortalExcursiones.Infraestructura.ProveedorValor;
+using PortalExcursiones.Modelos.ModelosEntrada;
 
 namespace PortalExcursiones.Controladores
 {
-    [RoutePrefix("api/guias")]
+    [RoutePrefix("api/guia")]
     public class GuiaController : BaseControllers
     {
         private IOperacionesComunes<guia> opcomun = null;
+        private IOperacionesGuia op = null;
 
-
-        public GuiaController(IOperacionesComunes<guia> _opcomun)
+        public GuiaController(IOperacionesComunes<guia> _opcomun,IOperacionesGuia _op)
         {
             opcomun = _opcomun;
+            op = _op;
         }
 
 
@@ -37,10 +39,18 @@ namespace PortalExcursiones.Controladores
             return opcomun.Todos();
         }
 
-        [Route("{id}")]
-        public HttpResponseMessage Get(string id)
+        [Route("anadiridioma")]
+        [HttpPost]
+        public HttpResponseMessage AnadirIdioma([FromBody] AnadirEliminarIdiomaModel datos)
         {
-            return opcomun.BusquedaPorId(id);
+            return op.AnadirIdioma(datos.Idioma_id, datos.Guia_id);
+        }
+
+        [Route("eliminaridioma")]
+        [HttpDelete]
+        public HttpResponseMessage EliminarIdioma([FromBody] AnadirEliminarIdiomaModel datos)
+        {
+            return op.EliminarIdioma(datos.Idioma_id, datos.Guia_id);
         }
 
 

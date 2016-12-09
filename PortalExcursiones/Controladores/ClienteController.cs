@@ -7,7 +7,7 @@ using PortalExcursiones.Infraestructura.ProveedorValor;
 
 namespace PortalExcursiones.Controladores
 {
-    [RoutePrefix("api/clientes")]
+    [RoutePrefix("api/cliente")]
     public class ClienteController : BaseControllers
     {
         private IOperacionesComunes<cliente> opcomun = null;

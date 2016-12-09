@@ -9,7 +9,7 @@ using PortalExcursiones.Modelos.ModelosEntrada;
 
 namespace PortalExcursiones.Controladores
 {
-    [RoutePrefix("api/usuarios")]
+    [RoutePrefix("api/usuario")]
     public class UsuarioController : BaseControllers
     {
         private IOperacionesComunes<usuario> opcomun = null;

@@ -1,47 +1,54 @@
 ﻿using PortalExcursiones.Infraestructura.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using CapaDatos.Entidades;
+using CapaDatos.Identity;
 using System.Net.Http;
 using System.Web.Http.ModelBinding;
+using Microsoft.Owin.Security;
 using PortalExcursiones.Modelos.ModelosSalida;
-using CapaDatos;
+using Microsoft.AspNet.Identity;
 using PortalExcursiones.Infraestructura.Enumeraciones;
-using System.Linq;
+using CapaDatos;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class EstadoExcursionOperacionesComunes : IOperacionesComunes<estadoexcursion>
+    public class DestinoOperaciones : IOperacionesComunes<destino>
     {
+
         private Contexto contexto;
         private Respuesta resp;
 
-        public EstadoExcursionOperacionesComunes(Contexto _contexto, Respuesta _resp)
+        public DestinoOperaciones(Contexto _contexto,Respuesta _resp)
         {
             contexto = _contexto;
             resp = _resp;
         }
 
-        public HttpResponseMessage Actualizar(estadoexcursion Entidad, ModelStateDictionary modelo)
+
+        public HttpResponseMessage Actualizar(destino Entidad, ModelStateDictionary modelo)
         {
             try
             {
-                if (modelo.IsValid)
+                if(modelo.IsValid)
                 {
-                    var estadoexcursion = contexto.estadoexcursion.Where(x => x.nombre.ToLower() == Entidad.nombre.ToLower() && x.id != Entidad.id).FirstOrDefault();
-                    if (estadoexcursion != null)
+                    var destino = contexto.destino.Where(x => x.nombre.ToLower() == Entidad.nombre.ToLower() && x.id!=Entidad.id).FirstOrDefault();
+                    if(destino != null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_REPETIDO;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_REPETIDO);
                         return resp.ObjectoRespuesta();
                     }
-                    estadoexcursion = contexto.estadoexcursion.Find(Entidad.id);
-                    if (estadoexcursion == null)
+                    destino = contexto.destino.Find(Entidad.id);
+                    if(destino == null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
                         return resp.ObjectoRespuesta();
                     }
-                    estadoexcursion.nombre = Entidad.nombre;
+                    destino.nombre = Entidad.nombre;
                     contexto.SaveChanges();
                     resp.Codigo = (int)Codigos.OK;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
@@ -69,8 +76,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             try
             {
                 var _id = Int64.Parse(id);
-                var estadoexcursion = contexto.estadoexcursion.Where(x => x.id == _id).Select(x => new { id = x.id, nombre = x.nombre }).FirstOrDefault();
-                if (estadoexcursion == null)
+                var destino = contexto.destino.Where(x=>x.id ==_id).Select(x => new { id = x.id, nombre = x.nombre }).FirstOrDefault();
+                if(destino == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
@@ -78,7 +85,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 }
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = estadoexcursion;
+                resp.Contenido = destino;
                 return resp.ObjectoRespuesta();
             }
             catch (Exception ex)
@@ -90,20 +97,19 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-       
-        public HttpResponseMessage Crear(estadoexcursion Entidad, ModelStateDictionary modelo)
+        public HttpResponseMessage Crear(destino Entidad, ModelStateDictionary modelo)
         {
             try
             {
-                if (modelo.IsValid)
+                if(modelo.IsValid)
                 {
-                    if (contexto.estadoexcursion.Where(x => x.nombre.ToLower() == Entidad.nombre.ToLower()).FirstOrDefault() != null)
+                    if(contexto.destino.Where(x=>x.nombre.ToLower()==Entidad.nombre.ToLower()).FirstOrDefault()!=null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_REPETIDO;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_REPETIDO);
                         return resp.ObjectoRespuesta();
                     }
-                    contexto.estadoexcursion.Add(new estadoexcursion() { nombre = Entidad.nombre });
+                    contexto.destino.Add(new destino() { nombre = Entidad.nombre });
                     contexto.SaveChanges();
                     resp.Codigo = (int)Codigos.OK;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
@@ -132,7 +138,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             {
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = contexto.estadoexcursion.Select(x => new { id = x.id, nombre = x.nombre }).ToList();
+                resp.Contenido = contexto.destino.Select(x=>new{id=x.id,nombre=x.nombre }).ToList();
                 return resp.ObjectoRespuesta();
             }
             catch (Exception ex)
