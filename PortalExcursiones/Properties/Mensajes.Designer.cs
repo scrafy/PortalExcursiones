@@ -349,6 +349,15 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Precio Grupo:.
+        /// </summary>
+        public static string mensaje40 {
+            get {
+                return ResourceManager.GetString("mensaje40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Dirección:.
         /// </summary>
         public static string mensaje5 {

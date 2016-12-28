@@ -268,6 +268,24 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El campo costegrupo es requerido.
+        /// </summary>
+        public static string error31 {
+            get {
+                return ResourceManager.GetString("error31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Al contabilizarse los infantes, es necesario especificar el coste.
+        /// </summary>
+        public static string error32 {
+            get {
+                return ResourceManager.GetString("error32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No existe ningún usuario con la direccion de email proporcionada.
         /// </summary>
         public static string error4 {

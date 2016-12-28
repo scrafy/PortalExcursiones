@@ -264,7 +264,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="recursos\imagenes\logo.png" />
+    <Content Include="recursos\imagenes\logo_empresa.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

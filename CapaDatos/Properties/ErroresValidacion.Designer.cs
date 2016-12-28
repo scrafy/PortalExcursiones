@@ -313,15 +313,6 @@ namespace CapaDatos.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El campo costeadulto es requerido.
-        /// </summary>
-        public static string error37 {
-            get {
-                return ResourceManager.GetString("error37", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a La dirección de email no es válida.
         /// </summary>
         public static string error4 {

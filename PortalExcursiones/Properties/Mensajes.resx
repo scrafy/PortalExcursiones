@@ -213,6 +213,9 @@
   <data name="mensaje4" xml:space="preserve">
     <value>Debe ir a la dirección indicada en el recuadro PUNTO DE REUNION y estar puntual el día {0} a la hora {1}. Para cualquier duda o aclaración puede contactar con el proveedor de la excursión al teléfono {2}</value>
   </data>
+  <data name="mensaje40" xml:space="preserve">
+    <value>Precio Grupo:</value>
+  </data>
   <data name="mensaje5" xml:space="preserve">
     <value>Dirección:</value>
   </data>

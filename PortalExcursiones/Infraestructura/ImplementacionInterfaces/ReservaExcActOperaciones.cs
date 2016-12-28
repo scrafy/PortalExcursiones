@@ -23,6 +23,7 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using PortalExcursiones.Infraestructura.LogicaComun;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
@@ -108,7 +109,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                             resp.Mensaje_error = Errores.error19;
                             return resp.ObjectoRespuesta();
                         }
-                        if ((total + total_reservados) > exact.maxpersonas)
+                        if((total + total_reservados) > exact.maxpersonas)
                         {
                             resp.Codigo = (int)Codigos.NUMERO_DE_PLAZAS_INSUFICIENTE;
                             resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.NUMERO_DE_PLAZAS_INSUFICIENTE);
@@ -148,7 +149,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     }
                 }
                 var precios = contexto.preciotemporada.Where(x => x.exact_id == exact.exact_id).ToList();
-                var preciotemp = precios.Where(x => x.id==8).FirstOrDefault();//precios.Where(x => x.desde <= DateTime.UtcNow && DateTime.UtcNow <= x.hasta).FirstOrDefault();
+                var preciotemp = precios.Where(x => x.desde <= DateTime.UtcNow && DateTime.UtcNow <= x.hasta).FirstOrDefault();//precios.Where(x => x.id==9).FirstOrDefault();
                 if (preciotemp == null)
                 {
                     resp.Codigo = (int)Codigos.PRECIO_NO_ENCONTRADO;
@@ -157,17 +158,24 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     return resp.ObjectoRespuesta();
                 }
                 decimal preciofinal;
-                if(exact.secontabilizaninfantes)
+                if(exact.precioporgrupo)
                 {
-                     preciofinal = (Entidad.Numadultos * preciotemp.pvpadulto) + (Entidad.Numninos * preciotemp.pvpnino) + (Entidad.Numinfantes * preciotemp.pvpinfante) + (Entidad.Numjuniors * preciotemp.pvpjunior) + (Entidad.Numseniors * preciotemp.pvpsenior);
+                    preciofinal = preciotemp.pvpgrupo;
                 }
                 else
                 {
-                     preciofinal = (Entidad.Numadultos * preciotemp.pvpadulto) + (Entidad.Numninos * preciotemp.pvpnino) + (Entidad.Numjuniors * preciotemp.pvpjunior) + (Entidad.Numseniors * preciotemp.pvpsenior);
+                    if (exact.secontabilizaninfantes)
+                    {
+                        preciofinal = (Entidad.Numadultos * preciotemp.pvpadulto) + (Entidad.Numninos * preciotemp.pvpnino) + (Entidad.Numinfantes * preciotemp.pvpinfante) + (Entidad.Numjuniors * preciotemp.pvpjunior) + (Entidad.Numseniors * preciotemp.pvpsenior);
+                    }
+                    else
+                    {
+                        preciofinal = (Entidad.Numadultos * preciotemp.pvpadulto) + (Entidad.Numninos * preciotemp.pvpnino) + (Entidad.Numjuniors * preciotemp.pvpjunior) + (Entidad.Numseniors * preciotemp.pvpsenior);
+                    }
                 }
                 decimal descuento = exact.descuento == null ? 0 : (decimal)exact.descuento;
                 if(descuento > 0)
-                {
+                 {
                     preciofinal = preciofinal - ((preciofinal * descuento) / 100);
                 }
                 if(exact.pickupservice)
@@ -189,7 +197,11 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 tran = contexto.Database.BeginTransaction();
                 var reserva = new reserva();
                 reserva.fechatransaccion = DateTime.UtcNow;
-                reserva.codigoqr = Guid.NewGuid().ToString();
+                reserva.codigoqr = this.NombreFactura();
+                while(contexto.reservaexcursionactividad.Where(x => x.reserva.factura == reserva.codigoqr + ".pdf").FirstOrDefault()!=null)
+                {
+                    reserva.codigoqr = this.NombreFactura();
+                }
                 reserva.factura = reserva.codigoqr + ".pdf";
                 reserva.precio = preciofinal;
                 reserva.proveedor_id = exact.configuracion.proveedor_id;
@@ -254,11 +266,23 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             return true;
         }
 
+        private string NombreFactura()
+        {
+            MD5 md5 = MD5.Create();
+            byte[] data = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")));
+            string output = "";
+            for (int i=0;i < data.Length;i++)
+            {
+                output += data[i].ToString("X2");
+            }
+            return output.Substring(0, 12);
+        }
+
         public void GenerarFactura(Contexto contexto,string id)
         {
             var existepuntorecogida = false;
             
-            var datosreserva = contexto.reservaexcursionactividad.Include("punto").Where(x => x.reserva.codigoqr == id).Select(x => new
+            var datosreserva = contexto.reservaexcursionactividad.Where(x => x.reserva.codigoqr == id).Select(x => new
             {
                 exact_id = x.calendarioexcursion.exact_id,
                 fechatransaccion = x.reserva.fechatransaccion,
@@ -266,6 +290,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 duracion = x.calendarioexcursion.excursionactividad.duracion,
                 tipo_duracion = x.calendarioexcursion.excursionactividad.tipoduracion,
                 actividad = x.calendarioexcursion.excursionactividad.configuracion.nombre,
+                preciogrupo = x.calendarioexcursion.excursionactividad.precioporgrupo,
                 numadultos = x.numadultos,
                 numninos = x.numninos,
                 numinfantes = x.numinfantes,
@@ -284,34 +309,45 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
             }).FirstOrDefault();
 
-            var precios = contexto.preciotemporada.Where(c => (c.desde <= datosreserva.fechatransaccion && datosreserva.fechatransaccion <= c.hasta) && c.exact_id == datosreserva.exact_id).Select(x => new
+            dynamic precios;
+            if(datosreserva.preciogrupo)
             {
-                precioadulto = x.pvpadulto,
-                precionino = x.pvpnino,
-                precioinfante = x.pvpinfante,
-                preciojunior = x.pvpjunior,
-                preciosenior = x.pvpsenior,
-                totaladulto = datosreserva.numadultos * x.pvpadulto,
-                totaljunior = datosreserva.numjuniors * x.pvpjunior,
-                totalsenior = datosreserva.numseniors * x.pvpsenior,
-                totalnino = datosreserva.numninos * x.pvpnino,
-                totalinfante = datosreserva.numinfantes * x.pvpinfante
+                precios = contexto.preciotemporada.Where(c => (c.desde <= datosreserva.fechatransaccion && datosreserva.fechatransaccion <= c.hasta) && c.exact_id == datosreserva.exact_id).Select(x => new
+                {
+                    preciogrupo = x.pvpgrupo
+                }).FirstOrDefault();
+            }
+            else
+            {
+                precios = contexto.preciotemporada.Where(c => (c.desde <= datosreserva.fechatransaccion && datosreserva.fechatransaccion <= c.hasta) && c.exact_id == datosreserva.exact_id).Select(x => new
+                {
+                    precioadulto = x.pvpadulto,
+                    precionino = x.pvpnino,
+                    precioinfante = x.pvpinfante,
+                    preciojunior = x.pvpjunior,
+                    preciosenior = x.pvpsenior,
+                    totaladulto = datosreserva.numadultos * x.pvpadulto,
+                    totaljunior = datosreserva.numjuniors * x.pvpjunior,
+                    totalsenior = datosreserva.numseniors * x.pvpsenior,
+                    totalnino = datosreserva.numninos * x.pvpnino,
+                    totalinfante = datosreserva.numinfantes * x.pvpinfante
 
-            }).FirstOrDefault();
-
+                }).FirstOrDefault();
+            }
+            
             var facturaitems = contexto.facturaitem_exact.Where(x => x.exact_id == datosreserva.exact_id).Select(x => x.item).ToList();
 
             if (datosreserva.punto != null)
                  existepuntorecogida = true;
                         
-            string filePath = HostingEnvironment.MapPath("~/" + ConfigurationManager.AppSettings["directoriofacturas"] + "/" + id + ".pdf");
+            string filePath = HostingEnvironment.MapPath("~/facturas/" + id + ".pdf");
             Document doc = new Document(PageSize.A4);
             PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
             doc.Open();
             iTextSharp.text.Font fuente = new iTextSharp.text.Font(iTextSharp.text.Font.TIMES_ROMAN, 12, iTextSharp.text.Font.NORMAL, iTextSharp.text.Color.BLACK);
             iTextSharp.text.Font bold = new iTextSharp.text.Font(iTextSharp.text.Font.TIMES_ROMAN, 12, iTextSharp.text.Font.BOLD, iTextSharp.text.Color.BLACK);
             iTextSharp.text.Font pequeña = new iTextSharp.text.Font(iTextSharp.text.Font.TIMES_ROMAN, 7, iTextSharp.text.Font.NORMAL, iTextSharp.text.Color.BLACK);
-            iTextSharp.text.Image logocabecera = iTextSharp.text.Image.GetInstance(@"C:\datos\logo.png");
+            iTextSharp.text.Image logocabecera = iTextSharp.text.Image.GetInstance(HostingEnvironment.MapPath("~/recursos/imagenes/logo_empresa.png"));
             logocabecera.ScalePercent(15);
 
             PdfContentByte cb = writer.DirectContent;
@@ -406,16 +442,23 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             preciosdic.Add(Mensajes.mensaje24,  datosreserva.numseniors.ToString());
             preciosdic.Add(Mensajes.mensaje25,    datosreserva.numninos.ToString());
             preciosdic.Add(Mensajes.mensaje26, datosreserva.numinfantes.ToString());
-            preciosdic.Add(Mensajes.mensaje27,  precios.precioadulto.ToString());
-            preciosdic.Add(Mensajes.mensaje28,  precios.preciojunior.ToString());
-            preciosdic.Add(Mensajes.mensaje29,  precios.preciosenior.ToString());
-            preciosdic.Add(Mensajes.mensaje30,    precios.precionino.ToString());
-            preciosdic.Add(Mensajes.mensaje31, precios.precioinfante.ToString());
-            preciosdic.Add(Mensajes.mensajes32,  precios.totaladulto.ToString());
-            preciosdic.Add(Mensajes.mensajes33,  precios.totaljunior.ToString());
-            preciosdic.Add(Mensajes.mensaje34,  precios.totalsenior.ToString());
-            preciosdic.Add(Mensajes.mensaje35,    precios.totalnino.ToString());
-            preciosdic.Add(Mensajes.mensaje36, precios.totalinfante.ToString());
+            if(datosreserva.preciogrupo)
+            {
+                preciosdic.Add(Mensajes.mensaje40, precios.preciogrupo.ToString());
+            }
+            else
+            {
+                preciosdic.Add(Mensajes.mensaje27, precios.precioadulto.ToString());
+                preciosdic.Add(Mensajes.mensaje28, precios.preciojunior.ToString());
+                preciosdic.Add(Mensajes.mensaje29, precios.preciosenior.ToString());
+                preciosdic.Add(Mensajes.mensaje30, precios.precionino.ToString());
+                preciosdic.Add(Mensajes.mensaje31, precios.precioinfante.ToString());
+                preciosdic.Add(Mensajes.mensajes32, precios.totaladulto.ToString());
+                preciosdic.Add(Mensajes.mensajes33, precios.totaljunior.ToString());
+                preciosdic.Add(Mensajes.mensaje34, precios.totalsenior.ToString());
+                preciosdic.Add(Mensajes.mensaje35, precios.totalnino.ToString());
+                preciosdic.Add(Mensajes.mensaje36, precios.totalinfante.ToString());
+            }
             PdfPCell cel1 = null;
             foreach (KeyValuePair<string, string> val in preciosdic)
             {
@@ -476,7 +519,15 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             celda_tabla_precio_total_nombre.HorizontalAlignment = PdfCell.ALIGN_RIGHT;
             celda_tabla_precio_total_nombre.BorderWidthRight = 0;
             celda_tabla_precio_total_nombre.PaddingBottom = 5;
-            decimal total = (precios.totaladulto + precios.totalinfante + precios.totalnino) - ((precios.totaladulto + precios.totalinfante + precios.totalnino) * ((decimal)datosreserva.descuento / 100));
+            decimal total = 0;
+            if(datosreserva.preciogrupo)
+            {
+                total = (precios.preciogrupo) - (precios.preciogrupo * ((decimal)datosreserva.descuento / 100));
+            }
+            else
+            {
+                total = (precios.totaladulto + precios.totalinfante + precios.totalnino + precios.totaljunior + precios.totalsenior) - ((precios.totaladulto + precios.totalinfante + precios.totalnino + precios.totaljunior + precios.totalsenior) * ((decimal)datosreserva.descuento / 100));
+            }
             PdfPCell celda_tabla_precio_total_precio = new PdfPCell(new Phrase(Math.Round(total,2).ToString() + " €", fuente));
             celda_tabla_precio_total_precio.HorizontalAlignment = PdfCell.ALIGN_RIGHT;
             celda_tabla_precio_total_precio.BorderWidthLeft = 0;

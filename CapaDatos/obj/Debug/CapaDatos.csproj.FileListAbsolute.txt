@@ -173,5 +173,6 @@ D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_fiel
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_fields_preciotemporada.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_fields_porcentaje.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_field_enviarmailproveedor.resources
-D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_table_facturaitem.resources
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.pvpgrupo_modification.resources

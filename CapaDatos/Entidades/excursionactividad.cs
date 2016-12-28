@@ -39,6 +39,8 @@ namespace CapaDatos.Entidades
         [Range(1, Int16.MaxValue, ErrorMessageResourceName = "error28", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public short maxpersonas { get; set; }
 
+        public bool precioporgrupo { get; set; }
+
         public decimal? descuento { get; set; }
 
         [Column(TypeName = "text")]

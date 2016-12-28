@@ -201,9 +201,6 @@
   <data name="error35" xml:space="preserve">
     <value>El campo porcentaje es requerido y debe ser mayor o igual que uno</value>
   </data>
-  <data name="error37" xml:space="preserve">
-    <value>El campo costeadulto es requerido</value>
-  </data>
   <data name="error4" xml:space="preserve">
     <value>La dirección de email no es válida</value>
   </data>

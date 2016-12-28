@@ -186,6 +186,12 @@
   <data name="error30" xml:space="preserve">
     <value>Se tiene que reservar al menos una plaza</value>
   </data>
+  <data name="error31" xml:space="preserve">
+    <value>El campo costegrupo es requerido</value>
+  </data>
+  <data name="error32" xml:space="preserve">
+    <value>Al contabilizarse los infantes, es necesario especificar el coste</value>
+  </data>
   <data name="error4" xml:space="preserve">
     <value>No existe ningún usuario con la direccion de email proporcionada</value>
   </data>

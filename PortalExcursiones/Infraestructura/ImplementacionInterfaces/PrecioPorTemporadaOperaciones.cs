@@ -64,20 +64,49 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         resp.Erroresvalidacion = new string[] { Errores.error12 }.ToList();
                         return resp.ObjectoRespuesta();
                     }
-                    var ganancia = contexto.configuracion.Where(x => x.id == Entidad.exact_id).Select(x => x.porcentaje).First();
+                    var datos = contexto.configuracion.Where(x => x.id == Entidad.exact_id).Select(x => new
+                    {
+                        porcentaje = x.porcentaje,
+                        esporgrupo = x.excursionactividad.precioporgrupo,
+                        secontabilizaninfantes = x.excursionactividad.secontabilizaninfantes
 
-                    Entidad.pvpadulto = Entidad.costeadulto + (Entidad.costeadulto * (ganancia / 100));
-                    Entidad.pvpinfante = Entidad.costeinfante + (Entidad.costeinfante * (ganancia / 100));
-                    Entidad.pvpjunior = Entidad.costejunior + (Entidad.costejunior * (ganancia / 100));
-                    Entidad.pvpnino = Entidad.costenino + (Entidad.costenino * (ganancia / 100));
-                    Entidad.pvpsenior = Entidad.costesenior + (Entidad.costesenior * (ganancia / 100));
+                    }).First();
+                    if (datos.esporgrupo)
+                    {
+                        if (Entidad.costegrupo == 0)
+                        {
+                            resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                            resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                            resp.Erroresvalidacion = new string[] { Errores.error31 }.ToList();
+                            return resp.ObjectoRespuesta();
+                        }
+                        Entidad.pvpgrupo = Entidad.costegrupo + (Entidad.costegrupo * (datos.porcentaje / 100));
+                        Entidad.netogrupo = Entidad.pvpgrupo - Entidad.costegrupo;
+                    }
+                    else
+                    {
+                        if (datos.secontabilizaninfantes)
+                        {
+                            if (Entidad.costeinfante == 0)
+                            {
+                                resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                                resp.Erroresvalidacion = new string[] { Errores.error32 }.ToList();
+                                return resp.ObjectoRespuesta();
+                            }
+                        }
+                        Entidad.pvpadulto = Entidad.costeadulto + (Entidad.costeadulto * (datos.porcentaje / 100));
+                        Entidad.pvpinfante = Entidad.costeinfante + (Entidad.costeinfante * (datos.porcentaje / 100));
+                        Entidad.pvpjunior = Entidad.costejunior + (Entidad.costejunior * (datos.porcentaje / 100));
+                        Entidad.pvpnino = Entidad.costenino + (Entidad.costenino * (datos.porcentaje / 100));
+                        Entidad.pvpsenior = Entidad.costesenior + (Entidad.costesenior * (datos.porcentaje / 100));
 
-                    Entidad.netoadulto = Entidad.pvpadulto - Entidad.costeadulto;
-                    Entidad.netoinfante = Entidad.pvpinfante - Entidad.costeinfante;
-                    Entidad.netojunior = Entidad.pvpjunior - Entidad.costejunior;
-                    Entidad.netonino = Entidad.pvpnino - Entidad.costenino;
-                    Entidad.netosenior = Entidad.pvpsenior - Entidad.costesenior;
-
+                        Entidad.netoadulto = Entidad.pvpadulto - Entidad.costeadulto;
+                        Entidad.netoinfante = Entidad.pvpinfante - Entidad.costeinfante;
+                        Entidad.netojunior = Entidad.pvpjunior - Entidad.costejunior;
+                        Entidad.netonino = Entidad.pvpnino - Entidad.costenino;
+                        Entidad.netosenior = Entidad.pvpsenior - Entidad.costesenior;
+                    }
                     contexto.Entry(preciotemporada).State = EntityState.Detached;
                     contexto.Entry(Entidad).State = EntityState.Modified;
                     contexto.SaveChanges();
@@ -132,20 +161,49 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         resp.Erroresvalidacion = new string[]{Errores.error12}.ToList();
                         return resp.ObjectoRespuesta();
                     }
-                    var ganancia = contexto.configuracion.Where(x => x.id == Entidad.exact_id).Select(x => x.porcentaje).First();
+                    var datos = contexto.configuracion.Where(x => x.id == Entidad.exact_id).Select(x =>new
+                    {
+                        porcentaje = x.porcentaje,
+                        esporgrupo = x.excursionactividad.precioporgrupo,
+                        secontabilizaninfantes = x.excursionactividad.secontabilizaninfantes
 
-                    Entidad.pvpadulto = Entidad.costeadulto + (Entidad.costeadulto * (ganancia/100));
-                    Entidad.pvpinfante = Entidad.costeinfante + (Entidad.costeinfante * (ganancia / 100));
-                    Entidad.pvpjunior = Entidad.costejunior + (Entidad.costejunior * (ganancia / 100));
-                    Entidad.pvpnino = Entidad.costenino + (Entidad.costenino * (ganancia / 100));
-                    Entidad.pvpsenior = Entidad.costesenior + (Entidad.costesenior * (ganancia / 100));
+                    }).First();
+                    if(datos.esporgrupo)
+                    {
+                        if(Entidad.costegrupo == 0)
+                        {
+                            resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                            resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                            resp.Erroresvalidacion = new string[] { Errores.error31 }.ToList();
+                            return resp.ObjectoRespuesta();
+                        }
+                        Entidad.pvpgrupo = Entidad.costegrupo + (Entidad.costegrupo * (datos.porcentaje / 100));
+                        Entidad.netogrupo = Entidad.pvpgrupo - Entidad.costegrupo;
+                    }
+                    else
+                    {
+                        if(datos.secontabilizaninfantes)
+                        {
+                            if(Entidad.costeinfante == 0)
+                            {
+                                resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                                resp.Erroresvalidacion = new string[] { Errores.error32 }.ToList();
+                                return resp.ObjectoRespuesta();
+                            }
+                        }
+                        Entidad.pvpadulto = Entidad.costeadulto + (Entidad.costeadulto * (datos.porcentaje / 100));
+                        Entidad.pvpinfante = Entidad.costeinfante + (Entidad.costeinfante * (datos.porcentaje / 100));
+                        Entidad.pvpjunior = Entidad.costejunior + (Entidad.costejunior * (datos.porcentaje / 100));
+                        Entidad.pvpnino = Entidad.costenino + (Entidad.costenino * (datos.porcentaje / 100));
+                        Entidad.pvpsenior = Entidad.costesenior + (Entidad.costesenior * (datos.porcentaje / 100));
 
-                    Entidad.netoadulto = Entidad.pvpadulto - Entidad.costeadulto;
-                    Entidad.netoinfante = Entidad.pvpinfante - Entidad.costeinfante;
-                    Entidad.netojunior = Entidad.pvpjunior - Entidad.costejunior;
-                    Entidad.netonino = Entidad.pvpnino - Entidad.costenino;
-                    Entidad.netosenior = Entidad.pvpsenior - Entidad.costesenior;
-
+                        Entidad.netoadulto = Entidad.pvpadulto - Entidad.costeadulto;
+                        Entidad.netoinfante = Entidad.pvpinfante - Entidad.costeinfante;
+                        Entidad.netojunior = Entidad.pvpjunior - Entidad.costejunior;
+                        Entidad.netonino = Entidad.pvpnino - Entidad.costenino;
+                        Entidad.netosenior = Entidad.pvpsenior - Entidad.costesenior;
+                    }
                     contexto.preciotemporada.Add(Entidad);
                     contexto.SaveChanges();
                     resp.Codigo = (int)Codigos.OK;

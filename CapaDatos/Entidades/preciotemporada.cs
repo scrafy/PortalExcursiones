@@ -31,7 +31,6 @@ namespace CapaDatos.Entidades
 
         public decimal pvpinfante { get; set; }
 
-        [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error37", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public decimal costeadulto { get; set; }
                 
         public decimal costenino { get; set; }
@@ -51,6 +50,12 @@ namespace CapaDatos.Entidades
         public decimal netojunior { get; set; }
 
         public decimal netosenior { get; set; }
+
+        public decimal costegrupo { get; set; }
+
+        public decimal netogrupo { get; set; }
+
+        public decimal pvpgrupo { get; set; }
 
         [Column(TypeName = "uint")]
         [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error43", ErrorMessageResourceType = typeof(ErroresValidacion))]
