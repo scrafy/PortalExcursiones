@@ -9,10 +9,11 @@ namespace CapaDatos.Entidades
     [Table("puntorecogida")]
     public partial class puntorecogida
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+       
         public puntorecogida()
         {
-            excursiones = new HashSet<calendarioexcursion_puntorecogida>();
+            configuraciones = new HashSet<puntorecogida_exact>();
+            reservas = new HashSet<reservaexcursionactividad>();
         }
 
         [Column(TypeName = "uint")]
@@ -43,9 +44,10 @@ namespace CapaDatos.Entidades
         [Range(1,Int64.MaxValue,ErrorMessageResourceName = "error14", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public long localidad_id { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<calendarioexcursion_puntorecogida> excursiones { get; set; }
-
         public virtual localidad localidad { get; set; }
+
+        public virtual ICollection<puntorecogida_exact> configuraciones { get; set; }
+
+        public virtual ICollection<reservaexcursionactividad> reservas { get; set; }
     }
 }

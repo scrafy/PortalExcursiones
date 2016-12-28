@@ -9,7 +9,7 @@ namespace CapaDatos.ConfiguracionEntidades
         public ConfiguracionIdioma()
         {
            
-              Property(e => e.nombre)
+              Property(e => e.lenguage)
               .IsUnicode(false);
 
           

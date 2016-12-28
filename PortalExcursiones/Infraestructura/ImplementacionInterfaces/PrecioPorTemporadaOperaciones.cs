@@ -30,8 +30,6 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                Entidad.desde = new DateTime(Entidad.desde.Year, Entidad.desde.Day, Entidad.desde.Month, Entidad.desde.Hour, Entidad.desde.Minute, Entidad.desde.Second);
-                Entidad.hasta = new DateTime(Entidad.hasta.Year, Entidad.hasta.Day, Entidad.hasta.Month, Entidad.hasta.Hour, Entidad.hasta.Minute, Entidad.hasta.Second);
                 if (modelo.IsValid)
                 {
                     var preciotemporada = contexto.preciotemporada.Find(Entidad.id);
@@ -66,6 +64,20 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         resp.Erroresvalidacion = new string[] { Errores.error12 }.ToList();
                         return resp.ObjectoRespuesta();
                     }
+                    var ganancia = contexto.configuracion.Where(x => x.id == Entidad.exact_id).Select(x => x.porcentaje).First();
+
+                    Entidad.pvpadulto = Entidad.costeadulto + (Entidad.costeadulto * (ganancia / 100));
+                    Entidad.pvpinfante = Entidad.costeinfante + (Entidad.costeinfante * (ganancia / 100));
+                    Entidad.pvpjunior = Entidad.costejunior + (Entidad.costejunior * (ganancia / 100));
+                    Entidad.pvpnino = Entidad.costenino + (Entidad.costenino * (ganancia / 100));
+                    Entidad.pvpsenior = Entidad.costesenior + (Entidad.costesenior * (ganancia / 100));
+
+                    Entidad.netoadulto = Entidad.pvpadulto - Entidad.costeadulto;
+                    Entidad.netoinfante = Entidad.pvpinfante - Entidad.costeinfante;
+                    Entidad.netojunior = Entidad.pvpjunior - Entidad.costejunior;
+                    Entidad.netonino = Entidad.pvpnino - Entidad.costenino;
+                    Entidad.netosenior = Entidad.pvpsenior - Entidad.costesenior;
+
                     contexto.Entry(preciotemporada).State = EntityState.Detached;
                     contexto.Entry(Entidad).State = EntityState.Modified;
                     contexto.SaveChanges();
@@ -94,8 +106,6 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                Entidad.desde = new DateTime(Entidad.desde.Year, Entidad.desde.Day, Entidad.desde.Month, Entidad.desde.Hour, Entidad.desde.Minute, Entidad.desde.Second);
-                Entidad.hasta = new DateTime(Entidad.hasta.Year, Entidad.hasta.Day, Entidad.hasta.Month, Entidad.hasta.Hour, Entidad.hasta.Minute, Entidad.hasta.Second);
                 if (modelo.IsValid)
                 {
                     if(Entidad.desde>=Entidad.hasta)
@@ -122,6 +132,20 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         resp.Erroresvalidacion = new string[]{Errores.error12}.ToList();
                         return resp.ObjectoRespuesta();
                     }
+                    var ganancia = contexto.configuracion.Where(x => x.id == Entidad.exact_id).Select(x => x.porcentaje).First();
+
+                    Entidad.pvpadulto = Entidad.costeadulto + (Entidad.costeadulto * (ganancia/100));
+                    Entidad.pvpinfante = Entidad.costeinfante + (Entidad.costeinfante * (ganancia / 100));
+                    Entidad.pvpjunior = Entidad.costejunior + (Entidad.costejunior * (ganancia / 100));
+                    Entidad.pvpnino = Entidad.costenino + (Entidad.costenino * (ganancia / 100));
+                    Entidad.pvpsenior = Entidad.costesenior + (Entidad.costesenior * (ganancia / 100));
+
+                    Entidad.netoadulto = Entidad.pvpadulto - Entidad.costeadulto;
+                    Entidad.netoinfante = Entidad.pvpinfante - Entidad.costeinfante;
+                    Entidad.netojunior = Entidad.pvpjunior - Entidad.costejunior;
+                    Entidad.netonino = Entidad.pvpnino - Entidad.costenino;
+                    Entidad.netosenior = Entidad.pvpsenior - Entidad.costesenior;
+
                     contexto.preciotemporada.Add(Entidad);
                     contexto.SaveChanges();
                     resp.Codigo = (int)Codigos.OK;
@@ -189,5 +213,9 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
+        public HttpResponseMessage Eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

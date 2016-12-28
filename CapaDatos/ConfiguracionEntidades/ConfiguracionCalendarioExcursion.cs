@@ -7,23 +7,10 @@ namespace CapaDatos.ConfiguracionEntidades
     {
         public ConfiguracionCalendarioExcursion()
         {
-
-          
-              HasMany(e => e.guias)
-              .WithRequired(e => e.calendarioexcursion)
-              .HasForeignKey(e => new { e.exact_id, e.fecha })
-              .WillCascadeOnDelete(false);
-
-          
-                HasMany(e => e.puntosrecogida)
-                .WithRequired(e => e.calendarioexcursion)
-                .HasForeignKey(e => new { e.exact_id, e.fecha })
-                .WillCascadeOnDelete(false);
-
-        
+            
                 HasMany(e => e.reservas)
                 .WithRequired(e => e.calendarioexcursion)
-                .HasForeignKey(e => new { e.exact_id, e.fecha })
+                .HasForeignKey(e=>e.calendario_id)
                 .WillCascadeOnDelete(false);
         }
     }

@@ -88,7 +88,7 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Uno de los horarios enviados tiene un formato incorrecto.
+        ///   Busca una cadena traducida similar a Uno de los horarios enviados tiene un formato incorrecto..
         /// </summary>
         public static string error12 {
             get {
@@ -187,11 +187,74 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El campo nombre es requerido.
+        /// </summary>
+        public static string error24 {
+            get {
+                return ResourceManager.GetString("error24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo latitud es requerido.
+        /// </summary>
+        public static string error25 {
+            get {
+                return ResourceManager.GetString("error25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo longitud es requerido.
+        /// </summary>
+        public static string error26 {
+            get {
+                return ResourceManager.GetString("error26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo direccion es requerido.
+        /// </summary>
+        public static string error27 {
+            get {
+                return ResourceManager.GetString("error27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo fecha es requerido.
+        /// </summary>
+        public static string error28 {
+            get {
+                return ResourceManager.GetString("error28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo fecha nueva es requerido.
+        /// </summary>
+        public static string error29 {
+            get {
+                return ResourceManager.GetString("error29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El campo password nuevo es requerido.
         /// </summary>
         public static string error3 {
             get {
                 return ResourceManager.GetString("error3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo username es requerido.
+        /// </summary>
+        public static string error30 {
+            get {
+                return ResourceManager.GetString("error30", resourceCulture);
             }
         }
         

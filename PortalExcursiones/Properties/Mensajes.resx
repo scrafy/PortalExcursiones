@@ -117,7 +117,121 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="menaje37" xml:space="preserve">
+    <value>Cliente:</value>
+  </data>
+  <data name="menasje38" xml:space="preserve">
+    <value>Precio total ( I.G.I.C includio )</value>
+  </data>
   <data name="mensaje1" xml:space="preserve">
     <value>Renovacion Password</value>
+  </data>
+  <data name="mensaje10" xml:space="preserve">
+    <value>Dirección:</value>
+  </data>
+  <data name="mensaje11" xml:space="preserve">
+    <value>Localidad:</value>
+  </data>
+  <data name="mensaje12" xml:space="preserve">
+    <value>Provincia:</value>
+  </data>
+  <data name="mensaje13" xml:space="preserve">
+    <value>País:</value>
+  </data>
+  <data name="mensaje14" xml:space="preserve">
+    <value>Código Postal:</value>
+  </data>
+  <data name="mensaje15" xml:space="preserve">
+    <value>Actividad:</value>
+  </data>
+  <data name="mensaje16" xml:space="preserve">
+    <value>Fecha/Hora:</value>
+  </data>
+  <data name="mensaje17" xml:space="preserve">
+    <value>Duración:</value>
+  </data>
+  <data name="mensaje18" xml:space="preserve">
+    <value>Flexible</value>
+  </data>
+  <data name="mensaje19" xml:space="preserve">
+    <value>hora/as</value>
+  </data>
+  <data name="mensaje2" xml:space="preserve">
+    <value>Esperar en el punto de recogida hasta que el servicio de transporte llegue. Este podrá demorar algún tiempo debido a que realiza recorridos adicionales para recoger otros clientes que realizarán la misma actividad/excursión. Para cualquier duda o aclaración puede contactar con el proveedor de la excursión al teléfono</value>
+  </data>
+  <data name="mensaje20" xml:space="preserve">
+    <value>minuto/os</value>
+  </data>
+  <data name="mensaje21" xml:space="preserve">
+    <value>dia/as</value>
+  </data>
+  <data name="mensaje22" xml:space="preserve">
+    <value>Número Adultos:</value>
+  </data>
+  <data name="mensaje23" xml:space="preserve">
+    <value>Número Juniors:</value>
+  </data>
+  <data name="mensaje24" xml:space="preserve">
+    <value>Número Seniors:</value>
+  </data>
+  <data name="mensaje25" xml:space="preserve">
+    <value>Número Niños:</value>
+  </data>
+  <data name="mensaje26" xml:space="preserve">
+    <value>Número Infantes:</value>
+  </data>
+  <data name="mensaje27" xml:space="preserve">
+    <value>Precio Adulto:</value>
+  </data>
+  <data name="mensaje28" xml:space="preserve">
+    <value>Precio Junior:</value>
+  </data>
+  <data name="mensaje29" xml:space="preserve">
+    <value>Precio Senior:</value>
+  </data>
+  <data name="mensaje3" xml:space="preserve">
+    <value>IMPORTANTE</value>
+  </data>
+  <data name="mensaje30" xml:space="preserve">
+    <value>Precio Niño:</value>
+  </data>
+  <data name="mensaje31" xml:space="preserve">
+    <value>Precio Infante:</value>
+  </data>
+  <data name="mensaje34" xml:space="preserve">
+    <value>Total Seniors:</value>
+  </data>
+  <data name="mensaje35" xml:space="preserve">
+    <value>Total Niños:</value>
+  </data>
+  <data name="mensaje36" xml:space="preserve">
+    <value>Total Infantes:</value>
+  </data>
+  <data name="mensaje39" xml:space="preserve">
+    <value>Precio total ( I.G.I.C includio ) descuento del {0}%</value>
+  </data>
+  <data name="mensaje4" xml:space="preserve">
+    <value>Debe ir a la dirección indicada en el recuadro PUNTO DE REUNION y estar puntual el día {0} a la hora {1}. Para cualquier duda o aclaración puede contactar con el proveedor de la excursión al teléfono {2}</value>
+  </data>
+  <data name="mensaje5" xml:space="preserve">
+    <value>Dirección:</value>
+  </data>
+  <data name="mensaje6" xml:space="preserve">
+    <value>Ver Mapa:</value>
+  </data>
+  <data name="mensaje7" xml:space="preserve">
+    <value>PUNTO DE REUNIÓN</value>
+  </data>
+  <data name="mensaje8" xml:space="preserve">
+    <value>HA SELECCIONADO ESTE PUNTO DE RECOGIDA</value>
+  </data>
+  <data name="mensaje9" xml:space="preserve">
+    <value>Nombre:</value>
+  </data>
+  <data name="mensajes32" xml:space="preserve">
+    <value>Total Adultos:</value>
+  </data>
+  <data name="mensajes33" xml:space="preserve">
+    <value>Total Juniors:</value>
   </data>
 </root>

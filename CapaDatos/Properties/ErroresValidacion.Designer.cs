@@ -304,29 +304,11 @@ namespace CapaDatos.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El campo pvpadulto es requerido.
-        /// </summary>
-        public static string error34 {
-            get {
-                return ResourceManager.GetString("error34", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a El campo pvpniño es requerido.
+        ///   Busca una cadena traducida similar a El campo porcentaje es requerido y debe ser mayor o igual que uno.
         /// </summary>
         public static string error35 {
             get {
                 return ResourceManager.GetString("error35", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a El campo pvpinfante es requerido.
-        /// </summary>
-        public static string error36 {
-            get {
-                return ResourceManager.GetString("error36", resourceCulture);
             }
         }
         
@@ -340,56 +322,11 @@ namespace CapaDatos.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El campo costeanino es requerido.
-        /// </summary>
-        public static string error38 {
-            get {
-                return ResourceManager.GetString("error38", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a El campo costeinfante es requerido.
-        /// </summary>
-        public static string error39 {
-            get {
-                return ResourceManager.GetString("error39", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a La dirección de email no es válida.
         /// </summary>
         public static string error4 {
             get {
                 return ResourceManager.GetString("error4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a El campo netoadulto es requerido.
-        /// </summary>
-        public static string error40 {
-            get {
-                return ResourceManager.GetString("error40", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a El campo netoniño es requerido.
-        /// </summary>
-        public static string error41 {
-            get {
-                return ResourceManager.GetString("error41", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a El campo netoinfante es requerido.
-        /// </summary>
-        public static string error42 {
-            get {
-                return ResourceManager.GetString("error42", resourceCulture);
             }
         }
         
@@ -439,11 +376,65 @@ namespace CapaDatos.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El campo direccion es requerido.
+        /// </summary>
+        public static string error48 {
+            get {
+                return ResourceManager.GetString("error48", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo edaddesde es requerido.
+        /// </summary>
+        public static string error49 {
+            get {
+                return ResourceManager.GetString("error49", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El campo usuario es requerido.
         /// </summary>
         public static string error5 {
             get {
                 return ResourceManager.GetString("error5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo edadhasta es requerido.
+        /// </summary>
+        public static string error50 {
+            get {
+                return ResourceManager.GetString("error50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo genero es requerido.
+        /// </summary>
+        public static string error51 {
+            get {
+                return ResourceManager.GetString("error51", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo tipo de duracion es requerido.
+        /// </summary>
+        public static string error52 {
+            get {
+                return ResourceManager.GetString("error52", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo descripcion es requerido.
+        /// </summary>
+        public static string error53 {
+            get {
+                return ResourceManager.GetString("error53", resourceCulture);
             }
         }
         

@@ -114,6 +114,8 @@ D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\PortalExcursiones.pdb
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\CapaDatos.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\EntityFramework.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\EntityFramework.SqlServer.dll
+D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Gma.QrCodeNet.Encoding.dll
+D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\iTextSharp.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.AspNet.Identity.Core.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -139,6 +141,8 @@ D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\MySql.Data.dll
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\CapaDatos.pdb
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\EntityFramework.xml
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\EntityFramework.SqlServer.xml
+D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Gma.QrCodeNet.Encoding.pdb
+D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Gma.QrCodeNet.Encoding.xml
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.AspNet.Identity.Core.xml
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 D:\PROYECTOS\PortalExcursiones\PortalExcursiones\bin\Microsoft.AspNet.Identity.Owin.xml

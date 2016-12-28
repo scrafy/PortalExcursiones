@@ -16,6 +16,10 @@ namespace CapaDatos.Entidades
             fechas = new HashSet<calendarioexcursion>();
             items = new HashSet<excursion_contiene_item>();
             precios = new HashSet<preciotemporada>();
+            idiomas = new HashSet<idioma_exact>();
+            puntos_recogida = new HashSet<puntorecogida_exact>();
+            grupoedades = new HashSet<grupoedad>();
+            factura_items = new HashSet<facturaitem_exact>();
         }
 
         [Key]
@@ -23,8 +27,11 @@ namespace CapaDatos.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long exact_id { get; set; }
 
-        [Range(1,Int16.MaxValue,ErrorMessageResourceName = "error26", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public short duracion { get; set; }
+
+        [Required(ErrorMessageResourceName = "error52", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [StringLength(60)]
+        public string tipoduracion { get; set; }
 
         [Range(1, Int16.MaxValue, ErrorMessageResourceName = "error27", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public short minpersonas { get; set; }
@@ -68,8 +75,6 @@ namespace CapaDatos.Entidades
 
         public byte? tipoactividad_id { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<calendarioexcursion> fechas { get; set; }
 
         public virtual categoriactividad categoriactividad { get; set; }
 
@@ -80,9 +85,24 @@ namespace CapaDatos.Entidades
         public virtual destino destino { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<calendarioexcursion> fechas { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<excursion_contiene_item> items { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<preciotemporada> precios { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<idioma_exact> idiomas { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<grupoedad> grupoedades { get; set; }
+
+        public virtual ICollection<puntorecogida_exact> puntos_recogida { get; set; }
+
+        public virtual ICollection<facturaitem_exact> factura_items { get; set; }
+
+
     }
 }

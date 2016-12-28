@@ -128,6 +128,11 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
+        public HttpResponseMessage Eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public HttpResponseMessage Todos()
         {
             try

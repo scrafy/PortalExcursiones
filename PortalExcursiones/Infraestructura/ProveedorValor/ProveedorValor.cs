@@ -47,12 +47,7 @@ namespace PortalExcursiones.Infraestructura.ProveedorValor
                             cliente.usuario.Id = null;//sino se manda el id machacamos con null el autogenerado por identity
 
                         return new ValueProviderResult(cliente, contenido, CultureInfo.InvariantCulture);
-                    case "guia":
-                        guia guia = JsonConvert.DeserializeObject<guia>(contenido);
-                        if (aux.usuario.id == null)
-                            guia.usuario.Id = null;//sino se manda el id machacamos con null el autogenerado por identity
-
-                        return new ValueProviderResult(guia, contenido, CultureInfo.InvariantCulture);
+                                  
                     case "proveedor":
                         proveedor proveedor = JsonConvert.DeserializeObject<proveedor>(contenido);
                         if (aux.usuario.id == null)
@@ -66,23 +61,6 @@ namespace PortalExcursiones.Infraestructura.ProveedorValor
 
                         return new ValueProviderResult(colaborador, contenido, CultureInfo.InvariantCulture);
 
-                }
-
-                
-            }
-            if (contexto.Request.Method.Method.Equals("POST"))
-            {
-                switch(key)
-                {
-                    case "calendarioexcursion":
-                        CalendarioExcursionModel calendario = JsonConvert.DeserializeObject<CalendarioExcursionModel>(contenido);
-                        DateTime dt = new DateTime();
-                        DateTime.TryParse(aux.desde==null ? "01/01/0001 00:00:00": aux.desde.ToString(), Thread.CurrentThread.CurrentCulture, DateTimeStyles.None, out dt);
-                        calendario.Desde = dt;
-                        DateTime.TryParse(aux.hasta == null ? "01/01/0001 00:00:00" : aux.hasta.ToString(), Thread.CurrentThread.CurrentCulture, DateTimeStyles.None, out dt);
-                        calendario.Hasta = dt;
-                        return new ValueProviderResult(calendario, contenido, CultureInfo.InvariantCulture);
-                  
                 }
             }
             return null;

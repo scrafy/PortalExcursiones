@@ -61,11 +61,353 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cliente:.
+        /// </summary>
+        public static string menaje37 {
+            get {
+                return ResourceManager.GetString("menaje37", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Precio total ( I.G.I.C includio ).
+        /// </summary>
+        public static string menasje38 {
+            get {
+                return ResourceManager.GetString("menasje38", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Renovacion Password.
         /// </summary>
         public static string mensaje1 {
             get {
                 return ResourceManager.GetString("mensaje1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Dirección:.
+        /// </summary>
+        public static string mensaje10 {
+            get {
+                return ResourceManager.GetString("mensaje10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Localidad:.
+        /// </summary>
+        public static string mensaje11 {
+            get {
+                return ResourceManager.GetString("mensaje11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Provincia:.
+        /// </summary>
+        public static string mensaje12 {
+            get {
+                return ResourceManager.GetString("mensaje12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a País:.
+        /// </summary>
+        public static string mensaje13 {
+            get {
+                return ResourceManager.GetString("mensaje13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Código Postal:.
+        /// </summary>
+        public static string mensaje14 {
+            get {
+                return ResourceManager.GetString("mensaje14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Actividad:.
+        /// </summary>
+        public static string mensaje15 {
+            get {
+                return ResourceManager.GetString("mensaje15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha/Hora:.
+        /// </summary>
+        public static string mensaje16 {
+            get {
+                return ResourceManager.GetString("mensaje16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Duración:.
+        /// </summary>
+        public static string mensaje17 {
+            get {
+                return ResourceManager.GetString("mensaje17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Flexible.
+        /// </summary>
+        public static string mensaje18 {
+            get {
+                return ResourceManager.GetString("mensaje18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a hora/as.
+        /// </summary>
+        public static string mensaje19 {
+            get {
+                return ResourceManager.GetString("mensaje19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Esperar en el punto de recogida hasta que el servicio de transporte llegue. Este podrá demorar algún tiempo debido a que realiza recorridos adicionales para recoger otros clientes que realizarán la misma actividad/excursión. Para cualquier duda o aclaración puede contactar con el proveedor de la excursión al teléfono.
+        /// </summary>
+        public static string mensaje2 {
+            get {
+                return ResourceManager.GetString("mensaje2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a minuto/os.
+        /// </summary>
+        public static string mensaje20 {
+            get {
+                return ResourceManager.GetString("mensaje20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a dia/as.
+        /// </summary>
+        public static string mensaje21 {
+            get {
+                return ResourceManager.GetString("mensaje21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número Adultos:.
+        /// </summary>
+        public static string mensaje22 {
+            get {
+                return ResourceManager.GetString("mensaje22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número Juniors:.
+        /// </summary>
+        public static string mensaje23 {
+            get {
+                return ResourceManager.GetString("mensaje23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número Seniors:.
+        /// </summary>
+        public static string mensaje24 {
+            get {
+                return ResourceManager.GetString("mensaje24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número Niños:.
+        /// </summary>
+        public static string mensaje25 {
+            get {
+                return ResourceManager.GetString("mensaje25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Número Infantes:.
+        /// </summary>
+        public static string mensaje26 {
+            get {
+                return ResourceManager.GetString("mensaje26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Precio Adulto:.
+        /// </summary>
+        public static string mensaje27 {
+            get {
+                return ResourceManager.GetString("mensaje27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Precio Junior:.
+        /// </summary>
+        public static string mensaje28 {
+            get {
+                return ResourceManager.GetString("mensaje28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Precio Senior:.
+        /// </summary>
+        public static string mensaje29 {
+            get {
+                return ResourceManager.GetString("mensaje29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a IMPORTANTE.
+        /// </summary>
+        public static string mensaje3 {
+            get {
+                return ResourceManager.GetString("mensaje3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Precio Niño:.
+        /// </summary>
+        public static string mensaje30 {
+            get {
+                return ResourceManager.GetString("mensaje30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Precio Infante:.
+        /// </summary>
+        public static string mensaje31 {
+            get {
+                return ResourceManager.GetString("mensaje31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total Seniors:.
+        /// </summary>
+        public static string mensaje34 {
+            get {
+                return ResourceManager.GetString("mensaje34", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total Niños:.
+        /// </summary>
+        public static string mensaje35 {
+            get {
+                return ResourceManager.GetString("mensaje35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total Infantes:.
+        /// </summary>
+        public static string mensaje36 {
+            get {
+                return ResourceManager.GetString("mensaje36", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Precio total ( I.G.I.C includio ) descuento del {0}%.
+        /// </summary>
+        public static string mensaje39 {
+            get {
+                return ResourceManager.GetString("mensaje39", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debe ir a la dirección indicada en el recuadro PUNTO DE REUNION y estar puntual el día {0} a la hora {1}. Para cualquier duda o aclaración puede contactar con el proveedor de la excursión al teléfono {2}.
+        /// </summary>
+        public static string mensaje4 {
+            get {
+                return ResourceManager.GetString("mensaje4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Dirección:.
+        /// </summary>
+        public static string mensaje5 {
+            get {
+                return ResourceManager.GetString("mensaje5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ver Mapa:.
+        /// </summary>
+        public static string mensaje6 {
+            get {
+                return ResourceManager.GetString("mensaje6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PUNTO DE REUNIÓN.
+        /// </summary>
+        public static string mensaje7 {
+            get {
+                return ResourceManager.GetString("mensaje7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a HA SELECCIONADO ESTE PUNTO DE RECOGIDA.
+        /// </summary>
+        public static string mensaje8 {
+            get {
+                return ResourceManager.GetString("mensaje8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre:.
+        /// </summary>
+        public static string mensaje9 {
+            get {
+                return ResourceManager.GetString("mensaje9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total Adultos:.
+        /// </summary>
+        public static string mensajes32 {
+            get {
+                return ResourceManager.GetString("mensajes32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total Juniors:.
+        /// </summary>
+        public static string mensajes33 {
+            get {
+                return ResourceManager.GetString("mensajes33", resourceCulture);
             }
         }
     }

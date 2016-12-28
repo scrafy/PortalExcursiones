@@ -20,8 +20,6 @@ namespace CapaDatos
 
         public virtual DbSet<alquilervehiculo> alquilervehiculo { get; set; }
         public virtual DbSet<calendarioexcursion> calendarioexcursion { get; set; }
-        public virtual DbSet<calendarioexcursion_guia> calendarioexcursion_guia { get; set; }
-        public virtual DbSet<calendarioexcursion_puntorecogida> calendarioexcursion_puntorecogida { get; set; }
         public virtual DbSet<categoriactividad> categoriactividad { get; set; }
         public virtual DbSet<categoriaexcursion> categoriaexcursion { get; set; }
         public virtual DbSet<cliente> cliente { get; set; }
@@ -31,9 +29,11 @@ namespace CapaDatos
         public virtual DbSet<estadoexcursion> estadoexcursion { get; set; }
         public virtual DbSet<excursion_contiene_item> excursion_contiene_item { get; set; }
         public virtual DbSet<excursionactividad> excursionactividad { get; set; }
-        public virtual DbSet<foto> foto { get; set; }
-        public virtual DbSet<guia> guia { get; set; }
-        public virtual DbSet<idioma_guia> idioma_guia { get; set; }
+        public virtual DbSet<fotoconfiguracion> fotoconfiguracion { get; set; }
+        public virtual DbSet<facturaitem> facturaitem { get; set; }
+        public virtual DbSet<facturaitem_exact> facturaitem_exact { get; set; }
+        public virtual DbSet<grupoedad> grupoedad { get; set; }
+        public virtual DbSet<idioma_exact> idioma_exact { get; set; }
         public virtual DbSet<idioma> idioma { get; set; }
         public virtual DbSet<item> item { get; set; }
         public virtual DbSet<localidad> localidad { get; set; }
@@ -42,6 +42,7 @@ namespace CapaDatos
         public virtual DbSet<proveedor> proveedor { get; set; }
         public virtual DbSet<provincia> provincia { get; set; }
         public virtual DbSet<puntorecogida> puntorecogida { get; set; }
+        public virtual DbSet<puntorecogida_exact> punto_exact { get; set; }
         public virtual DbSet<recogidadevolucion> recogidadevolucion { get; set; }
         public virtual DbSet<reserva> reserva { get; set; }
         public virtual DbSet<reservaexcursionactividad> reservaexcursionactividad { get; set; }
@@ -65,8 +66,7 @@ namespace CapaDatos
             modelo.Configurations.Add(new ConfiguracionDestino());
             modelo.Configurations.Add(new ConfiguracionEstadoExcursion());
             modelo.Configurations.Add(new ConfiguracionExcursionActividad());
-            modelo.Configurations.Add(new ConfiguracionFoto());
-            modelo.Configurations.Add(new ConfiguracionGuia());
+            modelo.Configurations.Add(new ConfiguracionFotoConfiguracion());
             modelo.Configurations.Add(new ConfiguracionIdioma());
             modelo.Configurations.Add(new ConfiguracionItem());
             modelo.Configurations.Add(new ConfiguracionLocalidad());
@@ -79,6 +79,7 @@ namespace CapaDatos
             modelo.Configurations.Add(new ConfiguracionTipoVehiculo());
             modelo.Configurations.Add(new ConfiguracionUsuario());
             modelo.Configurations.Add(new ConfiguracionVehiculo());
+            modelo.Configurations.Add(new ConfiguracionFacturaItem());
             ConfiguracionIdentity(modelo);
    
         }

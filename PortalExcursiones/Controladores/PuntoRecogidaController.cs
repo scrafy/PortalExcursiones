@@ -1,5 +1,7 @@
 ﻿using CapaDatos.Entidades;
 using PortalExcursiones.Infraestructura.Interfaces;
+using PortalExcursiones.Modelos.ModelosEntrada;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http;
 
@@ -8,35 +10,50 @@ namespace PortalExcursiones.Controladores
     [RoutePrefix("api/puntorecogida")]
     public class PuntoRecogidaController : BaseControllers
     {
-        private IOperacionesComunes<puntorecogida> opcomun = null;
+        private IOperacionesPuntoRecogida op = null;
 
-        public PuntoRecogidaController(IOperacionesComunes<puntorecogida> _opcomun)
+
+        public PuntoRecogidaController(IOperacionesPuntoRecogida _op)
         {
-            opcomun = _opcomun;
+            op = _op;
+
         }
 
         [Route]
-        public HttpResponseMessage Post([FromBody] puntorecogida puntorecogida)
+        public HttpResponseMessage Post([FromBody] PuntoRecogidaModel puntorecogida)
         {
-            return opcomun.Crear(puntorecogida, this.ModelState);
+            return op.Crear(puntorecogida, this.ModelState);
         }
 
         [Route]
-        public HttpResponseMessage Put([FromBody]puntorecogida puntorecogida)
+        public HttpResponseMessage Put([FromBody]PuntoRecogidaModel puntorecogida)
         {
-            return opcomun.Actualizar(puntorecogida, this.ModelState);
+            return op.Actualizar(puntorecogida, this.ModelState);
         }
 
         [Route]
         public HttpResponseMessage Get()
         {
-            return opcomun.Todos();
+            return op.Todos();
         }
 
         [Route("{id}")]
-        public HttpResponseMessage Get(string id)
+        public HttpResponseMessage Get(long id)
         {
-            return opcomun.BusquedaPorId(id);
+            return op.BusquedaPorId(id);
+        }
+
+        [Route("busquedapuntosexact/{id}")]
+        [HttpGet]
+        public HttpResponseMessage BusquedaExact(long id)
+        {
+            return op.BusquedaPorExAct(id);
+        }
+
+        [Route()]
+        public HttpResponseMessage Delete([FromBody]PuntoRecogidaEliminarModel datos)
+        {
+            return op.Eliminar(datos.Id);
         }
     }
 }

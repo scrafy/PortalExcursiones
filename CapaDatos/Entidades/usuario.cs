@@ -99,9 +99,7 @@ namespace CapaDatos.Entidades
 
         public virtual colaborador colaborador { get; set; }
 
-        public virtual guia guia { get; set; }
-
-        public virtual localidad localidad { get; set; }
+       public virtual localidad localidad { get; set; }
 
         public virtual proveedor proveedor { get; set; }
 

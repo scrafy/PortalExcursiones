@@ -9,7 +9,6 @@ namespace PortalExcursiones.Infraestructura.Enumeraciones
     {
         activa = 1,
         anulada = 2,
-        fechamodificada = 3,
-        realizada = 4
+        realizada = 3
     }
 }

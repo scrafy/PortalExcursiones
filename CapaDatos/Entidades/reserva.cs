@@ -26,6 +26,8 @@ namespace CapaDatos.Entidades
 
         public string colaborador_id { get; set; }
 
+        public string codigoqr { get; set; }
+
         public virtual cliente cliente { get; set; }
 
         public virtual colaborador colaborador { get; set; }

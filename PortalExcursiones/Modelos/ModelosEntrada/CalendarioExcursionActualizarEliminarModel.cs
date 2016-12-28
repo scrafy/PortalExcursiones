@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using PortalExcursiones.Infraestructura.AtributosValidacion;
+using PortalExcursiones.Properties;
+using System;
+
 
 namespace PortalExcursiones.Modelos.ModelosEntrada
 {
@@ -11,6 +11,8 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
         private DateTime fechanueva;
         private long exact_id;
 
+        [Hora(ErrorMessageResourceName = "error12",ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [Fecha(ErrorMessageResourceName = "error28", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public DateTime Fecha
         {
             get
@@ -24,6 +26,8 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
             }
         }
 
+        [Hora(ErrorMessageResourceName = "error12", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [Fecha(ErrorMessageResourceName = "error29", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public DateTime Fechanueva
         {
             get

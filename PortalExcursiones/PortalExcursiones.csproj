@@ -52,6 +52,14 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QrCode.Net.0.4.0.0\lib\net45\Gma.QrCodeNet.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="iTextSharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <HintPath>..\packages\iTextSharp-LGPL.4.1.6\lib\iTextSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -152,7 +160,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Infraestructura\Enlazadores\" />
+    <Folder Include="facturas\" />
+    <Folder Include="fotos\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -167,15 +176,22 @@
     <Compile Include="Controladores\DestinoController.cs" />
     <Compile Include="Controladores\EstadoExcursionController.cs" />
     <Compile Include="Controladores\ExcursionActividadController.cs" />
-    <Compile Include="Controladores\GuiaController.cs" />
+    <Compile Include="Controladores\FacturaItemController.cs" />
+    <Compile Include="Controladores\FotoConfiguracionController.cs" />
+    <Compile Include="Controladores\FotoManagerController.cs" />
+    <Compile Include="Controladores\GrupoEdadController.cs" />
     <Compile Include="Controladores\IdiomaController.cs" />
     <Compile Include="Controladores\ItemController.cs" />
     <Compile Include="Controladores\PrecioTemporadaController.cs" />
     <Compile Include="Controladores\ProveedorController.cs" />
     <Compile Include="Controladores\PuntoRecogidaController.cs" />
+    <Compile Include="Controladores\ReservaExcActController.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\DiasCalendarioAttribute.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\FechaAttribute.cs" />
+    <Compile Include="Infraestructura\AtributosValidacion\HoraAttribute.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\HorariosCalendarioAttribute.cs" />
+    <Compile Include="Infraestructura\Enumeraciones\DuracionExAct.cs" />
+    <Compile Include="Infraestructura\Enumeraciones\NombreRangoEdad.cs" />
     <Compile Include="Infraestructura\Enumeraciones\DiasSemana.cs" />
     <Compile Include="Infraestructura\Enumeraciones\EstadoExcursion.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\CalendarioExcursionOperaciones.cs" />
@@ -185,13 +201,19 @@
     <Compile Include="Infraestructura\ImplementacionInterfaces\DestinoOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\EstadoExcursionOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\ExcursionActividadOperaciones.cs" />
-    <Compile Include="Infraestructura\ImplementacionInterfaces\GuiaOperaciones.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\FacturaItemOperaciones.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\FotoConfiguracionOperaciones.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\FotoOperaciones.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\GrupoEdadOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\IdiomaOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\ItemOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\PrecioPorTemporadaOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\ProveedorOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\PuntoRecogidaOperaciones.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\ReservaExcActOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\UsuarioOperaciones.cs" />
+    <Compile Include="Infraestructura\Interfaces\ICreacionMultiple.cs" />
+    <Compile Include="Infraestructura\Interfaces\IGeneracionInformes.cs" />
     <Compile Include="Infraestructura\Interfaces\IOperacionesCalendarioExcursionActividad.cs" />
     <Compile Include="Infraestructura\Interfaces\IOperacionesComunes.cs" />
     <Compile Include="Controladores\UsuarioController.cs" />
@@ -199,20 +221,28 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infraestructura\Interfaces\IOperacionesExcursionActividad.cs" />
-    <Compile Include="Infraestructura\Interfaces\IOperacionesGuia.cs" />
+    <Compile Include="Infraestructura\Interfaces\IOperacionesFotoConfiguracion.cs" />
+    <Compile Include="Infraestructura\Interfaces\IOperacionesFotos.cs" />
+    <Compile Include="Infraestructura\Interfaces\IOperacionesPasarelaPago.cs" />
+    <Compile Include="Infraestructura\Interfaces\IOperacionesPuntoRecogida.cs" />
     <Compile Include="Infraestructura\Interfaces\IOperacionesUsuario.cs" />
+    <Compile Include="Infraestructura\LogicaComun\GestionAvisosEmail.cs" />
     <Compile Include="Infraestructura\ProveedorValor\ProveedorValor.cs" />
-    <Compile Include="Modelos\ModelosEntrada\AnadirEliminarIdiomaModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\AnadirEliminarItemModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\CalendarioExcursionActualizarEliminarModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\CalendarioExcursionModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\CambioPasswordModel.cs" />
-    <Compile Include="Modelos\ModelosEntrada\GuiaFechaModel.cs" />
+    <Compile Include="Modelos\ModelosEntrada\EliminarEntidadModel.cs" />
+    <Compile Include="Modelos\ModelosEntrada\FacturaItemModel.cs" />
+    <Compile Include="Modelos\ModelosEntrada\IdiomaExActModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\LoginModel.cs" />
-    <Compile Include="Modelos\ModelosEntrada\PuntoRecogidaFechaModel.cs" />
+    <Compile Include="Modelos\ModelosEntrada\PuntoRecogidaEliminarModel.cs" />
+    <Compile Include="Modelos\ModelosEntrada\PuntoRecogidaModel.cs" />
     <Compile Include="Modelos\ModelosEntrada\RenovacionPasswordModel.cs" />
     <Compile Include="Infraestructura\Enumeraciones\CodigosSalida.cs" />
+    <Compile Include="Modelos\ModelosEntrada\ReservaExcursionActividadModel.cs" />
     <Compile Include="Modelos\ModelosSalida\Excepcion.cs" />
+    <Compile Include="Modelos\ModelosSalida\FotoInfo.cs" />
     <Compile Include="Modelos\ModelosSalida\Respuesta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Errores.Designer.cs">
@@ -234,6 +264,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="recursos\imagenes\logo.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

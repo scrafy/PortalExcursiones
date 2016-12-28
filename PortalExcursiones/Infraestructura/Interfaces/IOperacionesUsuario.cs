@@ -11,5 +11,6 @@ namespace PortalExcursiones.Infraestructura.Interfaces
         HttpResponseMessage CambiarPassword(CambioPasswordModel password, ModelStateDictionary modelo);
         HttpResponseMessage ObtenerTokenReseteoPassword(string email);
         HttpResponseMessage RenovarPassword(RenovacionPasswordModel datos, ModelStateDictionary modelo);
+        HttpResponseMessage CambiarIdioma(string idioma);
     }
 }

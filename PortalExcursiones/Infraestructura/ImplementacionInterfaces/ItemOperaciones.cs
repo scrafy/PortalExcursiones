@@ -145,5 +145,10 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 return resp.ObjectoRespuesta();
             }
         }
+
+        public HttpResponseMessage Eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

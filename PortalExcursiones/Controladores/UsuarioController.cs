@@ -81,7 +81,12 @@ namespace PortalExcursiones.Controladores
             return opusu.RenovarPassword(datos,this.ModelState);
         }
 
-
+        [HttpGet]
+        [Route("cambiaridioma/{idioma}")]
+        public HttpResponseMessage CambiarIdioma(string idioma)
+        {
+            return opusu.CambiarIdioma(idioma);
+        }
 
     }
 }

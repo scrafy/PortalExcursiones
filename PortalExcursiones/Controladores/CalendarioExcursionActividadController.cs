@@ -30,41 +30,14 @@ namespace PortalExcursiones.Controladores
         [Route()]
         public HttpResponseMessage Delete([FromBody]CalendarioExcursionActualizarEliminarModel datos)
         {
-            return op.Eliminar(datos.Fecha, datos.Exact_id);
+            return op.Eliminar(datos,this.ModelState);
         }
 
         [Route()]
         public HttpResponseMessage Put([FromBody]CalendarioExcursionActualizarEliminarModel datos)
         {
-            return op.Actualizar(datos.Fecha,datos.Fechanueva,datos.Exact_id);
+            return op.Actualizar(datos,this.ModelState);
         }
-
-        [Route("anadirguiaexcursion")]
-        [HttpPost]
-        public HttpResponseMessage AnadirGuiaFecha([FromBody]GuiaFechaModel guia)
-        {
-            return op.AnadirGuia(guia.Fecha,guia.Exact_id, guia.Guia_id);
-        }
-
-        [Route("eliminarguiaexcursion")]
-        [HttpDelete]
-        public HttpResponseMessage EliminarGuiaFecha([FromBody]GuiaFechaModel guia)
-        {
-            return op.EliminarGuia(guia.Fecha, guia.Exact_id, guia.Guia_id);
-        }
-
-        [Route("anadirpuntoexcursion")]
-        [HttpPost]
-        public HttpResponseMessage AnadirPuntoRecogidaFecha([FromBody]PuntoRecogidaFechaModel punto)
-        {
-            return op.AnadirPuntoRecogida(punto.Fecha, punto.Exact_id, punto.Punto_id);
-        }
-
-        [Route("eliminarpuntoexcursion")]
-        [HttpDelete]
-        public HttpResponseMessage EliminarPuntoRecogidaFecha([FromBody]PuntoRecogidaFechaModel punto)
-        {
-            return op.EliminarPuntoRecogida(punto.Fecha, punto.Exact_id, punto.Punto_id);
-        }
+       
     }
 }

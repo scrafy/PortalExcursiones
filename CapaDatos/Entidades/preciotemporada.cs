@@ -21,32 +21,36 @@ namespace CapaDatos.Entidades
         [Fecha(ErrorMessageResourceName = "error45", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public DateTime hasta { get; set; }
 
-        [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error34", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public decimal pvpadulto { get; set; }
-
-        [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error35", ErrorMessageResourceType = typeof(ErroresValidacion))]
+               
         public decimal pvpnino { get; set; }
+               
+        public decimal pvpjunior { get; set; }
+                
+        public decimal pvpsenior { get; set; }
 
-        [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error36", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public decimal pvpinfante { get; set; }
 
         [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error37", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public decimal costeadulto { get; set; }
-
-        [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error38", ErrorMessageResourceType = typeof(ErroresValidacion))]
+                
         public decimal costenino { get; set; }
-
-        [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error39", ErrorMessageResourceType = typeof(ErroresValidacion))]
+                
         public decimal costeinfante { get; set; }
+               
+        public decimal costejunior{ get; set; }
 
-        [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error40", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        public decimal costesenior { get; set; }
+
         public decimal netoadulto { get; set; }
 
-        [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error41", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public decimal netonino { get; set; }
 
-        [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error42", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public decimal netoinfante { get; set; }
+
+        public decimal netojunior { get; set; }
+
+        public decimal netosenior { get; set; }
 
         [Column(TypeName = "uint")]
         [Range(1, Int64.MaxValue, ErrorMessageResourceName = "error43", ErrorMessageResourceType = typeof(ErroresValidacion))]

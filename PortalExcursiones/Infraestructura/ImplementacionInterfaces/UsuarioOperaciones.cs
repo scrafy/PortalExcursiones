@@ -15,6 +15,11 @@ using PortalExcursiones.Infraestructura.Enumeraciones;
 using System.Security.Claims;
 using Microsoft.Owin.Security;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Globalization;
+using System.Net.Http.Headers;
+using System.Collections.Generic;
+using System.Configuration;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
@@ -382,6 +387,31 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 return resp.ObjectoRespuesta();
             }
         }
-        
+
+        public HttpResponseMessage CambiarIdioma(string idioma)
+        {
+            if(Regex.IsMatch(idioma, ConfigurationManager.AppSettings["regexidiomas"]))
+            {
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                HttpResponseMessage msg = resp.ObjectoRespuesta();
+                CookieHeaderValue coo = new CookieHeaderValue("idioma", idioma);
+                coo.Path = "/";
+                msg.Headers.AddCookies(new CookieHeaderValue[]{coo});
+                return msg;
+            }
+            else
+            {
+                resp.Codigo = (int)Codigos.ERROR_CODIGO_IDIOMA_INCORRECTO;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_CODIGO_IDIOMA_INCORRECTO);
+                return resp.ObjectoRespuesta();
+            }
+           
+        }
+
+        public HttpResponseMessage Eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -118,7 +118,6 @@
     <Compile Include="ConfiguracionEntidades\ConfiguracionEstadoExcursion.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionExcursionActividad.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionFoto.cs" />
-    <Compile Include="ConfiguracionEntidades\ConfiguracionGuia.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionIdioma.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionLocalidad.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionPais.cs" />
@@ -132,11 +131,10 @@
     <Compile Include="ConfiguracionEntidades\ConfiguracionUsuario.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionVehiculo.cs" />
     <Compile Include="ConfiguracionEntidades\ConfiguracionItem.cs" />
+    <Compile Include="ConfiguracionEntidades\ConfiguracionFacturaItem.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="Entidades\alquilervehiculo.cs" />
     <Compile Include="Entidades\calendarioexcursion.cs" />
-    <Compile Include="Entidades\calendarioexcursion_guia.cs" />
-    <Compile Include="Entidades\calendarioexcursion_puntorecogida.cs" />
     <Compile Include="Entidades\categoriactividad.cs" />
     <Compile Include="Entidades\categoriaexcursion.cs" />
     <Compile Include="Entidades\cliente.cs" />
@@ -146,10 +144,12 @@
     <Compile Include="Entidades\estadoexcursion.cs" />
     <Compile Include="Entidades\excursionactividad.cs" />
     <Compile Include="Entidades\excursion_contiene_item.cs" />
-    <Compile Include="Entidades\foto.cs" />
-    <Compile Include="Entidades\guia.cs" />
+    <Compile Include="Entidades\facturaitem.cs" />
+    <Compile Include="Entidades\facturaitem_exact.cs" />
+    <Compile Include="Entidades\fotoconfiguracion.cs" />
+    <Compile Include="Entidades\grupoedad.cs" />
     <Compile Include="Entidades\idioma.cs" />
-    <Compile Include="Entidades\idioma_guia.cs" />
+    <Compile Include="Entidades\idioma_exact.cs" />
     <Compile Include="Entidades\item.cs" />
     <Compile Include="Entidades\localidad.cs" />
     <Compile Include="Entidades\pais.cs" />
@@ -157,6 +157,7 @@
     <Compile Include="Entidades\proveedor.cs" />
     <Compile Include="Entidades\provincia.cs" />
     <Compile Include="Entidades\puntorecogida.cs" />
+    <Compile Include="Entidades\puntorecogida_exact.cs" />
     <Compile Include="Entidades\recogidadevolucion.cs" />
     <Compile Include="Entidades\reserva.cs" />
     <Compile Include="Entidades\reservaexcursionactividad.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Identity\ValidadorUsuario.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\CIFAttributte.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\DNIAttribute.cs" />
+    <Compile Include="Infraestructura\AtributosValidacion\EnumAttribute.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\FechaAttribute.cs" />
     <Compile Include="Interceptor.cs" />
     <Compile Include="Migrations\201611052134451_Initial.cs" />
@@ -200,6 +202,74 @@
     <Compile Include="Migrations\201612081846410_Unique_Indexes.Designer.cs">
       <DependentUpon>201612081846410_Unique_Indexes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612121143371_cambionombrecampo.cs" />
+    <Compile Include="Migrations\201612121143371_cambionombrecampo.Designer.cs">
+      <DependentUpon>201612121143371_cambionombrecampo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612121522058_renamefototable.cs" />
+    <Compile Include="Migrations\201612121522058_renamefototable.Designer.cs">
+      <DependentUpon>201612121522058_renamefototable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612142019123_codigoqr_campo.cs" />
+    <Compile Include="Migrations\201612142019123_codigoqr_campo.Designer.cs">
+      <DependentUpon>201612142019123_codigoqr_campo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612171812489_modify_table_idioma_guia.cs" />
+    <Compile Include="Migrations\201612171812489_modify_table_idioma_guia.Designer.cs">
+      <DependentUpon>201612171812489_modify_table_idioma_guia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612191546188_exact_join_puntorecogida.cs" />
+    <Compile Include="Migrations\201612191546188_exact_join_puntorecogida.Designer.cs">
+      <DependentUpon>201612191546188_exact_join_puntorecogida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612191628006_deletetable_calendarioex_puntorecogida.cs" />
+    <Compile Include="Migrations\201612191628006_deletetable_calendarioex_puntorecogida.Designer.cs">
+      <DependentUpon>201612191628006_deletetable_calendarioex_puntorecogida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612191758165_addtable_puntoregocida_exact.cs" />
+    <Compile Include="Migrations\201612191758165_addtable_puntoregocida_exact.Designer.cs">
+      <DependentUpon>201612191758165_addtable_puntoregocida_exact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612192105017_newfield punto_id.cs" />
+    <Compile Include="Migrations\201612192105017_newfield punto_id.Designer.cs">
+      <DependentUpon>201612192105017_newfield punto_id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612202247253_add_new_fields_configuration.cs" />
+    <Compile Include="Migrations\201612202247253_add_new_fields_configuration.Designer.cs">
+      <DependentUpon>201612202247253_add_new_fields_configuration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612212027147_add_new_field_id_calendario_excursion.cs" />
+    <Compile Include="Migrations\201612212027147_add_new_field_id_calendario_excursion.Designer.cs">
+      <DependentUpon>201612212027147_add_new_field_id_calendario_excursion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612231659036_new_table_grupoedad.cs" />
+    <Compile Include="Migrations\201612231659036_new_table_grupoedad.Designer.cs">
+      <DependentUpon>201612231659036_new_table_grupoedad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612231846374_new_field_genero.cs" />
+    <Compile Include="Migrations\201612231846374_new_field_genero.Designer.cs">
+      <DependentUpon>201612231846374_new_field_genero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612241617446_new_field_tipoduracion.cs" />
+    <Compile Include="Migrations\201612241617446_new_field_tipoduracion.Designer.cs">
+      <DependentUpon>201612241617446_new_field_tipoduracion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612261947259_new_fields_preciotemporada.cs" />
+    <Compile Include="Migrations\201612261947259_new_fields_preciotemporada.Designer.cs">
+      <DependentUpon>201612261947259_new_fields_preciotemporada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612262016586_new_fields_porcentaje.cs" />
+    <Compile Include="Migrations\201612262016586_new_fields_porcentaje.Designer.cs">
+      <DependentUpon>201612262016586_new_fields_porcentaje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612272052534_new_field_enviarmailproveedor.cs" />
+    <Compile Include="Migrations\201612272052534_new_field_enviarmailproveedor.Designer.cs">
+      <DependentUpon>201612272052534_new_field_enviarmailproveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612281320414_new_table_facturaitem.cs" />
+    <Compile Include="Migrations\201612281320414_new_table_facturaitem.Designer.cs">
+      <DependentUpon>201612281320414_new_table_facturaitem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\ErroresValidacion.Designer.cs">
@@ -216,6 +286,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Migrations\SQLScripts\201612281320414_new_table_facturaitem.sql" />
     <EmbeddedResource Include="Migrations\201611052134451_Initial.resx">
       <DependentUpon>201611052134451_Initial.cs</DependentUpon>
     </EmbeddedResource>
@@ -237,6 +308,58 @@
     <EmbeddedResource Include="Migrations\201612081846410_Unique_Indexes.resx">
       <DependentUpon>201612081846410_Unique_Indexes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612121143371_cambionombrecampo.resx">
+      <DependentUpon>201612121143371_cambionombrecampo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612121522058_renamefototable.resx">
+      <DependentUpon>201612121522058_renamefototable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612142019123_codigoqr_campo.resx">
+      <DependentUpon>201612142019123_codigoqr_campo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612171812489_modify_table_idioma_guia.resx">
+      <DependentUpon>201612171812489_modify_table_idioma_guia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612191546188_exact_join_puntorecogida.resx">
+      <DependentUpon>201612191546188_exact_join_puntorecogida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612191628006_deletetable_calendarioex_puntorecogida.resx">
+      <DependentUpon>201612191628006_deletetable_calendarioex_puntorecogida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612191758165_addtable_puntoregocida_exact.resx">
+      <DependentUpon>201612191758165_addtable_puntoregocida_exact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612192105017_newfield punto_id.resx">
+      <DependentUpon>201612192105017_newfield punto_id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612202247253_add_new_fields_configuration.resx">
+      <DependentUpon>201612202247253_add_new_fields_configuration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612212027147_add_new_field_id_calendario_excursion.resx">
+      <DependentUpon>201612212027147_add_new_field_id_calendario_excursion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612231659036_new_table_grupoedad.resx">
+      <DependentUpon>201612231659036_new_table_grupoedad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612231846374_new_field_genero.resx">
+      <DependentUpon>201612231846374_new_field_genero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612241617446_new_field_tipoduracion.resx">
+      <DependentUpon>201612241617446_new_field_tipoduracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="Migrations\SQLScripts\201612241617446_new_field_tipoduracion.sql" />
+    <EmbeddedResource Include="Migrations\201612261947259_new_fields_preciotemporada.resx">
+      <DependentUpon>201612261947259_new_fields_preciotemporada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612262016586_new_fields_porcentaje.resx">
+      <DependentUpon>201612262016586_new_fields_porcentaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612272052534_new_field_enviarmailproveedor.resx">
+      <DependentUpon>201612272052534_new_field_enviarmailproveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612281320414_new_table_facturaitem.resx">
+      <DependentUpon>201612281320414_new_table_facturaitem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\ErroresValidacion.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErroresValidacion.Designer.cs</LastGenOutput>
@@ -249,6 +372,17 @@
     <Content Include="Migrations\SQLScripts\201611151433123_Identity.sql" />
     <Content Include="Migrations\SQLScripts\201611251818056_Change contrasena field.sql" />
     <Content Include="Migrations\SQLScripts\201611251846502_rollback contrasena field.sql" />
+    <Content Include="Migrations\SQLScripts\201612081846410_Unique_Indexes.sql" />
+    <Content Include="Migrations\SQLScripts\201612121143371_cambionombrecampo.sql" />
+    <Content Include="Migrations\SQLScripts\201612171812489_modify_table_idioma_guia.sql" />
+    <Content Include="Migrations\SQLScripts\201612191546188_exact_join_puntorecogida.sql" />
+    <Content Include="Migrations\SQLScripts\201612191628006_deletetable_calendarioex_puntorecogida.sql" />
+    <Content Include="Migrations\SQLScripts\201612191758165_addtable_puntoregocida_exact.sql" />
+    <Content Include="Migrations\SQLScripts\201612192105017_newfield punto_id.sql" />
+    <Content Include="Migrations\SQLScripts\201612202247253_add_new_fields_configuration.sql" />
+    <Content Include="Migrations\SQLScripts\201612212027147_add_new_field_id_calendario_excursion.sql" />
+    <Content Include="Migrations\SQLScripts\201612231647054_new_table_grupoedad.sql" />
+    <Content Include="Migrations\SQLScripts\201612231846374_new_field_genero.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

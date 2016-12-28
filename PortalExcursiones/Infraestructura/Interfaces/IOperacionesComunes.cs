@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Web.Http.ModelBinding;
 
 namespace PortalExcursiones.Infraestructura.Interfaces
@@ -9,5 +10,6 @@ namespace PortalExcursiones.Infraestructura.Interfaces
          HttpResponseMessage Actualizar(T Entidad, ModelStateDictionary modelo);
          HttpResponseMessage Todos();
          HttpResponseMessage BusquedaPorId(string id);
+         HttpResponseMessage Eliminar(string id);
     }
 }

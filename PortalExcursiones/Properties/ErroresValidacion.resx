@@ -127,7 +127,7 @@
     <value>Tiene que enviar al menos un horario</value>
   </data>
   <data name="error12" xml:space="preserve">
-    <value>Uno de los horarios enviados tiene un formato incorrecto</value>
+    <value>Uno de los horarios enviados tiene un formato incorrecto.</value>
   </data>
   <data name="error13" xml:space="preserve">
     <value>El campo fecha desde es requerido</value>
@@ -159,8 +159,29 @@
   <data name="error21" xml:space="preserve">
     <value>El campo tipoactividad es requerido</value>
   </data>
+  <data name="error24" xml:space="preserve">
+    <value>El campo nombre es requerido</value>
+  </data>
+  <data name="error25" xml:space="preserve">
+    <value>El campo latitud es requerido</value>
+  </data>
+  <data name="error26" xml:space="preserve">
+    <value>El campo longitud es requerido</value>
+  </data>
+  <data name="error27" xml:space="preserve">
+    <value>El campo direccion es requerido</value>
+  </data>
+  <data name="error28" xml:space="preserve">
+    <value>El campo fecha es requerido</value>
+  </data>
+  <data name="error29" xml:space="preserve">
+    <value>El campo fecha nueva es requerido</value>
+  </data>
   <data name="error3" xml:space="preserve">
     <value>El campo password nuevo es requerido</value>
+  </data>
+  <data name="error30" xml:space="preserve">
+    <value>El campo username es requerido</value>
   </data>
   <data name="error4" xml:space="preserve">
     <value>El campo password nuevo no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>

@@ -11,18 +11,17 @@ namespace CapaDatos.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public calendarioexcursion()
         {
-            guias = new HashSet<calendarioexcursion_guia>();
-            puntosrecogida = new HashSet<calendarioexcursion_puntorecogida>();
-            reservas = new HashSet<reservaexcursionactividad>();
+           reservas = new HashSet<reservaexcursionactividad>();
         }
 
-        [Key]
-        [Column(Order = 0, TypeName = "uint")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Column(TypeName = "uint")]
+        public long id { get; set; }
+
+       
+        [Column(TypeName = "uint")]
         public long exact_id { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+            
         public DateTime fecha { get; set; }
 
      
@@ -31,12 +30,6 @@ namespace CapaDatos.Entidades
         public virtual estadoexcursion estadoexcursion { get; set; }
 
         public virtual excursionactividad excursionactividad { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<calendarioexcursion_guia> guias { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<calendarioexcursion_puntorecogida> puntosrecogida { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reservaexcursionactividad> reservas { get; set; }

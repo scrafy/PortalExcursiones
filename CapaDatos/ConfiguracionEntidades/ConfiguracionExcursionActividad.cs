@@ -38,6 +38,24 @@ namespace CapaDatos.ConfiguracionEntidades
             .WithRequired(e => e.excursionactividad)
             .WillCascadeOnDelete(false);
 
+            HasMany(e => e.idiomas)
+           .WithRequired(e => e.excursion_actividad)
+           .WillCascadeOnDelete(false);
+
+            HasMany(e => e.puntos_recogida)
+           .WithRequired(e => e.excursion_actividad)
+           .WillCascadeOnDelete(false);
+
+            HasMany(e => e.grupoedades)
+           .WithRequired(e => e.exact)
+           .HasForeignKey(e=>e.exact_id)
+           .WillCascadeOnDelete(false);
+
+            HasMany(e => e.factura_items)
+           .WithRequired(e => e.exact)
+           .HasForeignKey(e => e.exact_id)
+           .WillCascadeOnDelete(false);
+
         }
     }
 }

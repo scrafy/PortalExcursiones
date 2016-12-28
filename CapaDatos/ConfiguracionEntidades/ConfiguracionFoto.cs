@@ -4,9 +4,9 @@ using CapaDatos.Entidades;
 
 namespace CapaDatos.ConfiguracionEntidades
 {
-    public class ConfiguracionFoto : EntityTypeConfiguration<foto>
+    public class ConfiguracionFotoConfiguracion : EntityTypeConfiguration<fotoconfiguracion>
     {
-        public ConfiguracionFoto()
+        public ConfiguracionFotoConfiguracion()
         {
             Property(e => e.url)
             .IsUnicode(false);

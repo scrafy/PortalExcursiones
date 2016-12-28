@@ -1,5 +1,6 @@
-﻿using System.Net.Http;
-
+﻿using PortalExcursiones.Modelos.ModelosEntrada;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace PortalExcursiones.Infraestructura.Interfaces
 {
@@ -7,5 +8,9 @@ namespace PortalExcursiones.Infraestructura.Interfaces
     {
         HttpResponseMessage AnadirItem(long item_id, long exact_id);
         HttpResponseMessage EliminarItem(long item_id, long exact_id);
+        HttpResponseMessage AnadirIdioma(List<IdiomaExActModel> idiomas);
+        HttpResponseMessage EliminarIdioma(int idioma_id,long exact_id);
+        HttpResponseMessage AnadirItemFactura(List<FacturaItemModel> items);
+        HttpResponseMessage EliminarItemFactura(long item_id, long exact_id);
     }
 }

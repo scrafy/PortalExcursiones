@@ -1,10 +1,14 @@
-﻿namespace PortalExcursiones.Modelos.ModelosEntrada
+﻿using PortalExcursiones.Properties;
+using System.ComponentModel.DataAnnotations;
+
+namespace PortalExcursiones.Modelos.ModelosEntrada
 {
     public class LoginModel
     {
         private string username;
         private string password;
 
+        [Required(ErrorMessageResourceName = "error30", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string Username
         {
             get
@@ -18,6 +22,7 @@
             }
         }
 
+        [Required(ErrorMessageResourceName =  "error7", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string Password
         {
             get

@@ -41,6 +41,8 @@ namespace CapaDatos.Entidades
         [StringLength(60)]
         public string lng { get; set; }
 
+        public bool emailfactura { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<configuracion> configuraciones { get; set; }
 

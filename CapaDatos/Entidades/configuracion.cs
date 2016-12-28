@@ -11,7 +11,7 @@ namespace CapaDatos.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public configuracion()
         {
-            fotos = new HashSet<foto>();
+            fotos = new HashSet<fotoconfiguracion>();
         }
 
         [Column(TypeName = "uint")]
@@ -38,9 +38,16 @@ namespace CapaDatos.Entidades
         [StringLength(50)]
         public string lng { get; set; }
 
+        [StringLength(255)]
+        [Required(ErrorMessageResourceName = "error48", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        public string direccion { get; set; }
+
         [Required(ErrorMessageResourceName = "error24", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(100)]
         public string logo { get; set; }
+
+        [Range(1,double.MaxValue,ErrorMessageResourceName = "error35", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        public decimal porcentaje { get; set; }
 
         [Required(ErrorMessageResourceName = "error25", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string proveedor_id { get; set; }
@@ -52,6 +59,6 @@ namespace CapaDatos.Entidades
         public virtual excursionactividad excursionactividad { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<foto> fotos { get; set; }
+        public virtual ICollection<fotoconfiguracion> fotos { get; set; }
     }
 }

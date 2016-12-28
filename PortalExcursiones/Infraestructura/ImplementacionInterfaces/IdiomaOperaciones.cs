@@ -43,13 +43,18 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             throw new NotImplementedException();
         }
 
+        public HttpResponseMessage Eliminar(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public HttpResponseMessage Todos()
         {
             try
             {
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = contexto.idioma.Select(x => new { id = x.id, nombre = x.nombre }).ToList();
+                resp.Contenido = contexto.idioma.Select(x => new { id = x.id, nombre = x.lenguage }).ToList();
                 return resp.ObjectoRespuesta();
             }
             catch (Exception ex)

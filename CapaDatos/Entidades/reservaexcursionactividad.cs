@@ -18,6 +18,10 @@ namespace CapaDatos.Entidades
 
         public byte numinfantes { get; set; }
 
+        public byte numjuniors { get; set; }
+
+        public byte numseniors { get; set; }
+
         [StringLength(255)]
         public string direccion { get; set; }
 
@@ -31,15 +35,18 @@ namespace CapaDatos.Entidades
         [Column(TypeName = "uint")]
         public long? localidad_id { get; set; }
 
-        public DateTime fecha { get; set; }
+        [Column(TypeName = "uint")]
+        public long calendario_id { get; set; }
 
         [Column(TypeName = "uint")]
-        public long exact_id { get; set; }
+        public long? punto_id { get; set; }
 
         public virtual calendarioexcursion calendarioexcursion { get; set; }
 
         public virtual localidad localidad { get; set; }
 
         public virtual reserva reserva { get; set; }
+
+        public virtual puntorecogida punto { get; set; }
     }
 }

@@ -132,11 +132,59 @@
   <data name="error13" xml:space="preserve">
     <value>La fecha desde tiene que ser menor que la fecha hasta</value>
   </data>
+  <data name="error14" xml:space="preserve">
+    <value>No se ha encontrado ninguna excursion que coincida con la fecha/hora seleccionada</value>
+  </data>
+  <data name="error15" xml:space="preserve">
+    <value>Únicamente quedan {0} plaza/as. Disminuya el número de personas</value>
+  </data>
+  <data name="error17" xml:space="preserve">
+    <value>No se ha encontrado ningún precio configurado para dicha excursión/actividad</value>
+  </data>
+  <data name="error18" xml:space="preserve">
+    <value>Ha habido un error tramitando el pago, por favor, inténtelo de nuevo</value>
+  </data>
+  <data name="error19" xml:space="preserve">
+    <value>No quedan plazas disponibles para la fecha seleccionada, por favor, elija otra</value>
+  </data>
   <data name="error2" xml:space="preserve">
     <value>No se ha encontrado a ningún usuario con las credenciales proporcionadas</value>
   </data>
+  <data name="error20" xml:space="preserve">
+    <value>Existe un registro con el mismo nombre, por favor, elija otro nombre</value>
+  </data>
+  <data name="error21" xml:space="preserve">
+    <value>El punto de recogida enviado en la reserva no existe o no pertenece a dicha configuración</value>
+  </data>
+  <data name="error22" xml:space="preserve">
+    <value>La fecha desde tiene que ser mayor que la fecha actual</value>
+  </data>
+  <data name="error23" xml:space="preserve">
+    <value>La fecha que se está bsucando tiene que ser mayor que la fecha actual</value>
+  </data>
+  <data name="error24" xml:space="preserve">
+    <value>La excursión actividad no soporta servicio de recogida, no es posible configurar puntos de recogida</value>
+  </data>
+  <data name="error25" xml:space="preserve">
+    <value>Tiene que enviar 5 nombres,uno para cada genero y deben ser:[ adulto | niño | infante | junior | senior ]</value>
+  </data>
+  <data name="error26" xml:space="preserve">
+    <value>{0} ya está confogurado para la excursion/actividad</value>
+  </data>
+  <data name="error27" xml:space="preserve">
+    <value>Tiene que enviar un nombre de genero el cual debe pertenecer a este conjunto: [ adulto | niño | infante | junior | senior ]</value>
+  </data>
+  <data name="error28" xml:space="preserve">
+    <value>Tiene que enviar un tipo de duracion el cual debe pertenecer a este conjunto: [ dia| hora | minuto | flexible ]</value>
+  </data>
+  <data name="error29" xml:space="preserve">
+    <value>Si el tipo de duración es flexible, el valor de la duración ha de ser mayor que cero</value>
+  </data>
   <data name="error3" xml:space="preserve">
     <value>El usuario no tenia la sesión iniciada, no es posible realizar un logout</value>
+  </data>
+  <data name="error30" xml:space="preserve">
+    <value>Se tiene que reservar al menos una plaza</value>
   </data>
   <data name="error4" xml:space="preserve">
     <value>No existe ningún usuario con la direccion de email proporcionada</value>
@@ -148,7 +196,7 @@
     <value>No existe ningún registro con el ID proporcionado</value>
   </data>
   <data name="error7" xml:space="preserve">
-    <value>El valor del campo hasta es menor que el valor del campo desde</value>
+    <value>El valor de la fecha hasta es menor o igual que el valor de la fecha desde</value>
   </data>
   <data name="error8" xml:space="preserve">
     <value>Existe una reserva,un punto de recogida o un guia asociado a dicha fecha, la eliminación no es posible</value>

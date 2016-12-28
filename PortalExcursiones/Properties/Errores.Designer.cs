@@ -106,6 +106,51 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se ha encontrado ninguna excursion que coincida con la fecha/hora seleccionada.
+        /// </summary>
+        public static string error14 {
+            get {
+                return ResourceManager.GetString("error14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Únicamente quedan {0} plaza/as. Disminuya el número de personas.
+        /// </summary>
+        public static string error15 {
+            get {
+                return ResourceManager.GetString("error15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se ha encontrado ningún precio configurado para dicha excursión/actividad.
+        /// </summary>
+        public static string error17 {
+            get {
+                return ResourceManager.GetString("error17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ha habido un error tramitando el pago, por favor, inténtelo de nuevo.
+        /// </summary>
+        public static string error18 {
+            get {
+                return ResourceManager.GetString("error18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No quedan plazas disponibles para la fecha seleccionada, por favor, elija otra.
+        /// </summary>
+        public static string error19 {
+            get {
+                return ResourceManager.GetString("error19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se ha encontrado a ningún usuario con las credenciales proporcionadas.
         /// </summary>
         public static string error2 {
@@ -115,11 +160,110 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Existe un registro con el mismo nombre, por favor, elija otro nombre.
+        /// </summary>
+        public static string error20 {
+            get {
+                return ResourceManager.GetString("error20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El punto de recogida enviado en la reserva no existe o no pertenece a dicha configuración.
+        /// </summary>
+        public static string error21 {
+            get {
+                return ResourceManager.GetString("error21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La fecha desde tiene que ser mayor que la fecha actual.
+        /// </summary>
+        public static string error22 {
+            get {
+                return ResourceManager.GetString("error22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La fecha que se está bsucando tiene que ser mayor que la fecha actual.
+        /// </summary>
+        public static string error23 {
+            get {
+                return ResourceManager.GetString("error23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La excursión actividad no soporta servicio de recogida, no es posible configurar puntos de recogida.
+        /// </summary>
+        public static string error24 {
+            get {
+                return ResourceManager.GetString("error24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiene que enviar 5 nombres,uno para cada genero y deben ser:[ adulto | niño | infante | junior | senior ].
+        /// </summary>
+        public static string error25 {
+            get {
+                return ResourceManager.GetString("error25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a {0} ya está confogurado para la excursion/actividad.
+        /// </summary>
+        public static string error26 {
+            get {
+                return ResourceManager.GetString("error26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiene que enviar un nombre de genero el cual debe pertenecer a este conjunto: [ adulto | niño | infante | junior | senior ].
+        /// </summary>
+        public static string error27 {
+            get {
+                return ResourceManager.GetString("error27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiene que enviar un tipo de duracion el cual debe pertenecer a este conjunto: [ dia| hora | minuto | flexible ].
+        /// </summary>
+        public static string error28 {
+            get {
+                return ResourceManager.GetString("error28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Si el tipo de duración es flexible, el valor de la duración ha de ser mayor que cero.
+        /// </summary>
+        public static string error29 {
+            get {
+                return ResourceManager.GetString("error29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El usuario no tenia la sesión iniciada, no es posible realizar un logout.
         /// </summary>
         public static string error3 {
             get {
                 return ResourceManager.GetString("error3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se tiene que reservar al menos una plaza.
+        /// </summary>
+        public static string error30 {
+            get {
+                return ResourceManager.GetString("error30", resourceCulture);
             }
         }
         
@@ -151,7 +295,7 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a El valor del campo hasta es menor que el valor del campo desde.
+        ///   Busca una cadena traducida similar a El valor de la fecha hasta es menor o igual que el valor de la fecha desde.
         /// </summary>
         public static string error7 {
             get {

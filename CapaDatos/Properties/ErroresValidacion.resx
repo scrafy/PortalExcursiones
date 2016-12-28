@@ -198,35 +198,14 @@
   <data name="error33" xml:space="preserve">
     <value>El campo qué esperar es requerido</value>
   </data>
-  <data name="error34" xml:space="preserve">
-    <value>El campo pvpadulto es requerido</value>
-  </data>
   <data name="error35" xml:space="preserve">
-    <value>El campo pvpniño es requerido</value>
-  </data>
-  <data name="error36" xml:space="preserve">
-    <value>El campo pvpinfante es requerido</value>
+    <value>El campo porcentaje es requerido y debe ser mayor o igual que uno</value>
   </data>
   <data name="error37" xml:space="preserve">
     <value>El campo costeadulto es requerido</value>
   </data>
-  <data name="error38" xml:space="preserve">
-    <value>El campo costeanino es requerido</value>
-  </data>
-  <data name="error39" xml:space="preserve">
-    <value>El campo costeinfante es requerido</value>
-  </data>
   <data name="error4" xml:space="preserve">
     <value>La dirección de email no es válida</value>
-  </data>
-  <data name="error40" xml:space="preserve">
-    <value>El campo netoadulto es requerido</value>
-  </data>
-  <data name="error41" xml:space="preserve">
-    <value>El campo netoniño es requerido</value>
-  </data>
-  <data name="error42" xml:space="preserve">
-    <value>El campo netoinfante es requerido</value>
   </data>
   <data name="error43" xml:space="preserve">
     <value>El campo exact_id es requerido</value>
@@ -243,8 +222,26 @@
   <data name="error47" xml:space="preserve">
     <value>El campo url es requerido</value>
   </data>
+  <data name="error48" xml:space="preserve">
+    <value>El campo direccion es requerido</value>
+  </data>
+  <data name="error49" xml:space="preserve">
+    <value>El campo edaddesde es requerido</value>
+  </data>
   <data name="error5" xml:space="preserve">
     <value>El campo usuario es requerido</value>
+  </data>
+  <data name="error50" xml:space="preserve">
+    <value>El campo edadhasta es requerido</value>
+  </data>
+  <data name="error51" xml:space="preserve">
+    <value>El campo genero es requerido</value>
+  </data>
+  <data name="error52" xml:space="preserve">
+    <value>El campo tipo de duracion es requerido</value>
+  </data>
+  <data name="error53" xml:space="preserve">
+    <value>El campo descripcion es requerido</value>
   </data>
   <data name="error6" xml:space="preserve">
     <value>El campo usuario no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>

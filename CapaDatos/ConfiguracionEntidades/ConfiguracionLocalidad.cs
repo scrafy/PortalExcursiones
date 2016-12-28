@@ -27,9 +27,9 @@ namespace CapaDatos.ConfiguracionEntidades
             
                 HasMany(e => e.reservas)
                 .WithOptional(e => e.localidad)
-                .HasForeignKey(e => e.localidad_id);
+                .HasForeignKey(e => e.localidad_id)
+                .WillCascadeOnDelete(false);
 
-            
                 HasMany(e => e.usuarios)
                 .WithRequired(e => e.localidad)
                 .HasForeignKey(e => e.localidad_id)

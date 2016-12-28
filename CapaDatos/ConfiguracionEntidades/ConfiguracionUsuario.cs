@@ -22,7 +22,6 @@ namespace CapaDatos.ConfiguracionEntidades
             Property(e => e.direccion2).IsUnicode(false);
             HasOptional(e => e.cliente).WithRequired(e => e.usuario);
             HasOptional(e => e.colaborador).WithRequired(e => e.usuario);
-            HasOptional(e => e.guia).WithRequired(e => e.usuario);
             HasOptional(e => e.proveedor).WithRequired(e => e.usuario);
             HasMany(e => e.Claims).WithRequired().HasForeignKey(e => e.UserId).WillCascadeOnDelete(false);
             HasMany(e => e.Logins).WithRequired().HasForeignKey(e => e.UserId).WillCascadeOnDelete(false);
