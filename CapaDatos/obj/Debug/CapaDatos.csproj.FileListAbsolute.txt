@@ -159,10 +159,6 @@ D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.codigoqr
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.modify_table_idioma_guia.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.exact_join_puntorecogida.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.deletetable_calendarioex_puntorecogida.resources
-D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Properties.ErroresValidacion.resources
-D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csproj.GenerateResource.Cache
-D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.dll
-D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.pdb
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.addtable_puntoregocida_exact.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.newfieldpunto_id.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.add_new_fields_configuration.resources
@@ -174,5 +170,11 @@ D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_fiel
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_fields_porcentaje.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_field_enviarmailproveedor.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_table_facturaitem.resources
-D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.pvpgrupo_modification.resources
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.facturaitem_proveedor.resources
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Properties.ErroresValidacion.resources
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csproj.GenerateResource.Cache
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.dll
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.pdb
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_field_proveedor_id.resources

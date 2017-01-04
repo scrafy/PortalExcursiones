@@ -240,6 +240,9 @@
   <data name="error53" xml:space="preserve">
     <value>El campo descripcion es requerido</value>
   </data>
+  <data name="error54" xml:space="preserve">
+    <value>El campo id de proveedor es requerido</value>
+  </data>
   <data name="error6" xml:space="preserve">
     <value>El campo usuario no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>
   </data>

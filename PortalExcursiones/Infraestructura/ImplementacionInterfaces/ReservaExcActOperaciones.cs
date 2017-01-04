@@ -24,10 +24,12 @@ using System.Drawing;
 using PortalExcursiones.Infraestructura.LogicaComun;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Web;
+using Microsoft.AspNet.Identity;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class ReservaExcActOperaciones : IOperacionesComunes<ReservaExcursionActividadModel>, IOperacionesPasarelaPago, IGeneracionInformes
+    public class ReservaExcActOperaciones : Operaciones,IOperacionesComunes<ReservaExcursionActividadModel>, IOperacionesPasarelaPago
     {
 
         private AdministradorUsuario mgr = null;
@@ -48,7 +50,70 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
         public HttpResponseMessage BusquedaPorId(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var _id = Int64.Parse(id);
+                var result =
+                (
+                    from r in contexto.reservaexcursionactividad
+                    join f in contexto.calendarioexcursion on r.calendario_id equals f.id
+                    where (r.reserva.id == _id || r.reserva.codigoqr == id) && r.reserva.proveedor_id == proveedor_id
+                    select new
+                    {
+                        id = r.reserva.id,
+                        fechatransaccion = r.reserva.fechatransaccion,
+                        precio = r.reserva.precio,
+                        factura = r.reserva.factura,
+                        codigoqr = r.reserva.codigoqr,
+                        numadultos = r.numadultos,
+                        numjuniors = r.numjuniors,
+                        numseniors = r.numseniors,
+                        numninos = r.numninos,
+                        numinfantes = r.numinfantes,
+                        fechaexcursion = f.fecha,
+                        puntorecogida = (r.punto.nombre == null) ? null : new
+                        {
+                            nombre = r.punto.nombre,
+                            lat = r.punto.lat,
+                            lng = r.punto.lng,
+                            direccion = r.punto.direccion,
+                            descripcion = r.punto.descripcion,
+                            localidad = r.punto.localidad.nombre,
+                            codigo_postal = r.punto.localidad.cp,
+                            provincia = r.punto.localidad.provincia.nombre,
+                            pais = r.punto.localidad.provincia.pais.nombre
+                        },
+                        cliente = new
+                        {
+                            nombre = r.reserva.cliente.usuario.nombre,
+                            primerapellido = r.reserva.cliente.usuario.primerapellido,
+                            segundoapellido = r.reserva.cliente.usuario.segundoapellido,
+                            email = r.reserva.cliente.usuario.Email,
+                            telefono = r.reserva.cliente.usuario.PhoneNumber,
+                            hotel = r.nombrehotel,
+                            direccionhotel = r.direccion,
+                            observaciones = r.observaciones,
+                            localidad = r.localidad.nombre,
+                            codigo_postal = r.localidad.cp,
+                            provincia = r.localidad.provincia.nombre,
+                            pais = r.localidad.provincia.pais.nombre
+                        }
+
+                    }
+                ).FirstOrDefault();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                resp.Contenido = result;
+                return resp.ObjectoRespuesta();
+            }
+            catch(Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
         }
 
         public HttpResponseMessage Crear(ReservaExcursionActividadModel Entidad, ModelStateDictionary modelo)
@@ -74,14 +139,14 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 var exact = contexto.excursionactividad.Include("configuracion").Where(x => x.exact_id == calendario.exact_id).FirstOrDefault();
                /* if(exact.esexcursion)
                 {
-                    if(new TimeSpan((DateTime.UtcNow.Ticks - calendario.fecha.Ticks)).TotalHours < 4)
+                    if(new TimeSpan((DateTime.Now.Ticks - calendario.fecha.Ticks)).TotalHours < 4)
                     {
                         //error
                     }
                 }
                 else
                 {
-                    if (new TimeSpan((DateTime.UtcNow.Ticks - calendario.fecha.Ticks)).TotalHours < 24)
+                    if (new TimeSpan((DateTime.Now.Ticks - calendario.fecha.Ticks)).TotalHours < 24)
                     {
                         //error
                     }
@@ -149,7 +214,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     }
                 }
                 var precios = contexto.preciotemporada.Where(x => x.exact_id == exact.exact_id).ToList();
-                var preciotemp = precios.Where(x => x.desde <= DateTime.UtcNow && DateTime.UtcNow <= x.hasta).FirstOrDefault();//precios.Where(x => x.id==9).FirstOrDefault();
+                var preciotemp = precios.Where(x => x.id==9).FirstOrDefault(); //precios.Where(x => x.desde <= DateTime.Now && DateTime.Now <= x.hasta).FirstOrDefault();
                 if (preciotemp == null)
                 {
                     resp.Codigo = (int)Codigos.PRECIO_NO_ENCONTRADO;
@@ -196,7 +261,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
                 tran = contexto.Database.BeginTransaction();
                 var reserva = new reserva();
-                reserva.fechatransaccion = DateTime.UtcNow;
+                reserva.fechatransaccion = DateTime.Now;
                 reserva.codigoqr = this.NombreFactura();
                 while(contexto.reservaexcursionactividad.Where(x => x.reserva.factura == reserva.codigoqr + ".pdf").FirstOrDefault()!=null)
                 {
@@ -255,9 +320,82 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual,int regxpag)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var reservas =
+                (
+                    from r in contexto.reservaexcursionactividad
+                    join f in contexto.calendarioexcursion on r.calendario_id equals f.id
+                    where r.reserva.proveedor_id == proveedor_id
+                    select new
+                    {
+                        id = r.reserva.id,
+                        fechatransaccion = r.reserva.fechatransaccion,
+                        precio = r.reserva.precio,
+                        factura = r.reserva.factura,
+                        codigoqr = r.reserva.codigoqr,
+                        numadultos = r.numadultos,
+                        numjuniors = r.numjuniors,
+                        numseniors = r.numseniors,
+                        numninos = r.numninos,
+                        numinfantes = r.numinfantes,
+                        fechaexcursion = f.fecha,
+                        puntorecogida = (r.punto.nombre == null) ? null : new
+                        {
+                            nombre = r.punto.nombre,
+                            lat = r.punto.lat,
+                            lng = r.punto.lng,
+                            direccion = r.punto.direccion,
+                            descripcion = r.punto.descripcion,
+                            localidad = r.punto.localidad.nombre,
+                            codigo_postal = r.punto.localidad.cp,
+                            provincia = r.punto.localidad.provincia.nombre,
+                            pais = r.punto.localidad.provincia.pais.nombre
+                        },
+                        cliente = new
+                        {
+                            nombre = r.reserva.cliente.usuario.nombre,
+                            primerapellido = r.reserva.cliente.usuario.primerapellido,
+                            segundoapellido = r.reserva.cliente.usuario.segundoapellido,
+                            email = r.reserva.cliente.usuario.Email,
+                            telefono = r.reserva.cliente.usuario.PhoneNumber,
+                            hotel = r.nombrehotel,
+                            direccionhotel = r.direccion,
+                            observaciones = r.observaciones,
+                            localidad = r.localidad.nombre,
+                            codigo_postal = r.localidad.cp,
+                            provincia = r.localidad.provincia.nombre,
+                            pais = r.localidad.provincia.pais.nombre
+                        }
+
+                    }
+                ).OrderBy(x => x.fechatransaccion).Skip((pag_actual - 1) * regxpag).Take(regxpag).ToList();
+                var paginacion = this.Paginacion
+                (
+                    contexto.reservaexcursionactividad.Where(x=>x.reserva.proveedor_id == proveedor_id).Count(),
+                    pag_actual,
+                    regxpag
+                );
+                var result = new
+                {
+                    reservas = reservas,
+                    paginacion = paginacion
+                };
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                resp.Contenido = result;
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
         }
 
         public bool RealizarPago()
@@ -269,7 +407,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         private string NombreFactura()
         {
             MD5 md5 = MD5.Create();
-            byte[] data = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")));
+            byte[] data = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             string output = "";
             for (int i=0;i < data.Length;i++)
             {
@@ -299,7 +437,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 direccion = x.calendarioexcursion.excursionactividad.configuracion.direccion,
                 lat = x.calendarioexcursion.excursionactividad.configuracion.lat,
                 lng = x.calendarioexcursion.excursionactividad.configuracion.lng,
-                descuento = x.calendarioexcursion.excursionactividad.descuento==null ? 0 : x.calendarioexcursion.excursionactividad.descuento,
+                descuento = x.calendarioexcursion.excursionactividad.descuento == null ? 0 : x.calendarioexcursion.excursionactividad.descuento,
                 punto = x.punto,
                 telefono = x.reserva.proveedor.usuario.PhoneNumber,
                 nombre = x.reserva.cliente.usuario.nombre,

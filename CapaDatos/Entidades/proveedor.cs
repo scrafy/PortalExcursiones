@@ -14,6 +14,8 @@ namespace CapaDatos.Entidades
         {
             configuraciones = new HashSet<configuracion>();
             reservas = new HashSet<reserva>();
+            facturaitems = new HashSet<facturaitem>();
+            puntosrecogida = new HashSet<puntorecogida>();
         }
 
         [Key]
@@ -50,5 +52,11 @@ namespace CapaDatos.Entidades
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reserva> reservas { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<facturaitem> facturaitems { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<puntorecogida> puntosrecogida { get; set; }
     }
 }

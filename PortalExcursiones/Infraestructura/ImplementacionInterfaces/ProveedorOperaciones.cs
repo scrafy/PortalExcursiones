@@ -14,7 +14,7 @@ using PortalExcursiones.Infraestructura.Enumeraciones;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class ProveedorOperaciones : IOperacionesComunes<proveedor>
+    public class ProveedorOperaciones : Operaciones,IOperacionesComunes<proveedor>
     {
         private AdministradorUsuario mgr = null;
         private Contexto contexto = null;
@@ -100,7 +100,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                var cliente = contexto.proveedor.Where(x => x.usuario_id == id).Select(x => new
+                var proveedor = contexto.proveedor.Where(x => x.usuario_id == id).Select(x => new
                 {
                     id = x.usuario_id,
                     nombre_empresa = x.nombreempresa,
@@ -108,6 +108,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     latitud = x.lat,
                     longitud = x.lng,
                     cif = x.cif,
+                    emailfactura = x.emailfactura,
                     direccion1 = x.usuario.direccion1,
                     direccion2 = x.usuario.direccion2,
                     email = x.usuario.Email,
@@ -115,17 +116,19 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     nombre = x.usuario.nombre,
                     primerapellido = x.usuario.primerapellido,
                     segundopellido = x.usuario.segundoapellido,
+                    username = x.usuario.UserName,
                     localidad = x.usuario.localidad.nombre,
                     codigo_postal = x.usuario.localidad.cp,
                     provincia = x.usuario.localidad.provincia.nombre,
                     pais = x.usuario.localidad.provincia.pais.nombre
+
                 }).FirstOrDefault();
 
-                if (cliente != null)
+                if (proveedor != null)
                 {
                     resp.Codigo = (int)Codigos.OK;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                    resp.Contenido = cliente;
+                    resp.Contenido = proveedor;
                     return resp.ObjectoRespuesta();
                 }
                 else
@@ -198,11 +201,11 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual,int regxpag)
         {
             try
             {
-                var clientes = contexto.proveedor.Select(x => new
+                var proveedores = contexto.proveedor.Select(x => new
                 {
                     id = x.usuario_id,
                     nombre_empresa = x.nombreempresa,
@@ -210,6 +213,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     latitud = x.lat,
                     longitud = x.lng,
                     cif = x.cif,
+                    emailfactura = x.emailfactura,
                     direccion1 = x.usuario.direccion1,
                     direccion2 = x.usuario.direccion2,
                     email = x.usuario.Email,
@@ -217,15 +221,22 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     nombre = x.usuario.nombre,
                     primerapellido = x.usuario.primerapellido,
                     segundopellido = x.usuario.segundoapellido,
+                    username = x.usuario.UserName,
                     localidad = x.usuario.localidad.nombre,
                     codigo_postal = x.usuario.localidad.cp,
                     provincia = x.usuario.localidad.provincia.nombre,
                     pais = x.usuario.localidad.provincia.pais.nombre
 
-                }).ToList();
+                }).OrderBy(x => x.nombre).Skip((pag_actual - 1) * regxpag).Take(regxpag).ToList();
+                var paginacion = this.Paginacion(contexto.proveedor.Count(), pag_actual, regxpag);
+                var result = new
+                {
+                    proveedores = proveedores,
+                    paginacion = paginacion
+                };
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = clientes;
+                resp.Contenido = result;
                 return resp.ObjectoRespuesta();
 
             }

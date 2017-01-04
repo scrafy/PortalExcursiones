@@ -10,6 +10,6 @@ namespace PortalExcursiones.Infraestructura.Interfaces
         HttpResponseMessage Crear(CalendarioExcursionModel datos, ModelStateDictionary modelo);
         HttpResponseMessage Eliminar(CalendarioExcursionActualizarEliminarModel datos, ModelStateDictionary modelo);
         HttpResponseMessage Actualizar(CalendarioExcursionActualizarEliminarModel datos, ModelStateDictionary modelo);
-      
+        HttpResponseMessage ObtenerCalendarioExcursion(int exact_id,int pag_actual,int regxpag);
     }
 }

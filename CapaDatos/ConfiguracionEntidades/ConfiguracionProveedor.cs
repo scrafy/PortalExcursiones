@@ -38,6 +38,16 @@ namespace CapaDatos.ConfiguracionEntidades
                 .WithRequired(e => e.proveedor)
                 .HasForeignKey(e => e.proveedor_id)
                 .WillCascadeOnDelete(false);
+
+            HasMany(e => e.facturaitems)
+            .WithRequired(e => e.proveedor)
+            .HasForeignKey(e => e.proveedor_id)
+            .WillCascadeOnDelete(false);
+
+            HasMany(e => e.puntosrecogida)
+           .WithRequired(e => e.proveedor)
+           .HasForeignKey(e => e.proveedor_id)
+           .WillCascadeOnDelete(false);
         }
     }
 }

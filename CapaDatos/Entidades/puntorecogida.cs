@@ -21,7 +21,6 @@ namespace CapaDatos.Entidades
 
         [Required(ErrorMessageResourceName = "error10", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [StringLength(255)]
-        [Index(IsUnique = true)]
         public string nombre { get; set; }
 
         [Required(ErrorMessageResourceName = "error20", ErrorMessageResourceType = typeof(ErroresValidacion))]
@@ -43,6 +42,11 @@ namespace CapaDatos.Entidades
         [Column(TypeName = "uint")]
         [Range(1,Int64.MaxValue,ErrorMessageResourceName = "error14", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public long localidad_id { get; set; }
+
+        [Required(ErrorMessageResourceName = "error54", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        public string proveedor_id { get; set; }
+
+        public virtual proveedor proveedor { get; set; }
 
         public virtual localidad localidad { get; set; }
 

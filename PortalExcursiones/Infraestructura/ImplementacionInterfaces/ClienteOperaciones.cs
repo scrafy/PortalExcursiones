@@ -14,7 +14,7 @@ using PortalExcursiones.Infraestructura.Enumeraciones;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class ClienteOperaciones : IOperacionesComunes<cliente>
+    public class ClienteOperaciones : Operaciones,IOperacionesComunes<cliente>
     {
         private AdministradorUsuario mgr = null;
         private Contexto contexto = null;
@@ -150,7 +150,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual,int regxpag)
         {
             try
             {
@@ -166,15 +166,21 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     nombre = x.usuario.nombre,
                     primerapellido = x.usuario.primerapellido,
                     segundopellido = x.usuario.segundoapellido,
-                    localidad = x.usuario.localidad.nombre,
+                   localidad = x.usuario.localidad.nombre,
                     codigo_postal = x.usuario.localidad.cp,
                     provincia = x.usuario.localidad.provincia.nombre,
                     pais = x.usuario.localidad.provincia.pais.nombre
 
-                }).ToList();
+                }).OrderBy(x => x.nombre).Skip((pag_actual - 1) * regxpag).Take(regxpag).ToList();
+                var paginacion = this.Paginacion(contexto.cliente.Count(), pag_actual, regxpag);
+                var result = new
+                {
+                    clientes = clientes,
+                    paginacion = paginacion
+                };
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = clientes;
+                resp.Contenido = result;
                 return resp.ObjectoRespuesta();
 
             }

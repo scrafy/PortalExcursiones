@@ -38,6 +38,12 @@ namespace PortalExcursiones.Controladores
         {
             return op.Actualizar(datos,this.ModelState);
         }
-       
+
+        [Route()]
+        public HttpResponseMessage GetObtenerCalendarioExcursion(int exact_id,int pag_actual=1,int regxpag=10)
+        {
+            return op.ObtenerCalendarioExcursion(exact_id, pag_actual, regxpag);
+        }
+
     }
 }

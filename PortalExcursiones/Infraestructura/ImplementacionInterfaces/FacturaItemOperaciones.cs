@@ -7,7 +7,9 @@ using System.Web.Http.ModelBinding;
 using PortalExcursiones.Modelos.ModelosSalida;
 using PortalExcursiones.Infraestructura.Enumeraciones;
 using CapaDatos;
-
+using System.Data.Entity;
+using System.Web;
+using Microsoft.AspNet.Identity;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
@@ -29,7 +31,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             {
                 if (modelo.IsValid)
                 {
-                    var facturaitem = contexto.facturaitem.Find(Entidad.id);
+                    var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                    var facturaitem = contexto.facturaitem.Where(x => x.proveedor_id == proveedor_id && x.id == Entidad.id).FirstOrDefault();
                     if (facturaitem == null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -66,7 +69,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             {
                 if (modelo.IsValid)
                 {
-                    contexto.facturaitem.Add(new facturaitem() { nombre = Entidad.nombre,descripcion = Entidad.descripcion });
+                    facturaitem facitem = new facturaitem() { nombre = Entidad.nombre, descripcion = Entidad.descripcion,proveedor_id = Entidad.proveedor_id };
+                    contexto.facturaitem.Add(facitem);
                     contexto.SaveChanges();
                     resp.Codigo = (int)Codigos.OK;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
@@ -89,13 +93,14 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual, int regxpag)
         {
             try
             {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = contexto.facturaitem.Select(x => new { id = x.id, nombre = x.nombre, descripcion = x.descripcion }).ToList();
+                resp.Contenido = contexto.facturaitem.Where(x=>x.proveedor_id == proveedor_id).Select(x => new { id = x.id, nombre = x.nombre, descripcion = x.descripcion,proveedor_id = x.proveedor_id }).ToList();
                 return resp.ObjectoRespuesta();
             }
             catch (Exception ex)
@@ -111,8 +116,9 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
                 var _id = Int64.Parse(id);
-                var facturaitem = contexto.facturaitem.Where(x => x.id == _id).Select(x => new { id = x.id, nombre = x.nombre, escripcion = x.descripcion }).FirstOrDefault();
+                var facturaitem = contexto.facturaitem.Where(x => x.id == _id && x.proveedor_id == proveedor_id).Select(x => new { id = x.id, nombre = x.nombre, escripcion = x.descripcion,proveedor_id = x.proveedor_id }).FirstOrDefault();
                 if (facturaitem == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -137,8 +143,9 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
                 var _id = Int64.Parse(id);
-                var facturaitem = contexto.facturaitem.Where(x => x.id == _id).FirstOrDefault();
+                var facturaitem = contexto.facturaitem.Where(x => x.id == _id && x.proveedor_id == proveedor_id).FirstOrDefault();
                 if (facturaitem == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;

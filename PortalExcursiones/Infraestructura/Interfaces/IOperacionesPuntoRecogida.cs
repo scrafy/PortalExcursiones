@@ -15,7 +15,7 @@ namespace PortalExcursiones.Infraestructura.Interfaces
         HttpResponseMessage Actualizar(PuntoRecogidaModel datos, ModelStateDictionary modelo);
         HttpResponseMessage BusquedaPorId(long id);
         HttpResponseMessage BusquedaPorExAct(long id);
-        HttpResponseMessage Todos();
+        HttpResponseMessage Todos(int pag_Actual,int regxpag);
         HttpResponseMessage Eliminar(long id);
     }
 }

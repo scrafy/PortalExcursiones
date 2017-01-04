@@ -11,7 +11,7 @@ using CapaDatos;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class ItemOperaciones : IOperacionesComunes<item>
+    public class ItemOperaciones : Operaciones,IOperacionesComunes<item>
     {
 
         private Contexto contexto;
@@ -102,13 +102,13 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual, int regxpag)
         {
             try
             {
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = contexto.item.Select(x => new { id = x.id, nombre = x.nombre,url = x.url }).ToList();
+                resp.Contenido = contexto.item.Select(x => new { id = x.id, nombre = x.nombre, url = x.url }).ToList();
                 return resp.ObjectoRespuesta();
             }
             catch (Exception ex)

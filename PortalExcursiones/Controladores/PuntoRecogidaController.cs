@@ -32,9 +32,9 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(int pag_actual = 1,int regxpag = 10)
         {
-            return op.Todos();
+            return op.Todos(pag_actual, regxpag);
         }
 
         [Route("{id}")]

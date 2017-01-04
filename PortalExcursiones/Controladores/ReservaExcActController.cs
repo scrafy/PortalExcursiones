@@ -24,5 +24,11 @@ namespace PortalExcursiones.Controladores
         {
             return opcomun.Crear(reservaexact, this.ModelState);
         }
+
+        [Route]
+        public HttpResponseMessage Get(int pag_actual = 1,int regxpag = 10)
+        {
+            return opcomun.Todos(pag_actual, regxpag);
+        }
     }
 }

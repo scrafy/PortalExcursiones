@@ -15,9 +15,8 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
         private string lng;
         private string direccion;
         private string descripcion;
-        private long exact_id;
         private long localidad_id;
-
+        
         [Required(ErrorMessageResourceName = "error24", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string Nombre
         {
@@ -83,19 +82,6 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
             set
             {
                 descripcion = value;
-            }
-        }
-
-        public long Exact_id
-        {
-            get
-            {
-                return exact_id;
-            }
-
-            set
-            {
-                exact_id = value;
             }
         }
 

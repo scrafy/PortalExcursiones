@@ -17,11 +17,12 @@ using PortalExcursiones.Properties;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using PortalExcursiones.Infraestructura.LogicaComun;
+using Microsoft.AspNet.Identity;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
    
-    public class CalendarioExcursionOperaciones : IOperacionesCalendarioExcursionActividad
+    public class CalendarioExcursionOperaciones : Operaciones,IOperacionesCalendarioExcursionActividad
     {
         private Contexto contexto = null;
         private Respuesta resp = null;
@@ -54,7 +55,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         resp.Erroresvalidacion.Add(Errores.error7);
                         return resp.ObjectoRespuesta();
                     }
-                    if(datos.Desde <= DateTime.UtcNow )
+                    if(datos.Desde <= DateTime.Now )
                     {
                         resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
@@ -116,14 +117,16 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                if(datos.Fecha <= DateTime.UtcNow)
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+
+                if (datos.Fecha <= DateTime.Now)
                 {
                     resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
                     resp.Erroresvalidacion = new string[] { Errores.error23 }.ToList();
                     return resp.ObjectoRespuesta();
                 }
-                var calendario = contexto.calendarioexcursion.Where(p => p.exact_id == datos.Exact_id && p.fecha.CompareTo(datos.Fecha) == 0 && p.estadoexcursion_id == (int)EstadoExcursion.activa).FirstOrDefault();
+                var calendario = contexto.calendarioexcursion.Where(p => p.exact_id == datos.Exact_id && p.fecha.CompareTo(datos.Fecha) == 0 && p.estadoexcursion_id == (int)EstadoExcursion.activa && p.excursionactividad.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
                 if(calendario == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -156,21 +159,23 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             {
                 if(modelo.IsValid)
                 {
-                    if (datos.Fecha <= DateTime.UtcNow)
+                    var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+
+                    if (datos.Fecha <= DateTime.Now)
                     {
                         resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
                         resp.Erroresvalidacion = new string[] { Errores.error23 }.ToList();
                         return resp.ObjectoRespuesta();
                     }
-                    if (datos.Fechanueva <= DateTime.UtcNow)
+                    if (datos.Fechanueva <= DateTime.Now)
                     {
                         resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
                         resp.Erroresvalidacion = new string[] { Errores.error11 }.ToList();
                         return resp.ObjectoRespuesta();
                     }
-                    var calendario = contexto.calendarioexcursion.Where(p => p.exact_id == datos.Exact_id && p.fecha.CompareTo(datos.Fecha) == 0 && p.estadoexcursion_id == (int)EstadoExcursion.activa).FirstOrDefault();
+                    var calendario = contexto.calendarioexcursion.Where(p => p.exact_id == datos.Exact_id && p.fecha.CompareTo(datos.Fecha) == 0 && p.estadoexcursion_id == (int)EstadoExcursion.activa && p.excursionactividad.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
                     if (calendario == null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -214,6 +219,53 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
         }
 
-      
+        public HttpResponseMessage ObtenerCalendarioExcursion(int exact_id, int pag_actual, int regxpag)
+        {
+            try
+            {
+                var proveedorid = HttpContext.Current.User.Identity.GetUserId<string>();
+                var fechas =
+                (
+                    from x in contexto.calendarioexcursion where x.exact_id == exact_id && x.excursionactividad.configuracion.proveedor_id == proveedorid
+                    select new
+                    {
+                        id = x.id,
+                        fecha = x.fecha,
+                        nombreconfiguracion = x.excursionactividad.configuracion.nombre,
+                        estado_id = x.estadoexcursion_id,
+                        estado_nombre = x.estadoexcursion.nombre,
+                        exact_id = x.exact_id
+
+                    }
+                ).OrderBy(x => x.fecha).Skip((pag_actual - 1) * regxpag).Take(regxpag).ToList();
+                var _fechas = fechas.Select(x => new
+                {
+                    id = x.id,
+                    fecha = x.fecha.ToString("dd-MM-yyyy HH:mm:ss"),
+                    nombreconfiguracion = x.nombreconfiguracion,
+                    estado_id = x.estado_id,
+                    estado_nombre = x.estado_nombre,
+                    exact_id = x.exact_id
+                });
+                var paginacion = this.Paginacion(contexto.calendarioexcursion.Where(x => x.exact_id == exact_id && x.excursionactividad.configuracion.proveedor_id == proveedorid).Count(), pag_actual, regxpag);
+                var result = new
+                {
+                    fechas = _fechas,
+                    paginacion = paginacion
+                };
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                resp.Contenido = result;
+                return resp.ObjectoRespuesta();
+            }
+            catch(Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+        
     }
 }

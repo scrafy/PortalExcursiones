@@ -11,11 +11,12 @@ using PortalExcursiones.Properties;
 using System.Data.Entity;
 using System.Collections.Generic;
 using PortalExcursiones.Modelos.ModelosEntrada;
-using System.Web.Http;
+using Microsoft.AspNet.Identity;
+using System.Web;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class ExcursionActividadOperaciones : IOperacionesComunes<excursionactividad>, IOperacionesExcursionActividad
+    public class ExcursionActividadOperaciones : Operaciones,IOperacionesComunes<excursionactividad>, IOperacionesExcursionActividad
     {
 
         private Contexto contexto;
@@ -31,8 +32,10 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                if (modelo.IsValid)
+                if(modelo.IsValid)
                 {
+                    var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+
                     if ((Entidad.tipoactividad_id == 0 || Entidad.tipoactividad_id == null) && (Entidad.tipoexcursion_id == 0 || Entidad.tipoexcursion_id == null))
                     {
                         resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
@@ -69,7 +72,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     {
                         Entidad.tipoexcursion_id = null;
                     }
-                    var exact = contexto.excursionactividad.Include("configuracion").Where(x => x.exact_id == Entidad.configuracion.id).FirstOrDefault();
+                    var exact = contexto.excursionactividad.Include("configuracion").Where(x => x.exact_id == Entidad.configuracion.id && x.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
                     if(exact == null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -244,13 +247,16 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual,int regxpag)
         {
             try
             {
+               var proveedorid = HttpContext.Current.User.Identity.GetUserId<string>();
                var excursiones =
                (
-                 from x in contexto.excursionactividad select new
+                 from x in contexto.excursionactividad
+                 where x.configuracion.proveedor_id == proveedorid
+                 select new
                  {
                      id = x.configuracion.id,
                      nombre = x.configuracion.nombre,
@@ -353,11 +359,16 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     }
                  }
                      
-                ).ToList();
-
+                ).OrderBy(x => x.nombre).Skip((pag_actual - 1) * regxpag).Take(regxpag).ToList();
+                var paginacion = this.Paginacion(contexto.excursionactividad.Where(x => x.configuracion.proveedor_id == proveedorid).Count(), pag_actual, regxpag);
+                var result = new
+                {
+                    excursiones = excursiones,
+                    paginacion = paginacion
+                };
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = excursiones;
+                resp.Contenido = result;
                 return resp.ObjectoRespuesta();
 
             }
@@ -375,7 +386,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             try
             {
                 Int64 _id = Int64.Parse(id);
-                if(contexto.excursionactividad.Where(x=>x.exact_id == _id).FirstOrDefault() == null)
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                if (contexto.excursionactividad.Where(x=>x.exact_id == _id).FirstOrDefault() == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
@@ -385,7 +397,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
                 var excursion =
                 (
-                  from x in contexto.excursionactividad.Where(c=>c.exact_id==_id)
+                  from x in contexto.excursionactividad.Where(c=>c.exact_id==_id && c.configuracion.proveedor_id == proveedor_id)
                   select new
                   {
                       id = x.configuracion.id,
@@ -500,10 +512,18 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                if(contexto.excursion_contiene_item.Where(x=>x.exact_id == exact_id && x.item_id == item_id).FirstOrDefault() != null)
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+
+                if (contexto.excursion_contiene_item.Where(x=>x.exact_id == exact_id && x.item_id == item_id).FirstOrDefault() != null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_REPETIDO;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_REPETIDO);
+                    return resp.ObjectoRespuesta();
+                }
+                if(contexto.configuracion.Where(x => x.id == exact_id && x.proveedor_id == proveedor_id).FirstOrDefault() == null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
                     return resp.ObjectoRespuesta();
                 }
                 contexto.excursion_contiene_item.Add(new excursion_contiene_item(){item_id = item_id,exact_id = exact_id });
@@ -525,7 +545,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                var item = contexto.excursion_contiene_item.Where(x => x.exact_id == exact_id && x.item_id == item_id).FirstOrDefault();
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var item = contexto.excursion_contiene_item.Where(x => x.exact_id == exact_id && x.item_id == item_id && x.excursionactividad.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
                 if(item == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -551,6 +572,13 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
            try
            {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                if (contexto.configuracion.Where(x => x.id == idiomas[0].Exact_id && x.proveedor_id == proveedor_id).FirstOrDefault() == null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                    return resp.ObjectoRespuesta();
+                }
                 idiomas.ForEach(x => contexto.idioma_exact.Add(new idioma_exact()
                 {
                     exact_id = x.Exact_id,
@@ -578,7 +606,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                var idioma = contexto.idioma_exact.Where(x => x.exact_id == exact_id && x.idioma_id == idioma_id).FirstOrDefault();
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var idioma = contexto.idioma_exact.Where(x => x.exact_id == exact_id && x.idioma_id == idioma_id && x.excursion_actividad.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
                 if (idioma == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -604,6 +633,13 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                if (contexto.configuracion.Where(x => x.id == items[0].Exact_id && x.proveedor_id == proveedor_id).FirstOrDefault() == null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                    return resp.ObjectoRespuesta();
+                }
                 items.ForEach(x=>
                 contexto.facturaitem_exact.Add(new facturaitem_exact()
                 {
@@ -628,7 +664,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                var item = contexto.facturaitem_exact.Where(x => x.exact_id == exact_id && x.item_id == item_id).FirstOrDefault();
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var item = contexto.facturaitem_exact.Where(x => x.exact_id == exact_id && x.item_id == item_id && x.exact.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
                 if (item == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -639,6 +676,92 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 contexto.SaveChanges();
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+
+        public HttpResponseMessage AnadirPunto(List<PuntoModel> puntos)
+        {
+            try
+            {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                if (contexto.configuracion.Where(x => x.id == puntos[0].Exact_id && x.proveedor_id == proveedor_id).FirstOrDefault() == null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                    return resp.ObjectoRespuesta();
+                }
+                puntos.ForEach(x =>
+                contexto.punto_exact.Add(new puntorecogida_exact()
+                {
+                    punto_id = x.Punto_id,
+                    exact_id = x.Exact_id
+                }));
+                contexto.SaveChanges();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+
+        public HttpResponseMessage EliminarPunto(PuntoModel punto)
+        {
+            try
+            {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var _punto = contexto.punto_exact.Where(x => x.exact_id == punto.Exact_id && x.punto_id == punto.Punto_id && x.punto.proveedor_id == proveedor_id).FirstOrDefault();
+                if (_punto == null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                    return resp.ObjectoRespuesta();
+                }
+                contexto.punto_exact.Remove(_punto);
+                contexto.SaveChanges();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+
+        public HttpResponseMessage GrupoEdad(long exact_id)
+        {
+            try
+            {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var grupoedad = contexto.grupoedad.Where(x => x.exact_id == exact_id && x.exact.configuracion.proveedor_id == proveedor_id).Select(x=>new
+                {
+                    id = x.id,
+                    edaddesde = x.edaddesde,
+                    edadhasta = x.edadhasta,
+                    genero = x.genero,
+                    nombre_configuracion = x.exact.configuracion.nombre
+
+                }).OrderBy(x=>x.edaddesde).ToList();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                resp.Contenido = grupoedad;
                 return resp.ObjectoRespuesta();
             }
             catch (Exception ex)

@@ -26,6 +26,11 @@ namespace CapaDatos.Entidades
         [Required(ErrorMessageResourceName = "error53", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string descripcion { get; set; }
 
+        [Required(ErrorMessageResourceName = "error54", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        public string proveedor_id { get; set; }
+
         public virtual ICollection<facturaitem_exact> excursiones { get; set; }
+
+        public virtual proveedor proveedor { get; set; }
     }
 }

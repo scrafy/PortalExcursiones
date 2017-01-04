@@ -35,9 +35,9 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(int pag_actual = 1, int regxpag = 10)
         {
-            return opcomun.Todos();
+            return opcomun.Todos(pag_actual, regxpag);
         }
 
         [Route("{id}")]
@@ -86,6 +86,20 @@ namespace PortalExcursiones.Controladores
         public HttpResponseMessage CambiarIdioma(string idioma)
         {
             return opusu.CambiarIdioma(idioma);
+        }
+
+        [HttpPost]
+        [Route("anadirole")]
+        public HttpResponseMessage AnadirRole([FromBody] RolModel datos)
+        {
+            return opusu.AnadirRol(datos);
+        }
+
+        [HttpPost]
+        [Route("eliminarole")]
+        public HttpResponseMessage EliminarRole([FromBody] RolModel datos)
+        {
+            return opusu.EliminarRol(datos);
         }
 
     }

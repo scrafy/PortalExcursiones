@@ -430,6 +430,15 @@ namespace CapaDatos.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El campo id de proveedor es requerido.
+        /// </summary>
+        public static string error54 {
+            get {
+                return ResourceManager.GetString("error54", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El campo usuario no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos.
         /// </summary>
         public static string error6 {

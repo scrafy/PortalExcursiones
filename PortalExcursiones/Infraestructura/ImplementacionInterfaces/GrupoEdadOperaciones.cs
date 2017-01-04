@@ -11,10 +11,11 @@ using PortalExcursiones.Modelos.ModelosSalida;
 using PortalExcursiones.Infraestructura.Enumeraciones;
 using PortalExcursiones.Properties;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class GrupoEdadOperaciones : IOperacionesComunes<grupoedad>, ICreacionMultiple<grupoedad>
+    public class GrupoEdadOperaciones : Operaciones,IOperacionesComunes<grupoedad>, ICreacionMultiple<grupoedad>
     {
         private Contexto contexto;
         private Respuesta resp;
@@ -31,6 +32,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             {
                 if (modelo.IsValid)
                 {
+                    var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+
                     string[] listageneros = Enum.GetNames(typeof(NombreRangoEdad));
                     var enviado = Entidad.genero.ToLower();
                     var existe = listageneros.Where(x => x == enviado).FirstOrDefault();
@@ -48,6 +51,12 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         resp.Codigo = (int)Codigos.REGISTRO_REPETIDO;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_REPETIDO);
                         resp.Mensaje_error = String.Format(Errores.error26, db.genero);
+                        return resp.ObjectoRespuesta();
+                    }
+                    if(contexto.grupoedad.Where(x => x.exact.configuracion.proveedor_id == proveedor_id && x.id == Entidad.id).FirstOrDefault() == null)
+                    {
+                        resp.Codigo = (int)Codigos.ERROR_OPERACION_NO_PERMITIDA;
+                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_OPERACION_NO_PERMITIDA);
                         return resp.ObjectoRespuesta();
                     }
                     contexto.grupoedad.Attach(Entidad);
@@ -138,13 +147,42 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual, int regxpag)
         {
             try
             {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var _aux = contexto.grupoedad.Where(x => x.exact.configuracion.proveedor_id == proveedor_id)
+                .Select(x => new //se proyecta pq se produce un error de referencia ciclica al serializar y no se sabe por qué
+                {
+                    id = x.id,
+                    edaddesde = x.edaddesde,
+                    edadhasta = x.edadhasta,
+                    genero = x.genero,
+                    nombre_configuracion = x.exact.configuracion.nombre
+
+                }).OrderBy(x => x.id).Skip((pag_actual - 1) * regxpag).Take(regxpag).ToList();
+                var aux = _aux.GroupBy(x => x.nombre_configuracion);
+                var output = new Dictionary<string, List<dynamic>>();
+                List<dynamic> edades = null;
+                foreach (var exact in aux)
+                {
+                    edades = new List<dynamic>();
+                    foreach (var p in exact)
+                    {
+                        edades.Add(p);
+                    }
+                    output.Add(exact.Key, edades);
+                }
+                var paginacion = this.Paginacion(contexto.grupoedad.Where(x => x.exact.configuracion.proveedor_id == proveedor_id).Count(), pag_actual, regxpag);
+                var result = new
+                {
+                    gruposedads = output,
+                    paginacion = paginacion
+                };
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = contexto.grupoedad.ToList();
+                resp.Contenido = result;
                 return resp.ObjectoRespuesta();
             }
             catch (Exception ex)
@@ -160,8 +198,9 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
                 var _id = Int64.Parse(id);
-                var grupoedad = contexto.grupoedad.Where(x => x.id == _id).FirstOrDefault();
+                var grupoedad = contexto.grupoedad.Where(x => x.id == _id && x.exact.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
                 if (grupoedad == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -184,50 +223,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
         public HttpResponseMessage Crear(grupoedad Entidad, ModelStateDictionary modelo)
         {
-            try
-            {
-                if (modelo.IsValid)
-                {
-                    string[] listageneros = Enum.GetNames(typeof(NombreRangoEdad));
-                    var enviado = Entidad.genero.ToLower();
-                    var existe = listageneros.Where(x => x == enviado).FirstOrDefault();
-                    if(String.IsNullOrEmpty(existe))
-                    {
-                        resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
-                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
-                        resp.Objetoerror = new string[] { Errores.error27 };
-                        return resp.ObjectoRespuesta();
-                    }
-                    var id = Entidad.exact_id;
-                    var db = contexto.grupoedad.Where(x => x.exact_id == id && x.genero == enviado).FirstOrDefault();
-                    if (db != null)
-                    {
-                        resp.Codigo = (int)Codigos.REGISTRO_REPETIDO;
-                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_REPETIDO);
-                        resp.Mensaje_error = String.Format(Errores.error26, db.genero);
-                        return resp.ObjectoRespuesta();
-                    }
-                    contexto.grupoedad.Add(Entidad);
-                    contexto.SaveChanges();
-                    resp.Codigo = (int)Codigos.OK;
-                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                    return resp.ObjectoRespuesta();
-                }
-                else
-                {
-                    resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
-                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
-                    resp.Objetoerror = modelo;
-                    return resp.ObjectoRespuesta();
-                }
-            }
-            catch (Exception ex)
-            {
-                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
-                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
-                resp.Excepcion = Excepcion.Create(ex);
-                return resp.ObjectoRespuesta();
-            }
+            throw new NotImplementedException();
         }
 
         public HttpResponseMessage Eliminar(string id)

@@ -8,7 +8,7 @@ namespace PortalExcursiones.Infraestructura.Interfaces
     {
          HttpResponseMessage Crear(T Entidad,ModelStateDictionary modelo);
          HttpResponseMessage Actualizar(T Entidad, ModelStateDictionary modelo);
-         HttpResponseMessage Todos();
+         HttpResponseMessage Todos(int pag_actual,int regxpag);
          HttpResponseMessage BusquedaPorId(string id);
          HttpResponseMessage Eliminar(string id);
     }

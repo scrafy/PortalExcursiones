@@ -7,11 +7,13 @@ using System.Web.Http.ModelBinding;
 using PortalExcursiones.Modelos.ModelosSalida;
 using PortalExcursiones.Infraestructura.Enumeraciones;
 using CapaDatos;
-
+using System.Web;
+using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class FotoConfiguracionOperaciones : IOperacionesComunes<fotoconfiguracion>, IOperacionesFotoConfiguracion
+    public class FotoConfiguracionOperaciones : Operaciones, IOperacionesComunes<fotoconfiguracion>, IOperacionesFotoConfiguracion
     {
         private Contexto contexto;
         private Respuesta resp;
@@ -31,8 +33,9 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
                 var _id = Int64.Parse(id);
-                var foto = contexto.fotoconfiguracion.Where(x => x.id == _id).Select(x => new { id = x.id, nombre = x.nombre,url = x.url,configuracion_id = x.configuracion_id }).FirstOrDefault();
+                var foto = contexto.fotoconfiguracion.Where(x => x.id == _id && x.configuracion.proveedor_id == proveedor_id).Select(x => new { id = x.id, nombre = x.nombre,url = x.url,configuracion_id = x.configuracion_id }).FirstOrDefault();
                 if (foto == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -91,7 +94,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                var foto = contexto.fotoconfiguracion.Where(x => x.id == id).FirstOrDefault();
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var foto = contexto.fotoconfiguracion.Where(x => x.id == id && x.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
                 if(foto == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -113,14 +117,33 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual, int regxpag)
         {
             try
             {
-                var fotos = contexto.fotoconfiguracion.Select(x => new { id = x.id, nombre = x.nombre, url = x.url, configuracion_id = x.configuracion_id });
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var _fotos = contexto.fotoconfiguracion.Include("configuracion").Where(x => x.configuracion.proveedor_id == proveedor_id).OrderBy(x => x.id).Skip((pag_actual - 1) * regxpag).Take(regxpag).ToList();
+                var fotos = _fotos.Select(x => new { id = x.id, nombre = x.nombre, url = x.url, configuracion_id = x.configuracion_id, confnombre = x.configuracion.nombre }).GroupBy(x => x.confnombre);
+                var output = new Dictionary<string, List<dynamic>>();
+                List<dynamic> listafotos = null;
+                foreach (var foto in fotos)
+                {
+                    listafotos = new List<dynamic>();
+                    foreach (var f in foto)
+                    {
+                        listafotos.Add(f);
+                    }
+                    output.Add(foto.Key, listafotos);
+                }
+                var paginacion = this.Paginacion(contexto.fotoconfiguracion.Where(x => x.configuracion.proveedor_id == proveedor_id).Count(), pag_actual, regxpag);
+                var result = new
+                {
+                    fotos = output,
+                    paginacion = paginacion
+                };
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = fotos;
+                resp.Contenido = result;
                 return resp.ObjectoRespuesta();
             }
             catch (Exception ex)

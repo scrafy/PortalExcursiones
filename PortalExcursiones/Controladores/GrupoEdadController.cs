@@ -38,9 +38,9 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(int pag_actual = 1, int regxpag = 10)
         {
-            return opcomun.Todos();
+            return opcomun.Todos(pag_actual, regxpag);
         }
 
         [Route("{id}")]
@@ -48,8 +48,6 @@ namespace PortalExcursiones.Controladores
         {
             return opcomun.BusquedaPorId(id);
         }
-
-
-
+        
     }
 }

@@ -35,9 +35,9 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(int pag_actual = 1, int regxpag = 10)
         {
-            return opcomun.Todos();
+            return opcomun.Todos(pag_actual, regxpag);
         }
 
         [Route("{id}")]
@@ -86,6 +86,12 @@ namespace PortalExcursiones.Controladores
         public HttpResponseMessage EliminarItem([FromBody]FacturaItemModel datos)
         {
             return op.EliminarItemFactura(datos.Item_id, datos.Exact_id);
+        }
+
+        [Route("grupoedad/{exact_id}")]
+        public HttpResponseMessage GetGrupoEdad(long exact_id)
+        {
+            return op.GrupoEdad(exact_id);
         }
     }
 }

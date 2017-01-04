@@ -12,7 +12,7 @@ namespace PortalExcursiones.Infraestructura.LogicaComun
     {
         public static void PuntoRecogidaEliminado(long id,Contexto contexto)
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
             var direcciones = contexto.reservaexcursionactividad.Where(x => x.punto_id == id && x.calendarioexcursion.fecha >= now).Select(x => x.reserva.cliente.usuario.Email).ToList();
             foreach (var direccion in direcciones)
             {
@@ -22,7 +22,7 @@ namespace PortalExcursiones.Infraestructura.LogicaComun
 
         public static void PuntoRecogidaModificado(long id, Contexto contexto)
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
             var direcciones = contexto.reservaexcursionactividad.Where(x => x.punto_id == id && x.calendarioexcursion.fecha >= now).Select(x => x.reserva.cliente.usuario.Email).ToList();
             foreach (var direccion in direcciones)
             {

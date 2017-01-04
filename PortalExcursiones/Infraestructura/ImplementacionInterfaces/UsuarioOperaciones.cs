@@ -15,15 +15,13 @@ using PortalExcursiones.Infraestructura.Enumeraciones;
 using System.Security.Claims;
 using Microsoft.Owin.Security;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Globalization;
 using System.Net.Http.Headers;
-using System.Collections.Generic;
 using System.Configuration;
+
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class UsuarioOperaciones : IOperacionesComunes<usuario>, IOperacionesUsuario
+    public class UsuarioOperaciones : Operaciones,IOperacionesComunes<usuario>, IOperacionesUsuario
     {
         private AdministradorUsuario mgr = null;
         private Contexto contexto = null;
@@ -351,13 +349,12 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual,int regxpag)
         {
             try
             {
                 var usuarios = mgr.Users.Select(e => new
                 {
-
                     id = e.Id,
                     direccion1 = e.direccion1,
                     direccion2 = e.direccion2,
@@ -369,13 +366,18 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     localidad = e.localidad.nombre,
                     codigo_postal = e.localidad.cp,
                     provincia = e.localidad.provincia.nombre,
-                    pais = e.localidad.provincia.pais.nombre
-                }).ToList();
-
-               
+                    pais = e.localidad.provincia.pais.nombre,
+                   
+                }).OrderBy(x => x.nombre).Skip((pag_actual - 1) * regxpag).Take(regxpag).ToList();
+                var paginacion = this.Paginacion(mgr.Users.Count(), pag_actual, regxpag);
+                var result = new
+                {
+                    usuarios = usuarios,
+                    paginacion  = paginacion
+                };
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = usuarios;
+                resp.Contenido = result;
                 return resp.ObjectoRespuesta();
 
             }
@@ -413,5 +415,56 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             throw new NotImplementedException();
         }
+
+        public HttpResponseMessage AnadirRol(RolModel datos)
+        {
+            try
+            {
+               IdentityResult result = mgr.AddToRole(datos.Usuario_id, datos.Rol);
+               if(!result.Succeeded)
+               {
+                    resp.Codigo = (int)Codigos.ERROR_AÑADIENDO_ROL;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_AÑADIENDO_ROL);
+                    resp.Objetoerror = result.Errors;
+                    return resp.ObjectoRespuesta();
+               }
+               resp.Codigo = (int)Codigos.OK;
+               resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+               return resp.ObjectoRespuesta();
+            }
+            catch(Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+
+        public HttpResponseMessage EliminarRol(RolModel datos)
+        {
+            try
+            {
+                IdentityResult result = mgr.RemoveFromRole(datos.Usuario_id, datos.Rol);
+                if (!result.Succeeded)
+                {
+                    resp.Codigo = (int)Codigos.ERROR_AÑADIENDO_ROL;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_AÑADIENDO_ROL);
+                    resp.Objetoerror = result.Errors;
+                    return resp.ObjectoRespuesta();
+                }
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
+        }
+        
     }
 }

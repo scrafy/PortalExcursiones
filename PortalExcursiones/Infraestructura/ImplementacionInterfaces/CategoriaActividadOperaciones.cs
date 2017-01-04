@@ -130,7 +130,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             throw new NotImplementedException();
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual,int regxpag)
         {
             try
             {

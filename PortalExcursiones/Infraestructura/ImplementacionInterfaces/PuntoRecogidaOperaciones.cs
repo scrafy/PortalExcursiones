@@ -21,7 +21,7 @@ using PortalExcursiones.Infraestructura.LogicaComun;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class PuntoRecogidaOperaciones : IOperacionesPuntoRecogida
+    public class PuntoRecogidaOperaciones : Operaciones,IOperacionesPuntoRecogida
     {
         private Contexto contexto;
         private Respuesta resp;
@@ -39,7 +39,15 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             {
                 if (modelo.IsValid)
                 {
-                    var puntorecogida = contexto.puntorecogida.Where(x => x.nombre.ToLower() == punto.Nombre.ToLower() && x.id != punto.Id).FirstOrDefault();
+                    if(punto.Id == 0)
+                    {
+                        resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                        resp.Objetoerror = new string[] {ErroresValidacion.error17 };
+                        return resp.ObjectoRespuesta();
+                    }
+                    var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                    var puntorecogida = contexto.puntorecogida.Where(x => x.nombre.ToLower() == punto.Nombre.ToLower() && x.id != punto.Id && x.proveedor_id == proveedor_id).FirstOrDefault();
                     if (puntorecogida != null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_REPETIDO;
@@ -47,7 +55,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         resp.Mensaje_error = Errores.error20;
                         return resp.ObjectoRespuesta();
                     }
-                    puntorecogida = contexto.puntorecogida.Find(punto.Id);
+                    puntorecogida = contexto.puntorecogida.Where(x => x.id == punto.Id && x.proveedor_id == proveedor_id).FirstOrDefault();
                     if (puntorecogida == null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -87,13 +95,15 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                var puntorecogida = contexto.puntorecogida.Where(x => x.id == id).Select(x => new
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var puntorecogida = contexto.puntorecogida.Where(x => x.id == id && x.proveedor_id == proveedor_id).Select(x => new
                 {
                     id = x.id,
                     nombre = x.nombre,
                     lat = x.lat,
                     lng = x.lng,
                     direccion = x.direccion,
+                    localidad_id = x.localidad_id,
                     localidad = x.localidad.nombre,
                     provincia = x.localidad.provincia.nombre,
                     pais = x.localidad.provincia.pais.nombre,
@@ -124,14 +134,15 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                
-                var puntorecogida = contexto.punto_exact.Include("puntorecogida").Where(x => x.exact_id == id).Select(x => new
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var puntorecogida = contexto.punto_exact.Where(x => x.exact_id == id && x.excursion_actividad.configuracion.proveedor_id == proveedor_id).Select(x => new
                 {
                     id = x.punto.id,
                     nombre = x.punto.nombre,
                     lat = x.punto.lat,
                     lng = x.punto.lng,
                     direccion = x.punto.direccion,
+                    localidad_id = x.punto.localidad_id,
                     localidad = x.punto.localidad.nombre,
                     provincia = x.punto.localidad.provincia.nombre,
                     pais = x.punto.localidad.provincia.pais.nombre,
@@ -153,25 +164,33 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         }
 
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual,int regxpag)
         {
             try
             {
-                var puntosrecogida = contexto.puntorecogida.Select(x => new
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var puntosrecogida = contexto.puntorecogida.Where(x => x.proveedor_id == proveedor_id).Select(x => new
                 {
                     id = x.id,
                     nombre = x.nombre,
                     lat = x.lat,
                     lng = x.lng,
                     direccion = x.direccion,
+                    localidad_id = x.localidad_id,
                     localidad = x.localidad.nombre,
                     provincia = x.localidad.provincia.nombre,
                     pais = x.localidad.provincia.pais.nombre,
                     descripcion = x.descripcion
-                }).ToList();
+                }).OrderBy(x => x.nombre).Skip((pag_actual - 1) * regxpag).Take(regxpag).ToList();
+                var paginacion = this.Paginacion(contexto.puntorecogida.Where(x => x.proveedor_id == proveedor_id).Count(), pag_actual, regxpag);
+                var result = new
+                {
+                    puntosrecogida = puntosrecogida,
+                    paginacion = paginacion
+                };
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = puntosrecogida;
+                resp.Contenido = result;
                 return resp.ObjectoRespuesta();
             }
             catch (Exception ex)
@@ -185,12 +204,12 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
         public HttpResponseMessage Crear(PuntoRecogidaModel punto, ModelStateDictionary modelo)
         {
-            DbContextTransaction tran = null;
             try
             {
                 if (modelo.IsValid)
                 {
-                    var puntorecogida = contexto.punto_exact.Include("punto").Where(x => x.punto.nombre.ToLower() == punto.Nombre.ToLower() && x.exact_id == punto.Exact_id).FirstOrDefault();
+                    var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                    var puntorecogida = contexto.puntorecogida.Where(x => x.nombre.ToLower() == punto.Nombre.ToLower() && x.proveedor_id == proveedor_id).FirstOrDefault();
                     if (puntorecogida != null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_REPETIDO;
@@ -198,14 +217,6 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         resp.Mensaje_error = Errores.error20;
                         return resp.ObjectoRespuesta();
                     }
-                    if (!contexto.excursionactividad.Where(x=>x.exact_id == punto.Exact_id).Select(x=>x.pickupservice).First())
-                    {
-                        resp.Codigo = (int)Codigos.SERVICIO_RECOGIDA_NO_SOPORTADO;
-                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.SERVICIO_RECOGIDA_NO_SOPORTADO);
-                        resp.Mensaje_error = Errores.error24;
-                        return resp.ObjectoRespuesta();
-                    }
-                    tran = contexto.Database.BeginTransaction();
                     var _punto = contexto.puntorecogida.Add(new puntorecogida()
                     {
                         lat = punto.Lat,
@@ -213,16 +224,10 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         nombre = punto.Nombre,
                         descripcion = punto.Descripcion,
                         direccion = punto.Direccion,
-                        localidad_id = punto.Localidad_id
+                        localidad_id = punto.Localidad_id,
+                        proveedor_id = proveedor_id
                     });
                     contexto.SaveChanges();
-                    contexto.punto_exact.Add(new puntorecogida_exact()
-                    {
-                        exact_id = punto.Exact_id,
-                        punto_id = _punto.id
-                    });
-                    contexto.SaveChanges();
-                    contexto.Database.CurrentTransaction.Commit();
                     resp.Codigo = (int)Codigos.OK;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
                     return resp.ObjectoRespuesta();
@@ -237,9 +242,6 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
             catch (Exception ex)
             {
-                if (contexto.Database.CurrentTransaction != null)
-                    contexto.Database.CurrentTransaction.Rollback();
-
                 resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
                 resp.Excepcion = Excepcion.Create(ex);
@@ -251,12 +253,13 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
-                var puntos = contexto.punto_exact.Where(x => x.punto_id == id).ToList();
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var puntos = contexto.punto_exact.Where(x => x.punto_id == id && x.punto.proveedor_id == proveedor_id).ToList();
                 if(puntos.Count > 0)
                 {
                     puntos.ForEach(x => contexto.punto_exact.Remove(x));
                 }
-                var punto = contexto.puntorecogida.Find(id);
+                var punto = contexto.puntorecogida.Where(x => x.id == id && x.proveedor_id == proveedor_id).FirstOrDefault();
                 if(punto == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;

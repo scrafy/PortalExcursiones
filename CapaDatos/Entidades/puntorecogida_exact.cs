@@ -16,10 +16,6 @@ namespace CapaDatos.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long exact_id { get; set; }
 
-        [Column(TypeName = "text")]
-        [StringLength(65535)]
-        public string nota { get; set; }
-
         [ForeignKey("punto_id")]
         public virtual puntorecogida punto { get; set; }
 

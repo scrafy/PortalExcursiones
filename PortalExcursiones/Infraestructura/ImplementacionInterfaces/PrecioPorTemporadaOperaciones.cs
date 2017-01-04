@@ -11,10 +11,12 @@ using PortalExcursiones.Properties;
 using System.Data.Entity;
 using PortalExcursiones.Infraestructura.Interfaces;
 using PortalExcursiones.Infraestructura.Enumeraciones;
+using System.Web;
+using System.Collections.Generic;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class PrecioPorTemporadaOperaciones : IOperacionesComunes<preciotemporada>
+    public class PrecioPorTemporadaOperaciones : Operaciones,IOperacionesComunes<preciotemporada>
     {
 
         private Contexto contexto;
@@ -32,7 +34,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             {
                 if (modelo.IsValid)
                 {
-                    var preciotemporada = contexto.preciotemporada.Find(Entidad.id);
+                    var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                    var preciotemporada = contexto.preciotemporada.Where(x => x.excursionactividad.configuracion.proveedor_id == proveedor_id && x.id == Entidad.id).FirstOrDefault();
                     if (preciotemporada == null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -137,7 +140,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             {
                 if (modelo.IsValid)
                 {
-                    if(Entidad.desde>=Entidad.hasta)
+                    var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                    if (Entidad.desde>=Entidad.hasta)
                     {
                         resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
@@ -161,13 +165,19 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         resp.Erroresvalidacion = new string[]{Errores.error12}.ToList();
                         return resp.ObjectoRespuesta();
                     }
-                    var datos = contexto.configuracion.Where(x => x.id == Entidad.exact_id).Select(x =>new
+                    var datos = contexto.configuracion.Where(x => x.id == Entidad.exact_id && x.proveedor_id == proveedor_id).Select(x => new
                     {
                         porcentaje = x.porcentaje,
                         esporgrupo = x.excursionactividad.precioporgrupo,
                         secontabilizaninfantes = x.excursionactividad.secontabilizaninfantes
 
-                    }).First();
+                    }).FirstOrDefault();
+                    if(datos == null)
+                    {
+                        resp.Codigo = (int)Codigos.ERROR_OPERACION_NO_PERMITIDA;
+                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_OPERACION_NO_PERMITIDA);
+                        return resp.ObjectoRespuesta();
+                    }
                     if(datos.esporgrupo)
                     {
                         if(Entidad.costegrupo == 0)
@@ -227,13 +237,33 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage Todos()
+        public HttpResponseMessage Todos(int pag_actual, int regxpag)
         {
             try
             {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var _aux = contexto.preciotemporada.Include(e => e.excursionactividad.configuracion).Where(x => x.excursionactividad.configuracion.proveedor_id == proveedor_id).OrderBy(x => x.id).Skip((pag_actual - 1) * regxpag).Take(regxpag).ToList();
+                var aux = _aux.GroupBy(x => x.excursionactividad.configuracion.nombre);
+                var output = new Dictionary<string, List<preciotemporada>>();
+                List<preciotemporada> _precios = null;
+                foreach (var exact in aux)
+                {
+                    _precios = new List<preciotemporada>();
+                    foreach (var p in exact)
+                    {
+                       _precios.Add(p);
+                    }
+                    output.Add(exact.Key,_precios);
+                }
+                var paginacion = this.Paginacion(contexto.preciotemporada.Where(x => x.excursionactividad.configuracion.proveedor_id == proveedor_id).Count(), pag_actual, regxpag);
+                var result = new
+                {
+                    precios = output,
+                    paginacion = paginacion
+                };
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                resp.Contenido = contexto.preciotemporada.ToList();
+                resp.Contenido = result;
                 return resp.ObjectoRespuesta();
             }
             catch(Exception ex)
@@ -249,8 +279,9 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
                 var _id = Int64.Parse(id);
-                var destino = contexto.preciotemporada.Find(_id);
+                var destino = contexto.preciotemporada.Where(x => x.excursionactividad.configuracion.proveedor_id == proveedor_id&& x.id == _id).FirstOrDefault();
                 if (destino == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;

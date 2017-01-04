@@ -12,5 +12,8 @@ namespace PortalExcursiones.Infraestructura.Interfaces
         HttpResponseMessage EliminarIdioma(int idioma_id,long exact_id);
         HttpResponseMessage AnadirItemFactura(List<FacturaItemModel> items);
         HttpResponseMessage EliminarItemFactura(long item_id, long exact_id);
+        HttpResponseMessage AnadirPunto(List<PuntoModel> puntos);
+        HttpResponseMessage EliminarPunto(PuntoModel punto);
+        HttpResponseMessage GrupoEdad(long exact_id);
     }
 }
