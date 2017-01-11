@@ -25,11 +25,13 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
     {
         private Contexto contexto;
         private Respuesta resp;
+        private GestionAvisosEmail avisos;
 
-        public PuntoRecogidaOperaciones(Contexto _contexto, Respuesta _resp)
+        public PuntoRecogidaOperaciones(Contexto _contexto, Respuesta _resp,GestionAvisosEmail _avisos)
         {
             contexto = _contexto;
             resp = _resp;
+            avisos = _avisos;
         }
 
 
@@ -69,7 +71,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     puntorecogida.descripcion = punto.Descripcion;
                     puntorecogida.direccion = punto.Direccion;
                     contexto.SaveChanges();
-                    Task.Run(() => GestionAvisosEmail.PuntoRecogidaModificado(punto.Id, contexto));
+                    Task.Run(() => avisos.PuntoRecogidaModificado(punto.Id));
                     resp.Codigo = (int)Codigos.OK;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
                     return resp.ObjectoRespuesta();
@@ -251,32 +253,40 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
         public HttpResponseMessage Eliminar(long id)
         {
+            DbContextTransaction tran = null;
             try
             {
                 var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
-                var puntos = contexto.punto_exact.Where(x => x.punto_id == id && x.punto.proveedor_id == proveedor_id).ToList();
-                if(puntos.Count > 0)
-                {
-                    puntos.ForEach(x => contexto.punto_exact.Remove(x));
-                }
                 var punto = contexto.puntorecogida.Where(x => x.id == id && x.proveedor_id == proveedor_id).FirstOrDefault();
-                if(punto == null)
+                if (punto == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
                     return resp.ObjectoRespuesta();
                 }
+                tran = contexto.Database.BeginTransaction();
+                var puntos = contexto.punto_exact.Where(x => x.punto_id == id && x.punto.proveedor_id == proveedor_id).ToList();
+                if(puntos.Count > 0)
+                {
+                    puntos.ForEach(x => contexto.punto_exact.Remove(x));
+                }
+                var now = DateTime.Now;
+                var emailes = contexto.reservaexcursionactividad.Where(x => x.punto_id == id && x.calendarioexcursion.fecha >= now).Select(x => x.reserva.cliente.usuario.Email).ToList().Distinct();
                 var reservas = contexto.reservaexcursionactividad.Where(x => x.punto_id == id).ToList();
                 reservas.ForEach(x => x.punto_id = null);
                 contexto.puntorecogida.Remove(punto);
                 contexto.SaveChanges();
-                Task.Run(() => GestionAvisosEmail.PuntoRecogidaEliminado(id, contexto));
+                tran.Commit();
+                Task.Run(() => avisos.PuntoRecogidaEliminado(id, new List<string>(emailes), proveedor_id));
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
                 return resp.ObjectoRespuesta();
             }
             catch(Exception ex)
             {
+                if (contexto.Database.CurrentTransaction != null)
+                    tran.Rollback();
+
                 resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
                 resp.Excepcion = Excepcion.Create(ex);

@@ -67,19 +67,21 @@ namespace PortalExcursiones.Controladores
             return opusu.CambiarPassword(modelo,this.ModelState);
         }
 
-        [HttpGet]
+       /* [HttpGet]
         [Route("tokenrenovacionpassword")]
         public HttpResponseMessage TokenRenovacionPassword([FromUri]string email)
         {
            return opusu.ObtenerTokenReseteoPassword(email);
-        }
+        }*/
+    
+         [HttpGet]
+         [Route("resetpassword")]
+         public HttpResponseMessage ResetPassword([FromUri] string email)
+         {
+             return opusu.ResetPassword(email);
+         }
 
-        [HttpPost]
-        [Route("renovarpassword")]
-        public HttpResponseMessage RenovarPassword([FromBody] RenovacionPasswordModel datos)
-        {
-            return opusu.RenovarPassword(datos,this.ModelState);
-        }
+      
 
         [HttpGet]
         [Route("cambiaridioma/{idioma}")]

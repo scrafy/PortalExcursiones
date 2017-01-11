@@ -27,7 +27,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -97,8 +97,6 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -137,6 +135,7 @@
     <Compile Include="Entidades\calendarioexcursion.cs" />
     <Compile Include="Entidades\categoriactividad.cs" />
     <Compile Include="Entidades\categoriaexcursion.cs" />
+    <Compile Include="Entidades\clavevalor.cs" />
     <Compile Include="Entidades\cliente.cs" />
     <Compile Include="Entidades\colaborador.cs" />
     <Compile Include="Entidades\configuracion.cs" />
@@ -166,7 +165,6 @@
     <Compile Include="Entidades\usuario.cs" />
     <Compile Include="Entidades\vehiculo.cs" />
     <Compile Include="Identity\AdministradorUsuario.cs" />
-    <Compile Include="Identity\ServicioEmail.cs" />
     <Compile Include="Identity\ValidadorPassword.cs" />
     <Compile Include="Identity\ValidadorUsuario.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\CIFAttributte.cs" />
@@ -282,6 +280,18 @@
     <Compile Include="Migrations\201701041501096_new_field_proveedor_id.Designer.cs">
       <DependentUpon>201701041501096_new_field_proveedor_id.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701080123460_new_table_clave_valor.cs" />
+    <Compile Include="Migrations\201701080123460_new_table_clave_valor.Designer.cs">
+      <DependentUpon>201701080123460_new_table_clave_valor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701092208094_new_field_localidad_id.cs" />
+    <Compile Include="Migrations\201701092208094_new_field_localidad_id.Designer.cs">
+      <DependentUpon>201701092208094_new_field_localidad_id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701102350567_newfield_motivoanulacion.cs" />
+    <Compile Include="Migrations\201701102350567_newfield_motivoanulacion.Designer.cs">
+      <DependentUpon>201701102350567_newfield_motivoanulacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\ErroresValidacion.Designer.cs">
@@ -301,6 +311,9 @@
     <Content Include="Migrations\SQLScripts\201612281320414_new_table_facturaitem.sql" />
     <Content Include="Migrations\SQLScripts\201612281921138_pvpgrupo_modification.sql" />
     <Content Include="Migrations\SQLScripts\201612291418214_facturaitem_proveedor.sql" />
+    <Content Include="Migrations\SQLScripts\201701041501096_new_field_proveedor_id.sql" />
+    <Content Include="Migrations\SQLScripts\201701080123460_new_table_clave_valor.sql" />
+    <Content Include="Migrations\SQLScripts\201701092208094_new_field_localidad_id.sql" />
     <EmbeddedResource Include="Migrations\201611052134451_Initial.resx">
       <DependentUpon>201611052134451_Initial.cs</DependentUpon>
     </EmbeddedResource>
@@ -382,6 +395,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701041501096_new_field_proveedor_id.resx">
       <DependentUpon>201701041501096_new_field_proveedor_id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701080123460_new_table_clave_valor.resx">
+      <DependentUpon>201701080123460_new_table_clave_valor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701092208094_new_field_localidad_id.resx">
+      <DependentUpon>201701092208094_new_field_localidad_id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701102350567_newfield_motivoanulacion.resx">
+      <DependentUpon>201701102350567_newfield_motivoanulacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\ErroresValidacion.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

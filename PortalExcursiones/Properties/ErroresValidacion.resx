@@ -183,6 +183,15 @@
   <data name="error30" xml:space="preserve">
     <value>El campo username es requerido</value>
   </data>
+  <data name="error31" xml:space="preserve">
+    <value>La confirmación del password no coincide</value>
+  </data>
+  <data name="error32" xml:space="preserve">
+    <value>El campo confirmación password no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>
+  </data>
+  <data name="error33" xml:space="preserve">
+    <value>El campo confirmación password es requerido</value>
+  </data>
   <data name="error4" xml:space="preserve">
     <value>El campo password nuevo no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos</value>
   </data>

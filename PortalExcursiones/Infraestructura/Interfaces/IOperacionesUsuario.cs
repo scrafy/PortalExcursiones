@@ -9,8 +9,8 @@ namespace PortalExcursiones.Infraestructura.Interfaces
         HttpResponseMessage Login(LoginModel login,ModelStateDictionary modelo);
         HttpResponseMessage Logout();
         HttpResponseMessage CambiarPassword(CambioPasswordModel password, ModelStateDictionary modelo);
-        HttpResponseMessage ObtenerTokenReseteoPassword(string email);
-        HttpResponseMessage RenovarPassword(RenovacionPasswordModel datos, ModelStateDictionary modelo);
+        //HttpResponseMessage ObtenerTokenReseteoPassword(string email);
+        HttpResponseMessage ResetPassword(string email);
         HttpResponseMessage CambiarIdioma(string idioma);
         HttpResponseMessage AnadirRol(RolModel datos);
         HttpResponseMessage EliminarRol(RolModel datos);

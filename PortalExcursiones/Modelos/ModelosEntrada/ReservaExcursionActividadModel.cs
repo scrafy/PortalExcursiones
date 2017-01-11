@@ -29,6 +29,8 @@
 
         private long? punto_id;
 
+        private long exact_id;
+
         public byte Numadultos
         {
             get
@@ -195,6 +197,19 @@
             set
             {
                 numseniors = value;
+            }
+        }
+
+        public long Exact_id
+        {
+            get
+            {
+                return exact_id;
+            }
+
+            set
+            {
+                exact_id = value;
             }
         }
     }

@@ -22,6 +22,7 @@ namespace CapaDatos
         public virtual DbSet<calendarioexcursion> calendarioexcursion { get; set; }
         public virtual DbSet<categoriactividad> categoriactividad { get; set; }
         public virtual DbSet<categoriaexcursion> categoriaexcursion { get; set; }
+        public virtual DbSet<clavevalor> clavevalor { get; set; }
         public virtual DbSet<cliente> cliente { get; set; }
         public virtual DbSet<colaborador> colaborador { get; set; }
         public virtual DbSet<configuracion> configuracion { get; set; }

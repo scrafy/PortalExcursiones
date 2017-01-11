@@ -52,11 +52,16 @@ namespace CapaDatos.Entidades
         [Required(ErrorMessageResourceName = "error25", ErrorMessageResourceType = typeof(ErroresValidacion))]
         public string proveedor_id { get; set; }
 
+        [Required(ErrorMessageResourceName = "error14", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        public long localidad_id { get; set; }
+
         public virtual alquilervehiculo alquilervehiculo { get; set; }
 
         public virtual proveedor proveedor { get; set; }
 
         public virtual excursionactividad excursionactividad { get; set; }
+
+        public virtual localidad localidad { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fotoconfiguracion> fotos { get; set; }

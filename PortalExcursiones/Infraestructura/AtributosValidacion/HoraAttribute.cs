@@ -11,7 +11,7 @@ namespace PortalExcursiones.Infraestructura.AtributosValidacion
         {
             DateTime fecha = (DateTime)valor;
             TimeSpan s = new TimeSpan(fecha.Ticks);
-            if ((s.Minutes != 30) && (s.Minutes != 0))
+            if (((s.Minutes != 30) && (s.Minutes != 0)) || (s.Seconds != 0 ))
             {
                 return false;
             }

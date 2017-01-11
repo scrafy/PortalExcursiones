@@ -34,6 +34,11 @@ namespace CapaDatos.ConfiguracionEntidades
                 .WithRequired(e => e.localidad)
                 .HasForeignKey(e => e.localidad_id)
                 .WillCascadeOnDelete(false);
+
+                HasMany(e => e.configuraciones)
+               .WithRequired(e => e.localidad)
+               .HasForeignKey(e => e.localidad_id)
+               .WillCascadeOnDelete(false);
         }
     }
 }

@@ -26,11 +26,13 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
     {
         private Contexto contexto = null;
         private Respuesta resp = null;
+        private GestionAvisosEmail avisos = null;
 
-        public CalendarioExcursionOperaciones(Contexto _contexto, Respuesta _resp)
+        public CalendarioExcursionOperaciones(Contexto _contexto, Respuesta _resp,GestionAvisosEmail _avisos)
         {
             contexto = _contexto;
             resp = _resp;
+            avisos = _avisos;
         }
 
         public HttpResponseMessage Crear(CalendarioExcursionModel datos, ModelStateDictionary modelo)
@@ -117,8 +119,14 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
+                if(String.IsNullOrEmpty(datos.Motivoanulacion))
+                {
+                    resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                    resp.Erroresvalidacion = new string[] { Errores.error33 }.ToList();
+                    return resp.ObjectoRespuesta();
+                }
                 var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
-
                 if (datos.Fecha <= DateTime.Now)
                 {
                     resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
@@ -134,8 +142,9 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     return resp.ObjectoRespuesta();
                 }
                 calendario.estadoexcursion_id = (int)EstadoExcursion.anulada;
+                calendario.motivoanulacion = datos.Motivoanulacion;
                 contexto.SaveChanges();
-                Task.Run(() => GestionAvisosEmail.ExActAnulada(calendario.id, datos.Fecha, contexto));
+                Task.Run(() => avisos.ExActAnulada(calendario.id));
                 //habría que realizar las transferencias para devolver el dinero a los clientes que tenian hecha una reserva para dicha excursion
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
@@ -160,6 +169,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 if(modelo.IsValid)
                 {
                     var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+
 
                     if (datos.Fecha <= DateTime.Now)
                     {
@@ -190,10 +200,11 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         return resp.ObjectoRespuesta();
                     }
                     tran = contexto.Database.BeginTransaction();
+                    DateTime aux = calendario.fecha;
                     calendario.fecha = datos.Fechanueva;
                     contexto.SaveChanges();
                     tran.Commit();
-                    Task.Run(() => GestionAvisosEmail.FechaCalendarioModificada(calendario.id,datos.Fechanueva,contexto));
+                    Task.Run(() => avisos.FechaCalendarioModificada(calendario.id, aux));
                     resp.Codigo = (int)Codigos.OK;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
                     return resp.ObjectoRespuesta();

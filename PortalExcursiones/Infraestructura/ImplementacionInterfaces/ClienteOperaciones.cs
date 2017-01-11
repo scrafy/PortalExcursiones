@@ -11,6 +11,8 @@ using PortalExcursiones.Properties;
 using System.Data.Entity;
 using PortalExcursiones.Infraestructura.Interfaces;
 using PortalExcursiones.Infraestructura.Enumeraciones;
+using System.Threading.Tasks;
+using PortalExcursiones.Infraestructura.LogicaComun;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
@@ -19,12 +21,14 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         private AdministradorUsuario mgr = null;
         private Contexto contexto = null;
         private Respuesta resp = null;
-       
-        public ClienteOperaciones(AdministradorUsuario _mgr, Contexto _contexto,Respuesta _resp)
+        private GestionAvisosEmail avisosemail = null;
+
+        public ClienteOperaciones(AdministradorUsuario _mgr, Contexto _contexto,Respuesta _resp,GestionAvisosEmail avisos)
         {
             mgr = _mgr; 
             contexto = _contexto;
             resp = _resp;
+            avisosemail = avisos;
         }
 
         public HttpResponseMessage Crear(cliente Entidad,ModelStateDictionary modelo)
@@ -36,6 +40,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 {
                     Entidad.usuario_id = Entidad.usuario.Id;
                     tran = contexto.Database.BeginTransaction();
+                    var password = Entidad.usuario.PasswordHash;
                     IdentityResult result = mgr.CreateAsync(Entidad.usuario, Entidad.usuario.PasswordHash).Result;
                     if(!result.Succeeded)
                     {
@@ -54,6 +59,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         contexto.cliente.Add(Entidad);
                         contexto.SaveChanges();
                         tran.Commit();
+                        Task.Run(() => avisosemail.CreacionCuentaCliente(Entidad.usuario_id,password));
                         resp.Codigo = (int)Codigos.OK;
                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
                         return resp.ObjectoRespuesta();

@@ -24,7 +24,11 @@ namespace CapaDatos.Entidades
             
         public DateTime fecha { get; set; }
 
-     
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string motivoanulacion { get; set; }
+
+
         public byte estadoexcursion_id { get; set; }
 
         public virtual estadoexcursion estadoexcursion { get; set; }

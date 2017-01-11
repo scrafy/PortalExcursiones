@@ -9,6 +9,7 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
         
         private string passantiguo;
         private string passnuevo;
+        private string confpassnuevo;
 
 
         public CambioPasswordModel()
@@ -43,6 +44,21 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
             set
             {
                 passnuevo = value;
+            }
+        }
+
+        [Required(ErrorMessageResourceName = "error33", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [RegularExpression("^[a-zA-Z0-9]{6,}$", ErrorMessageResourceName = "error32", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        public string Confpassnuevo
+        {
+            get
+            {
+                return confpassnuevo;
+            }
+
+            set
+            {
+                confpassnuevo = value;
             }
         }
     }

@@ -1,14 +1,7 @@
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web.Http.ModelBinding;
 using CapaDatos.Properties;
 
 namespace CapaDatos.Entidades

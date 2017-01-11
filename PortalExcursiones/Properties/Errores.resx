@@ -192,6 +192,9 @@
   <data name="error32" xml:space="preserve">
     <value>Al contabilizarse los infantes, es necesario especificar el coste</value>
   </data>
+  <data name="error33" xml:space="preserve">
+    <value>El campo motivo de anulación es requerido</value>
+  </data>
   <data name="error4" xml:space="preserve">
     <value>No existe ningún usuario con la direccion de email proporcionada</value>
   </data>

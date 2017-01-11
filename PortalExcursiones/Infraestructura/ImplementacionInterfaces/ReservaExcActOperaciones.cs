@@ -35,12 +35,14 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         private AdministradorUsuario mgr = null;
         private Contexto contexto = null;
         private Respuesta resp = null;
+        private GestionAvisosEmail avisos = null;
 
-        public ReservaExcActOperaciones(AdministradorUsuario _mgr, Contexto _contexto, Respuesta _resp)
+        public ReservaExcActOperaciones(AdministradorUsuario _mgr, Contexto _contexto, Respuesta _resp,GestionAvisosEmail _avisos)
         {
             mgr = _mgr;
             contexto = _contexto;
             resp = _resp;
+            avisos = _avisos;
         }
 
         public HttpResponseMessage Actualizar(ReservaExcursionActividadModel Entidad, ModelStateDictionary modelo)
@@ -128,7 +130,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     resp.Objetoerror = modelo;
                     return resp.ObjectoRespuesta();
                 }
-                var calendario = contexto.calendarioexcursion.Where(x => x.id == Entidad.Calendario_id && x.estadoexcursion.id == (int)EstadoExcursion.activa).FirstOrDefault();
+                var calendario = contexto.calendarioexcursion.Where(x => x.id == Entidad.Calendario_id && x.exact_id == Entidad.Exact_id && x.estadoexcursion.id == (int)EstadoExcursion.activa).FirstOrDefault();
                 if(calendario == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -214,7 +216,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     }
                 }
                 var precios = contexto.preciotemporada.Where(x => x.exact_id == exact.exact_id).ToList();
-                var preciotemp = precios.Where(x => x.id==9).FirstOrDefault(); //precios.Where(x => x.desde <= DateTime.Now && DateTime.Now <= x.hasta).FirstOrDefault();
+                var preciotemp = precios.Where(x => x.desde <= DateTime.Now && DateTime.Now <= x.hasta).FirstOrDefault();//precios.Where(x => x.id==9).FirstOrDefault(); 
                 if (preciotemp == null)
                 {
                     resp.Codigo = (int)Codigos.PRECIO_NO_ENCONTRADO;
@@ -302,7 +304,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 }
                 contexto.SaveChanges();
                 tran.Commit();
-                Task.Run(() => GenerarFactura(contexto, reserva.codigoqr)).ContinueWith((prevTask) => GestionAvisosEmail.EnviarFacturaReserva(reserva.id, contexto));
+                Task.Run(() => GenerarFactura(reserva.codigoqr)).ContinueWith((prevTask) => avisos.EnviarFacturaReserva(reserva.id));
                 resp.Codigo = (int)Codigos.OK;
                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
                 return resp.ObjectoRespuesta();
@@ -416,10 +418,12 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             return output.Substring(0, 12);
         }
 
-        public void GenerarFactura(Contexto contexto,string id)
+        public void GenerarFactura(string id)
         {
             var existepuntorecogida = false;
-            
+            var clavevalor = new Dictionary<string, string>();
+            contexto.clavevalor.ToList().ForEach(x => clavevalor.Add(x.clave,x.valor));
+
             var datosreserva = contexto.reservaexcursionactividad.Where(x => x.reserva.codigoqr == id).Select(x => new
             {
                 exact_id = x.calendarioexcursion.exact_id,
@@ -437,6 +441,10 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 direccion = x.calendarioexcursion.excursionactividad.configuracion.direccion,
                 lat = x.calendarioexcursion.excursionactividad.configuracion.lat,
                 lng = x.calendarioexcursion.excursionactividad.configuracion.lng,
+                localidad = x.calendarioexcursion.excursionactividad.configuracion.localidad.nombre,
+                codigopostal = x.calendarioexcursion.excursionactividad.configuracion.localidad.cp,
+                provincia = x.calendarioexcursion.excursionactividad.configuracion.localidad.provincia.nombre,
+                pais = x.calendarioexcursion.excursionactividad.configuracion.localidad.provincia.pais.nombre,
                 descuento = x.calendarioexcursion.excursionactividad.descuento == null ? 0 : x.calendarioexcursion.excursionactividad.descuento,
                 punto = x.punto,
                 telefono = x.reserva.proveedor.usuario.PhoneNumber,
@@ -591,8 +599,8 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 preciosdic.Add(Mensajes.mensaje29, precios.preciosenior.ToString());
                 preciosdic.Add(Mensajes.mensaje30, precios.precionino.ToString());
                 preciosdic.Add(Mensajes.mensaje31, precios.precioinfante.ToString());
-                preciosdic.Add(Mensajes.mensajes32, precios.totaladulto.ToString());
-                preciosdic.Add(Mensajes.mensajes33, precios.totaljunior.ToString());
+                preciosdic.Add(Mensajes.mensaje32, precios.totaladulto.ToString());
+                preciosdic.Add(Mensajes.mensaje33, precios.totaljunior.ToString());
                 preciosdic.Add(Mensajes.mensaje34, precios.totalsenior.ToString());
                 preciosdic.Add(Mensajes.mensaje35, precios.totalnino.ToString());
                 preciosdic.Add(Mensajes.mensaje36, precios.totalinfante.ToString());
@@ -678,6 +686,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             #endregion
 
             if (existepuntorecogida)
+
             {
                 var datospunto = contexto.puntorecogida.Where(x => x.id == datosreserva.punto.id).Select(x => new
                 {
@@ -698,12 +707,12 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
                 Dictionary<string, string> puntodic = new Dictionary<string, string>();
                 puntodic.Add(Mensajes.mensaje9, datosreserva.punto.nombre);
-                puntodic.Add(Mensajes.mensaje10, datosreserva.punto.direccion);
+                puntodic.Add(Mensajes.mensaje5, datosreserva.punto.direccion);
                 puntodic.Add(Mensajes.mensaje11, datospunto.localidad);
                 puntodic.Add(Mensajes.mensaje12, datospunto.provincia);
                 puntodic.Add(Mensajes.mensaje13, datospunto.pais);
                 puntodic.Add(Mensajes.mensaje14, datospunto.cp.ToString());
-                puntodic.Add(Mensajes.mensaje6, String.Format("http://asdadasasd.org?lat={0}&lng={1}", datosreserva.punto.lat, datosreserva.punto.lng));
+                puntodic.Add(Mensajes.mensaje6, String.Format(clavevalor["googlemap"], datosreserva.punto.lat, datosreserva.punto.lng));
                 PdfPCell cel = null;
                 var puntotext = new Phrase(Mensajes.mensaje8, bold);
                 cel = new PdfPCell(puntotext);
@@ -746,7 +755,11 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
                 Dictionary<string, string> puntodic = new Dictionary<string, string>();
                 puntodic.Add(Mensajes.mensaje5, datosreserva.direccion);
-                puntodic.Add(Mensajes.mensaje6, String.Format("http://asdadasasd.org?lat={0}&lng={1}", datosreserva.lat, datosreserva.lng));
+                puntodic.Add(Mensajes.mensaje11, datosreserva.localidad);
+                puntodic.Add(Mensajes.mensaje12, datosreserva.provincia);
+                puntodic.Add(Mensajes.mensaje13, datosreserva.pais);
+                puntodic.Add(Mensajes.mensaje14, datosreserva.codigopostal.ToString());
+                puntodic.Add(Mensajes.mensaje6, String.Format(clavevalor["googlemap"], datosreserva.lat, datosreserva.lng));
                 PdfPCell cel = null;
                 var puntotext = new Phrase(Mensajes.mensaje7, bold);
                 cel = new PdfPCell(puntotext);
@@ -792,7 +805,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             PdfPCell celda_tabla_importante_desc = null;
 
             if (existepuntorecogida)
-                 celda_tabla_importante_desc = new PdfPCell(new Phrase(Mensajes.mensaje2 + " " + datosreserva.telefono, fuente));
+                 celda_tabla_importante_desc = new PdfPCell(new Phrase(String.Format(Mensajes.mensaje2, datosreserva.telefono), fuente));
             else
                  celda_tabla_importante_desc = new PdfPCell(new Phrase(String.Format(Mensajes.mensaje4, datosreserva.fecha.ToString("dd-MM-yyyy"), datosreserva.fecha.ToString("HH:mm:ss"),datosreserva.telefono), fuente));
 

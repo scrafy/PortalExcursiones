@@ -15,7 +15,6 @@ namespace CapaDatos.Identity
         : base(almacen)
         {
             UserValidator = new ValidadorUsuario(this);
-            EmailService = new ServicioEmail();
             PasswordValidator = new ValidadorPassword();
         }
         
@@ -27,7 +26,6 @@ namespace CapaDatos.Identity
                 var  t = this;
                 IDataProtector dataProtector = p.Create("ASP.NET Identity");
                 t.UserTokenProvider = new DataProtectorTokenProvider<usuario>(dataProtector);
-                
             }
         }
 

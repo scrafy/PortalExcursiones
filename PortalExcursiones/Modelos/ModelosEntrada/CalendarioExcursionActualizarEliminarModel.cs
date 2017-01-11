@@ -10,6 +10,7 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
         private DateTime fecha;
         private DateTime fechanueva;
         private long exact_id;
+        private string motivoanulacion;
 
         [Hora(ErrorMessageResourceName = "error12",ErrorMessageResourceType = typeof(ErroresValidacion))]
         [Fecha(ErrorMessageResourceName = "error28", ErrorMessageResourceType = typeof(ErroresValidacion))]
@@ -51,6 +52,18 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
             set
             {
                 exact_id = value;
+            }
+        }
+        public string Motivoanulacion
+        {
+            get
+            {
+                return motivoanulacion;
+            }
+
+            set
+            {
+                motivoanulacion = value;
             }
         }
     }

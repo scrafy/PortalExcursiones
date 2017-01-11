@@ -16,7 +16,7 @@ using Microsoft.Owin.Security.DataProtection;
 using PortalExcursiones.Infraestructura.Interfaces;
 using PortalExcursiones.Infraestructura.ImplementacionInterfaces;
 using Microsoft.Owin.Security;
-
+using PortalExcursiones.Infraestructura.LogicaComun;
 
 namespace PortalExcursiones
 {
@@ -59,8 +59,8 @@ namespace PortalExcursiones
             contenedor.RegisterType<IOperacionesComunes<grupoedad>, GrupoEdadOperaciones>(new CicloVidaObjecto<GrupoEdadOperaciones>());
             contenedor.RegisterType<ICreacionMultiple<grupoedad>, GrupoEdadOperaciones>(new CicloVidaObjecto<GrupoEdadOperaciones>());
             contenedor.RegisterType<IOperacionesComunes<facturaitem>, FacturaItemOperaciones>(new CicloVidaObjecto<FacturaItemOperaciones>());
-            contenedor.RegisterType<IGeneracionInformes, InformeOperaciones>(new CicloVidaObjecto<InformeOperaciones>());
-
+            contenedor.RegisterType<IGeneracionInformes, InformeOperaciones>(new CicloVidaObjecto<InformeOperaciones>()); 
+            contenedor.RegisterType<GestionAvisosEmail>(new CicloVidaObjecto<GestionAvisosEmail>());
         }
 
         public static UnityContainer ObtenerContenedor()

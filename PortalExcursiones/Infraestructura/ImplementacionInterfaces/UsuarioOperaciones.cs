@@ -17,7 +17,11 @@ using Microsoft.Owin.Security;
 using System.Text.RegularExpressions;
 using System.Net.Http.Headers;
 using System.Configuration;
-
+using PortalExcursiones.Infraestructura.LogicaComun;
+using System.Web;
+using System.Text;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
@@ -27,13 +31,15 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         private Contexto contexto = null;
         private Respuesta resp = null;
         private IAuthenticationManager auth;
+        private GestionAvisosEmail avisosemail = null;
 
-        public UsuarioOperaciones(IAuthenticationManager _auth,AdministradorUsuario _mgr, Contexto _contexto, Respuesta _resp)
+        public UsuarioOperaciones(IAuthenticationManager _auth,AdministradorUsuario _mgr, Contexto _contexto, Respuesta _resp,GestionAvisosEmail avisos)
         {
             mgr = _mgr;
             contexto = _contexto;
             resp = _resp;
             auth = _auth;
+            avisosemail = avisos;
         }
 
         public HttpResponseMessage Login(LoginModel login, ModelStateDictionary modelo)
@@ -111,6 +117,13 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             {
                 if (modelo.IsValid)
                 {
+                    if(password.Passnuevo != password.Confpassnuevo)
+                    {
+                        resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                        resp.Objetoerror = new string[]{ErroresValidacion.error31};
+                        return resp.ObjectoRespuesta();
+                    }
                     IdentityResult result = mgr.ChangePassword(auth.User.Identity.GetUserId(), password.Passantiguo, password.Passnuevo);
                     if (result.Succeeded)
                     {
@@ -141,34 +154,114 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
         }
 
-        public HttpResponseMessage ObtenerTokenReseteoPassword(string email)
+        /*  public HttpResponseMessage ObtenerTokenReseteoPassword(string email)
+          {
+              try
+              {
+                  if (!String.IsNullOrEmpty(email) && Regex.IsMatch(email, "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$"))
+                  {
+                      usuario usuario = mgr.FindByEmail(email);
+                      if (usuario == null)
+                      {
+                          resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                          resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                          resp.Mensaje_error = Errores.error4;
+                          return resp.ObjectoRespuesta();
+                      }
+                      var token = mgr.GeneratePasswordResetToken(usuario.Id);
+                      avisosemail.ResetPassword(usuario.Id, token);
+                      resp.Codigo = (int)Codigos.OK;
+                      resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                      return resp.ObjectoRespuesta();
+                  }
+                  else
+                  {
+                      resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                      resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                      resp.Objetoerror = new string[] { Errores.error5 };
+                      return resp.ObjectoRespuesta();
+                  }
+
+              }
+              catch (Exception ex)
+              {
+                  resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                  resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                  resp.Excepcion = Excepcion.Create(ex);
+                  return resp.ObjectoRespuesta();
+              }
+          }*/
+
+        /* public HttpResponseMessage RenovarPassword(RenovacionPasswordModel datos, ModelStateDictionary modelo)
+         {
+             try
+             {
+                 if(modelo.IsValid)
+                 {
+                     datos.Token = datos.Token.Replace(" ", "+");
+                     IdentityResult result = mgr.ResetPassword(datos.Userid, datos.Token, datos.Password);
+                     if (result.Succeeded)
+                     {
+                         resp.Codigo = (int)Codigos.OK;
+                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                         return resp.ObjectoRespuesta();
+                     }
+                     else
+                     {
+                         resp.Codigo = (int)Codigos.ERROR_RESETEANDO_PASSWORD;
+                         resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_RESETEANDO_PASSWORD);
+                         resp.Mensaje_error = result.Errors.First();
+                         return resp.ObjectoRespuesta();
+                     }
+                 }
+                 else
+                 {
+                     resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
+                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
+                     resp.Objetoerror = modelo;
+                     return resp.ObjectoRespuesta();
+                 }
+             }
+             catch (Exception ex)
+             {
+                 resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                 resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                 resp.Excepcion = Excepcion.Create(ex);
+                 return resp.ObjectoRespuesta();
+             }
+         }*/
+
+        public HttpResponseMessage ResetPassword(string email)
         {
             try
             {
-                if (!String.IsNullOrEmpty(email) && Regex.IsMatch(email, "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$"))
+                var user = mgr.FindByEmail(email);
+                if (user == null)
                 {
-                    usuario usuario = mgr.FindByEmail(email);
-                    if (usuario == null)
-                    {
-                        resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
-                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
-                        resp.Mensaje_error = Errores.error4;
-                        return resp.ObjectoRespuesta();
-                    }
-                    var token = mgr.GeneratePasswordResetToken(usuario.Id);
-                    mgr.SendEmail(usuario.Id, Mensajes.mensaje1, String.Format("http://localhost:54656/api/usuarios/renovarpassword?userid={0}&token={1}", usuario.Id, token));
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                    resp.Mensaje_error = Errores.error4;
+                    return resp.ObjectoRespuesta();
+                }
+                var newpassword = NewPassword();
+                var aux = mgr.PasswordHasher.HashPassword(newpassword);
+                user.PasswordHash = aux;
+                IdentityResult result = mgr.Update(user);
+                if (result.Succeeded)
+                {
+                    Task.Run(() => avisosemail.ResetPassword(user.Id, newpassword));
                     resp.Codigo = (int)Codigos.OK;
                     resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
                     return resp.ObjectoRespuesta();
                 }
                 else
                 {
-                    resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
-                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
-                    resp.Objetoerror = new string[] { Errores.error5 };
+                    resp.Codigo = (int)Codigos.ERROR_RESETEANDO_PASSWORD;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_RESETEANDO_PASSWORD);
+                    resp.Mensaje_error = result.Errors.First();
                     return resp.ObjectoRespuesta();
                 }
-
+               
             }
             catch (Exception ex)
             {
@@ -179,42 +272,16 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public HttpResponseMessage RenovarPassword(RenovacionPasswordModel datos, ModelStateDictionary modelo)
+        private string NewPassword()
         {
-            try
+            MD5 md5 = MD5.Create();
+            byte[] data = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+            string output = "";
+            for (int i = 0; i < data.Length; i++)
             {
-                if (modelo.IsValid)
-                {
-                    IdentityResult result = mgr.ResetPassword(datos.Userid, datos.Token, datos.Password);
-                    if (result.Succeeded)
-                    {
-                        resp.Codigo = (int)Codigos.OK;
-                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
-                        return resp.ObjectoRespuesta();
-                    }
-                    else
-                    {
-                        resp.Codigo = (int)Codigos.ERROR_RESETEANDO_PASSWORD;
-                        resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_RESETEANDO_PASSWORD);
-                        resp.Mensaje_error = result.Errors.First();
-                        return resp.ObjectoRespuesta();
-                    }
-                }
-                else
-                {
-                    resp.Codigo = (int)Codigos.ERROR_DE_VALIDACION;
-                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_VALIDACION);
-                    resp.Objetoerror = modelo;
-                    return resp.ObjectoRespuesta();
-                }
+                output += data[i].ToString("X2");
             }
-            catch (Exception ex)
-            {
-                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
-                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
-                resp.Excepcion = Excepcion.Create(ex);
-                return resp.ObjectoRespuesta();
-            }
+            return output.Substring(0, 10);
         }
 
         public HttpResponseMessage Crear(usuario Entidad, ModelStateDictionary modelo)
@@ -465,6 +532,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                 return resp.ObjectoRespuesta();
             }
         }
-        
+
+       
     }
 }

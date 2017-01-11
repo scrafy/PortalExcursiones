@@ -126,9 +126,6 @@
   <data name="mensaje1" xml:space="preserve">
     <value>Renovacion Password</value>
   </data>
-  <data name="mensaje10" xml:space="preserve">
-    <value>Dirección:</value>
-  </data>
   <data name="mensaje11" xml:space="preserve">
     <value>Localidad:</value>
   </data>
@@ -157,7 +154,7 @@
     <value>hora/as</value>
   </data>
   <data name="mensaje2" xml:space="preserve">
-    <value>Esperar en el punto de recogida hasta que el servicio de transporte llegue. Este podrá demorar algún tiempo debido a que realiza recorridos adicionales para recoger otros clientes que realizarán la misma actividad/excursión. Para cualquier duda o aclaración puede contactar con el proveedor de la excursión al teléfono</value>
+    <value>Esperar en el punto de recogida hasta que el servicio de transporte llegue. Este podrá demorar algún tiempo debido a que realiza recorridos adicionales para recoger otros clientes que realizarán la misma actividad/excursión. Para cualquier duda o aclaración puede contactar con el proveedor de la excursión al teléfono {0}</value>
   </data>
   <data name="mensaje20" xml:space="preserve">
     <value>minuto/os</value>
@@ -198,6 +195,12 @@
   <data name="mensaje31" xml:space="preserve">
     <value>Precio Infante:</value>
   </data>
+  <data name="mensaje32" xml:space="preserve">
+    <value>Total Adultos:</value>
+  </data>
+  <data name="mensaje33" xml:space="preserve">
+    <value>Total Juniors:</value>
+  </data>
   <data name="mensaje34" xml:space="preserve">
     <value>Total Seniors:</value>
   </data>
@@ -216,25 +219,130 @@
   <data name="mensaje40" xml:space="preserve">
     <value>Precio Grupo:</value>
   </data>
+  <data name="mensaje41" xml:space="preserve">
+    <value>Gracias por registrarse con nosotros</value>
+  </data>
+  <data name="mensaje42" xml:space="preserve">
+    <value>Bienvenido Sr/Sra {0}, su cuenta ha sido creada correctamente.</value>
+  </data>
+  <data name="mensaje43" xml:space="preserve">
+    <value>Sus datos de acceso al portal son los siguientes:</value>
+  </data>
+  <data name="mensaje44" xml:space="preserve">
+    <value>Usuario:</value>
+  </data>
+  <data name="mensaje45" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="mensaje46" xml:space="preserve">
+    <value>Cuenta creada correctamente</value>
+  </data>
+  <data name="mensaje47" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="mensaje48" xml:space="preserve">
+    <value>Ha solicitado un cambio de contraseña, por favor, introduzca su nueva contraseña y pulse enviar</value>
+  </data>
+  <data name="mensaje49" xml:space="preserve">
+    <value>Introduzca su nuevo password</value>
+  </data>
   <data name="mensaje5" xml:space="preserve">
     <value>Dirección:</value>
+  </data>
+  <data name="mensaje50" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
+  <data name="mensaje51" xml:space="preserve">
+    <value>Sus nuevas credenciales de acceso son:</value>
+  </data>
+  <data name="mensaje52" xml:space="preserve">
+    <value>Si desea cambiar el password, inicie sesión con este nuevo password y desde su área personal podrá realizar la operación</value>
+  </data>
+  <data name="mensaje53" xml:space="preserve">
+    <value>Confirmación de reserva</value>
+  </data>
+  <data name="mensaje54" xml:space="preserve">
+    <value>Fecha de la excursión/actividad:</value>
+  </data>
+  <data name="mensaje55" xml:space="preserve">
+    <value>Reserva a nombre de:</value>
+  </data>
+  <data name="mensaje56" xml:space="preserve">
+    <value>Número total de personas:</value>
+  </data>
+  <data name="mensaje57" xml:space="preserve">
+    <value>Número total de infantes:</value>
+  </data>
+  <data name="mensaje58" xml:space="preserve">
+    <value>Punto de reunión:</value>
+  </data>
+  <data name="mensaje59" xml:space="preserve">
+    <value>Punto de recogida:</value>
   </data>
   <data name="mensaje6" xml:space="preserve">
     <value>Ver Mapa:</value>
   </data>
+  <data name="mensaje60" xml:space="preserve">
+    <value>Para cualquier duda o aclaración puede contactar con el proveedor de la excursión en el teléfono</value>
+  </data>
+  <data name="mensaje61" xml:space="preserve">
+    <value>Esperar en el PUNTO DE RECOGIDA hasta que el servicio de transporte llegue. Este podrá demorar algún tiempo debido a que realiza recorridos adicionales para recoger a otros clientes que realizan la misma excursión/actividad.</value>
+  </data>
+  <data name="mensaje62" xml:space="preserve">
+    <value>Deberá dirigirse a la dirección indicada en PUNTO DE REUNIÓN y ser puntual el dia {0} a la hora {1}</value>
+  </data>
+  <data name="mensaje63" xml:space="preserve">
+    <value>Día:</value>
+  </data>
+  <data name="mensaje64" xml:space="preserve">
+    <value>Hora:</value>
+  </data>
+  <data name="mensaje65" xml:space="preserve">
+    <value>Para cualquier duda o consulta no dude en ponerse en contacto con el proveedor en el telefono</value>
+  </data>
+  <data name="mensaje66" xml:space="preserve">
+    <value>La finalidad de este mensaje no es otra sino la de informarle de que la excursion/actividad la cual tiene contratada para el día &lt;b&gt;{0}&lt;/b&gt; y hora &lt;b&gt;{1}&lt;/b&gt; ha sido modificada para la siguiente fecha:</value>
+  </data>
+  <data name="mensaje67" xml:space="preserve">
+    <value>Fecha de excursión modificada</value>
+  </data>
+  <data name="mensaje68" xml:space="preserve">
+    <value>La excursión/activad que tiene contratada cuya fecha de realización es &lt;b&gt;{0}&lt;/b&gt; ha sido anulada por el touroperador por el siguiente motivo:</value>
+  </data>
   <data name="mensaje7" xml:space="preserve">
     <value>PUNTO DE REUNIÓN</value>
+  </data>
+  <data name="mensaje70" xml:space="preserve">
+    <value>El dinero le será reembolsado a la mayor brevedad posible, el cual será transferido a la cuenta asociada a la tarjeta de crédito/debito con la que realizó el pago.</value>
+  </data>
+  <data name="mensaje71" xml:space="preserve">
+    <value>Rogamos disculpen las molestias que este percance les haya podido ocacionar. Para cualquier duda o aclaración, puede contactar con el proveedor en el telefono &lt;b&gt;{0}&lt;/b&gt;</value>
+  </data>
+  <data name="mensaje72" xml:space="preserve">
+    <value>Excursión/Actividad anulada por el touroperador</value>
+  </data>
+  <data name="mensaje73" xml:space="preserve">
+    <value>El proveedor no ha especificado el motivo por el cual se ha anulado la excursión/actividad</value>
+  </data>
+  <data name="mensaje74" xml:space="preserve">
+    <value>Punto de recogida modificado</value>
+  </data>
+  <data name="mensaje75" xml:space="preserve">
+    <value>La finalidad de este correo no es otra sino la de informarle de que el punto de recogida de la excursión que tiene pendiente de realizar ha sido modificado por el touroperador al siguiente.</value>
+  </data>
+  <data name="mensaje76" xml:space="preserve">
+    <value>NUEVO PUNTO DE RECOGIDA:</value>
+  </data>
+  <data name="mensaje77" xml:space="preserve">
+    <value>La finalidad de este correo no es otra sino la de informarle de que el punto de recogida de la excursión que tiene pendiente de realizar ha sido anulado por el touroperador, por lo que tendrá que dirigirse a un nuevo punto de reunión el cual le será asignado por el touroperador. Rogamos se ponga en contacto con el mismo en el número de teléfono &lt;b&gt;{0}&lt;/b&gt;</value>
+  </data>
+  <data name="mensaje78" xml:space="preserve">
+    <value>Punto de recogida eliminado</value>
   </data>
   <data name="mensaje8" xml:space="preserve">
     <value>HA SELECCIONADO ESTE PUNTO DE RECOGIDA</value>
   </data>
   <data name="mensaje9" xml:space="preserve">
     <value>Nombre:</value>
-  </data>
-  <data name="mensajes32" xml:space="preserve">
-    <value>Total Adultos:</value>
-  </data>
-  <data name="mensajes33" xml:space="preserve">
-    <value>Total Juniors:</value>
   </data>
 </root>

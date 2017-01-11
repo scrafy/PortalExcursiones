@@ -286,6 +286,15 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El campo motivo de anulación es requerido.
+        /// </summary>
+        public static string error33 {
+            get {
+                return ResourceManager.GetString("error33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No existe ningún usuario con la direccion de email proporcionada.
         /// </summary>
         public static string error4 {

@@ -31,7 +31,8 @@ namespace CapaDatos.ConfiguracionEntidades
            
                 HasMany(e => e.reservas)
                 .WithOptional(e => e.colaborador)
-                .HasForeignKey(e => e.colaborador_id);
+                .HasForeignKey(e => e.colaborador_id)
+                .WillCascadeOnDelete(false);
 
         }
     }

@@ -259,6 +259,33 @@ namespace PortalExcursiones.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La confirmación del password no coincide.
+        /// </summary>
+        public static string error31 {
+            get {
+                return ResourceManager.GetString("error31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo confirmación password no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos.
+        /// </summary>
+        public static string error32 {
+            get {
+                return ResourceManager.GetString("error32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El campo confirmación password es requerido.
+        /// </summary>
+        public static string error33 {
+            get {
+                return ResourceManager.GetString("error33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El campo password nuevo no es válido, asegúrese de que introduce al menos seis o mas caractéres alfanuméricos.
         /// </summary>
         public static string error4 {

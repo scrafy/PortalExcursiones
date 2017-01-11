@@ -15,6 +15,7 @@ namespace CapaDatos.Entidades
             puntosrecogida = new HashSet<puntorecogida>();
             reservas = new HashSet<reservaexcursionactividad>();
             usuarios = new HashSet<usuario>();
+            configuraciones = new HashSet<configuracion>();
         }
 
         [Column(TypeName = "uint")]
@@ -45,5 +46,8 @@ namespace CapaDatos.Entidades
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuario> usuarios { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<configuracion> configuraciones { get; set; }
     }
 }
