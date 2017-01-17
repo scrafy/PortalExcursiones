@@ -20,12 +20,14 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
+        [AllowAnonymous]
         public HttpResponseMessage Post([FromBody]ReservaExcursionActividadModel reservaexact)
         {
             return opcomun.Crear(reservaexact, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles="proveedor")]
         public HttpResponseMessage Get(int pag_actual = 1,int regxpag = 10)
         {
             return opcomun.Todos(pag_actual, regxpag);

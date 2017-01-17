@@ -304,7 +304,30 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
         public HttpResponseMessage Eliminar(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                long _id = Int64.Parse(id);
+                var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
+                var precio = contexto.preciotemporada.Where(x => x.id == _id && x.excursionactividad.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
+                if(precio == null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                    return resp.ObjectoRespuesta();
+                }
+                contexto.preciotemporada.Remove(precio);
+                contexto.SaveChanges();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch(Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
         }
     }
 }

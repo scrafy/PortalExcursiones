@@ -1,4 +1,6 @@
-﻿using PortalExcursiones.Infraestructura.AtributosValidacion;
+﻿using CapaDatos.Infraestructura.Json;
+using Newtonsoft.Json;
+using PortalExcursiones.Infraestructura.AtributosValidacion;
 using PortalExcursiones.Properties;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
         private List<string> dias;
 
         [Fecha(ErrorMessageResourceName = "error13",ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Desde
         {
             get
@@ -30,6 +33,7 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
         }
 
         [Fecha(ErrorMessageResourceName = "error14", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Hasta
         {
             get

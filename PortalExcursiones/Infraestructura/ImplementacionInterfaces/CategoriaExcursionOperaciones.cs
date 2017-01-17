@@ -130,7 +130,29 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
         public HttpResponseMessage Eliminar(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                long _id = Int64.Parse(id);
+                var cat = contexto.categoriaexcursion.Where(x => x.id == _id).FirstOrDefault();
+                if (cat == null)
+                {
+                    resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
+                    resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.REGISTRO_NO_ENCONTRADO);
+                    return resp.ObjectoRespuesta();
+                }
+                contexto.categoriaexcursion.Remove(cat);
+                contexto.SaveChanges();
+                resp.Codigo = (int)Codigos.OK;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.OK);
+                return resp.ObjectoRespuesta();
+            }
+            catch (Exception ex)
+            {
+                resp.Codigo = (int)Codigos.ERROR_DE_SERVIDOR;
+                resp.Mensaje = Enum.GetName(typeof(Codigos), (int)Codigos.ERROR_DE_SERVIDOR);
+                resp.Excepcion = Excepcion.Create(ex);
+                return resp.ObjectoRespuesta();
+            }
         }
 
         public HttpResponseMessage Todos(int pag_actual,int regxpag)

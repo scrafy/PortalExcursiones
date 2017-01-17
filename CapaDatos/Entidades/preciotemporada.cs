@@ -1,3 +1,4 @@
+using CapaDatos.Infraestructura.Json;
 using CapaDatos.Properties;
 using Newtonsoft.Json;
 using PortalExcursiones.CapaDatos.Infraestructura.AtributosValidacion;
@@ -15,10 +16,12 @@ namespace CapaDatos.Entidades
 
         [Column(TypeName = "date")]
         [Fecha(ErrorMessageResourceName = "error44",ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime desde { get; set; }
 
         [Column(TypeName = "date")]
         [Fecha(ErrorMessageResourceName = "error45", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime hasta { get; set; }
 
         public decimal pvpadulto { get; set; }

@@ -1,5 +1,6 @@
 ﻿using CapaDatos.Entidades;
 using PortalExcursiones.Infraestructura.Interfaces;
+using PortalExcursiones.Modelos.ModelosEntrada;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,33 +14,37 @@ namespace PortalExcursiones.Controladores
     public class FotoConfiguracionController : BaseControllers
     {
         private IOperacionesComunes<fotoconfiguracion> opcomun;
-        private IOperacionesFotoConfiguracion op;
+       
 
-        public FotoConfiguracionController(IOperacionesComunes<fotoconfiguracion> _opcomun, IOperacionesFotoConfiguracion _op)
+        public FotoConfiguracionController(IOperacionesComunes<fotoconfiguracion> _opcomun)
         {
             this.opcomun = _opcomun;
-            this.op = _op;
+         
         }
 
         [Route]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Post([FromBody] fotoconfiguracion fotoconfiguracion)
         {
             return opcomun.Crear(fotoconfiguracion, this.ModelState);
         }
 
-        [Route("{id}")]
-        public HttpResponseMessage Delete(long id)
+        [Route()]
+        [Authorize(Roles = "proveedor")]
+        public HttpResponseMessage Delete([FromBody] EliminarEntidadModel datos)
         {
-            return op.Eliminar(id);
+            return opcomun.Eliminar(datos.Id);
         }
 
         [Route]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Get(int pag_actual = 1, int regxpag = 10)
         {
             return opcomun.Todos(pag_actual, regxpag);
         }
 
         [Route("{id}")]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Get(string id)
         {
             return opcomun.BusquedaPorId(id);

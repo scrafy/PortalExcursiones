@@ -115,6 +115,9 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
         {
             try
             {
+                bool autenticado = HttpContext.Current.User.Identity.IsAuthenticated;
+                bool isinrole = HttpContext.Current.User.IsInRole("cliente");
+                
                 if (modelo.IsValid)
                 {
                     if(password.Passnuevo != password.Confpassnuevo)

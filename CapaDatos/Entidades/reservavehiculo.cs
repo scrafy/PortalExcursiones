@@ -1,3 +1,5 @@
+using CapaDatos.Infraestructura.Json;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,6 +14,7 @@ namespace CapaDatos.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long reserva_id { get; set; }
 
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime fecha_entrega { get; set; }
 
         public byte numdias { get; set; }

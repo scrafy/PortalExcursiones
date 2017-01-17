@@ -23,24 +23,28 @@ namespace PortalExcursiones.Controladores
         }
         
         [Route]
+        [Authorize(Roles = "administrador")]
         public HttpResponseMessage Post([FromBody] usuario usuario)
         {
             return opcomun.Crear(usuario, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles = "administrador")]
         public HttpResponseMessage Put([ValueProvider(typeof(ProveedorValorFactory))] usuario usuario)
         {
             return opcomun.Actualizar(usuario, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles = "administrador")]
         public HttpResponseMessage Get(int pag_actual = 1, int regxpag = 10)
         {
             return opcomun.Todos(pag_actual, regxpag);
         }
 
         [Route("{id}")]
+        [Authorize(Roles = "administrador")]
         public HttpResponseMessage Get(string id)
         {
             return opcomun.BusquedaPorId(id);
@@ -48,6 +52,7 @@ namespace PortalExcursiones.Controladores
 
         [HttpPost]
         [Route("login")]
+        [AllowAnonymous]
         public HttpResponseMessage Login([FromBody] LoginModel login)
         {
             return opusu.Login(login,this.ModelState);
@@ -55,6 +60,7 @@ namespace PortalExcursiones.Controladores
 
         [HttpGet]
         [Route("logout")]
+        [AllowAnonymous]
         public HttpResponseMessage Logout()
         {
             return opusu.Logout();
@@ -62,6 +68,7 @@ namespace PortalExcursiones.Controladores
 
         [HttpPost]
         [Route("cambiarpassword")]
+        [Authorize(Roles = "administrador,cliente,proveedor")]
         public HttpResponseMessage CambioPasword(CambioPasswordModel modelo)
         {
             return opusu.CambiarPassword(modelo,this.ModelState);
@@ -76,6 +83,7 @@ namespace PortalExcursiones.Controladores
     
          [HttpGet]
          [Route("resetpassword")]
+         [AllowAnonymous]
          public HttpResponseMessage ResetPassword([FromUri] string email)
          {
              return opusu.ResetPassword(email);
@@ -85,6 +93,7 @@ namespace PortalExcursiones.Controladores
 
         [HttpGet]
         [Route("cambiaridioma/{idioma}")]
+        [AllowAnonymous]
         public HttpResponseMessage CambiarIdioma(string idioma)
         {
             return opusu.CambiarIdioma(idioma);
@@ -92,6 +101,7 @@ namespace PortalExcursiones.Controladores
 
         [HttpPost]
         [Route("anadirole")]
+        [Authorize(Roles = "administrador")]
         public HttpResponseMessage AnadirRole([FromBody] RolModel datos)
         {
             return opusu.AnadirRol(datos);
@@ -99,6 +109,7 @@ namespace PortalExcursiones.Controladores
 
         [HttpPost]
         [Route("eliminarole")]
+        [Authorize(Roles = "administrador")]
         public HttpResponseMessage EliminarRole([FromBody] RolModel datos)
         {
             return opusu.EliminarRol(datos);

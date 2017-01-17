@@ -20,24 +20,28 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Post([FromBody] PuntoRecogidaModel puntorecogida)
         {
             return op.Crear(puntorecogida, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Put([FromBody]PuntoRecogidaModel puntorecogida)
         {
             return op.Actualizar(puntorecogida, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Get(int pag_actual = 1,int regxpag = 10)
         {
             return op.Todos(pag_actual, regxpag);
         }
 
         [Route("{id}")]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Get(long id)
         {
             return op.BusquedaPorId(id);
@@ -45,12 +49,14 @@ namespace PortalExcursiones.Controladores
 
         [Route("busquedapuntosexact/{id}")]
         [HttpGet]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage BusquedaExact(long id)
         {
             return op.BusquedaPorExAct(id);
         }
 
         [Route()]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Delete([FromBody]PuntoRecogidaEliminarModel datos)
         {
             return op.Eliminar(datos.Id);

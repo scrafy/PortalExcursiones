@@ -185,7 +185,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                         resp.Erroresvalidacion = new string[] { Errores.error11 }.ToList();
                         return resp.ObjectoRespuesta();
                     }
-                    var calendario = contexto.calendarioexcursion.Where(p => p.exact_id == datos.Exact_id && p.fecha.CompareTo(datos.Fecha) == 0 && p.estadoexcursion_id == (int)EstadoExcursion.activa && p.excursionactividad.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
+                    var calendario = contexto.calendarioexcursion.Where(p => p.exact_id == datos.Exact_id && p.fecha.CompareTo(datos.Fecha) == 0 && (p.estadoexcursion_id == (int)EstadoExcursion.activa || p.estadoexcursion_id == (int)EstadoExcursion.fechamodificada) && p.excursionactividad.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
                     if (calendario == null)
                     {
                         resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;
@@ -202,6 +202,7 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
                     tran = contexto.Database.BeginTransaction();
                     DateTime aux = calendario.fecha;
                     calendario.fecha = datos.Fechanueva;
+                    calendario.estadoexcursion_id = (int)EstadoExcursion.fechamodificada;
                     contexto.SaveChanges();
                     tran.Commit();
                     Task.Run(() => avisos.FechaCalendarioModificada(calendario.id, aux));

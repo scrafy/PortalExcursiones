@@ -19,6 +19,7 @@ namespace PortalExcursiones
 
                  ExpireTimeSpan = TimeSpan.FromMinutes(30),
                  AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
+
             });
            
         }

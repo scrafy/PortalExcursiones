@@ -17,30 +17,35 @@ namespace PortalExcursiones.Controladores
         }
 
         [Route]
+        [Authorize(Roles="proveedor")]
         public HttpResponseMessage Post([FromBody] facturaitem facturaitem)
         {
             return opcomun.Crear(facturaitem, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Put([FromBody]facturaitem facturaitem)
         {
             return opcomun.Actualizar(facturaitem, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Get(int pag_actual = 1, int regxpag = 10)
         {
             return opcomun.Todos(pag_actual,regxpag);
         }
 
         [Route("{id}")]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Get(string id)
         {
             return opcomun.BusquedaPorId(id);
         }
 
         [Route()]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Delete([FromBody]EliminarEntidadModel datos)
         {
             return opcomun.Eliminar(datos.Id);

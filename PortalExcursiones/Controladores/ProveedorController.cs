@@ -20,24 +20,28 @@ namespace PortalExcursiones.Controladores
 
 
         [Route]
+        [Authorize(Roles = "administrador,proveedor")]
         public HttpResponseMessage Post([FromBody] proveedor proveedor)
         {
             return opcomun.Crear(proveedor, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles = "administrador,proveedor")]
         public HttpResponseMessage Put([ValueProvider(typeof(ProveedorValorFactory))]  proveedor proveedor)
         {
             return opcomun.Actualizar(proveedor, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles = "administrador")]
         public HttpResponseMessage Get(int pag_actual = 1, int regxpag = 10)
         {
             return opcomun.Todos(pag_actual, regxpag);
         }
 
         [Route("{id}")]
+        [Authorize(Roles = "administrador")]
         public HttpResponseMessage Get(string id)
         {
             return opcomun.BusquedaPorId(id);

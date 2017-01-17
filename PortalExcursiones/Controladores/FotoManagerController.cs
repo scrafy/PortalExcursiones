@@ -14,7 +14,7 @@ namespace PortalExcursiones.Controladores
         {
             this.op = _op;
         }
-
+        [AllowAnonymous]
         public HttpResponseMessage Post()
         {
             return op.Subir(this.Request);           

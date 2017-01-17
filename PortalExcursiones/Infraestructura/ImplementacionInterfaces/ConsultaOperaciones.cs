@@ -12,12 +12,12 @@ using Microsoft.AspNet.Identity;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class InformeOperaciones : Operaciones,IGeneracionInformes
+    public class ConsultaOperaciones : Operaciones,IGeneracionInformes
     {
         private Contexto contexto;
         private Respuesta resp;
 
-        public InformeOperaciones(Contexto _contexto, Respuesta _resp)
+        public ConsultaOperaciones(Contexto _contexto, Respuesta _resp)
         {
             contexto = _contexto;
             resp = _resp;
@@ -107,9 +107,6 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
             }
         }
 
-        public void GenerarFactura(string id)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

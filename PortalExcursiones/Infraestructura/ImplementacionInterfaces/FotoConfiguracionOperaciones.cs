@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 {
-    public class FotoConfiguracionOperaciones : Operaciones, IOperacionesComunes<fotoconfiguracion>, IOperacionesFotoConfiguracion
+    public class FotoConfiguracionOperaciones : Operaciones, IOperacionesComunes<fotoconfiguracion>
     {
         private Contexto contexto;
         private Respuesta resp;
@@ -87,15 +87,11 @@ namespace PortalExcursiones.Infraestructura.ImplementacionInterfaces
 
         public HttpResponseMessage Eliminar(string id)
         {
-            throw new NotImplementedException();
-        }
-
-        public HttpResponseMessage Eliminar(long id)
-        {
             try
             {
+                long _id = Int64.Parse(id);
                 var proveedor_id = HttpContext.Current.User.Identity.GetUserId();
-                var foto = contexto.fotoconfiguracion.Where(x => x.id == id && x.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
+                var foto = contexto.fotoconfiguracion.Where(x => x.id == _id && x.configuracion.proveedor_id == proveedor_id).FirstOrDefault();
                 if(foto == null)
                 {
                     resp.Codigo = (int)Codigos.REGISTRO_NO_ENCONTRADO;

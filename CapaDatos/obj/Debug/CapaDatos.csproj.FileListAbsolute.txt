@@ -174,10 +174,9 @@ D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.pvpgrupo
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.facturaitem_proveedor.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_field_proveedor_id.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_table_clave_valor.resources
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_field_localidad_id.resources
+D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.newfield_motivoanulacion.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Properties.ErroresValidacion.resources
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csproj.GenerateResource.Cache
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.dll
 D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.pdb
-D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.new_field_localidad_id.resources
-D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
-D:\PROYECTOS\PortalExcursiones\CapaDatos\obj\Debug\CapaDatos.Migrations.newfield_motivoanulacion.resources

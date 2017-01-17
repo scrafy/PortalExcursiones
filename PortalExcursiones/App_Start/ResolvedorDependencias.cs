@@ -49,7 +49,6 @@ namespace PortalExcursiones
             contenedor.RegisterType<IOperacionesComunes<preciotemporada>, PrecioPorTemporadaOperaciones>(new CicloVidaObjecto<PrecioPorTemporadaOperaciones>());
             contenedor.RegisterType<IOperacionesPuntoRecogida, PuntoRecogidaOperaciones>(new CicloVidaObjecto<PuntoRecogidaOperaciones>());
             contenedor.RegisterType<IOperacionesComunes<fotoconfiguracion>, FotoConfiguracionOperaciones>(new CicloVidaObjecto<FotoConfiguracionOperaciones>());
-            contenedor.RegisterType<IOperacionesFotoConfiguracion, FotoConfiguracionOperaciones>(new CicloVidaObjecto<FotoConfiguracionOperaciones>());
             contenedor.RegisterType<IOperacionesComunes<idioma>, IdiomaOperaciones>(new CicloVidaObjecto<IdiomaOperaciones>());
             contenedor.RegisterType<IOperacionesComunes<item>, ItemOperaciones>(new CicloVidaObjecto<ItemOperaciones>());
             contenedor.RegisterType<IOperacionesComunes<ReservaExcursionActividadModel>, ReservaExcActOperaciones>(new CicloVidaObjecto<ReservaExcActOperaciones>());
@@ -59,7 +58,7 @@ namespace PortalExcursiones
             contenedor.RegisterType<IOperacionesComunes<grupoedad>, GrupoEdadOperaciones>(new CicloVidaObjecto<GrupoEdadOperaciones>());
             contenedor.RegisterType<ICreacionMultiple<grupoedad>, GrupoEdadOperaciones>(new CicloVidaObjecto<GrupoEdadOperaciones>());
             contenedor.RegisterType<IOperacionesComunes<facturaitem>, FacturaItemOperaciones>(new CicloVidaObjecto<FacturaItemOperaciones>());
-            contenedor.RegisterType<IGeneracionInformes, InformeOperaciones>(new CicloVidaObjecto<InformeOperaciones>()); 
+            contenedor.RegisterType<IGeneracionInformes, ConsultaOperaciones>(new CicloVidaObjecto<ConsultaOperaciones>()); 
             contenedor.RegisterType<GestionAvisosEmail>(new CicloVidaObjecto<GestionAvisosEmail>());
         }
 

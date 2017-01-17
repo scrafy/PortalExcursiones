@@ -1,3 +1,5 @@
+using CapaDatos.Infraestructura.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,7 +23,7 @@ namespace CapaDatos.Entidades
         [Column(TypeName = "uint")]
         public long exact_id { get; set; }
 
-            
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime fecha { get; set; }
 
         [Column(TypeName = "text")]

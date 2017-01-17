@@ -1,4 +1,6 @@
-﻿using PortalExcursiones.Infraestructura.AtributosValidacion;
+﻿using CapaDatos.Infraestructura.Json;
+using Newtonsoft.Json;
+using PortalExcursiones.Infraestructura.AtributosValidacion;
 using PortalExcursiones.Properties;
 using System;
 
@@ -14,6 +16,7 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
 
         [Hora(ErrorMessageResourceName = "error12",ErrorMessageResourceType = typeof(ErroresValidacion))]
         [Fecha(ErrorMessageResourceName = "error28", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Fecha
         {
             get
@@ -29,6 +32,7 @@ namespace PortalExcursiones.Modelos.ModelosEntrada
 
         [Hora(ErrorMessageResourceName = "error12", ErrorMessageResourceType = typeof(ErroresValidacion))]
         [Fecha(ErrorMessageResourceName = "error29", ErrorMessageResourceType = typeof(ErroresValidacion))]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Fechanueva
         {
             get

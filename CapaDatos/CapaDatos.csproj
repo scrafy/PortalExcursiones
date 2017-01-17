@@ -171,6 +171,7 @@
     <Compile Include="Infraestructura\AtributosValidacion\DNIAttribute.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\EnumAttribute.cs" />
     <Compile Include="Infraestructura\AtributosValidacion\FechaAttribute.cs" />
+    <Compile Include="Infraestructura\Json\DateTimeConverter.cs" />
     <Compile Include="Interceptor.cs" />
     <Compile Include="Migrations\201611052134451_Initial.cs" />
     <Compile Include="Migrations\201611052134451_Initial.Designer.cs">

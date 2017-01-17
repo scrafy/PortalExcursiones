@@ -54,16 +54,13 @@ namespace PortalExcursiones.Infraestructura.ProveedorValor
                             proveedor.usuario.Id = null;//sino se manda el id machacamos con null el autogenerado por identity
 
                         return new ValueProviderResult(proveedor, contenido, CultureInfo.InvariantCulture);
-                    case "colaborador":
-                        colaborador colaborador = JsonConvert.DeserializeObject<colaborador>(contenido);
-                        if (aux.usuario.id == null)
-                            colaborador.usuario.Id = null;//sino se manda el id machacamos con null el autogenerado por identity
 
-                        return new ValueProviderResult(colaborador, contenido, CultureInfo.InvariantCulture);
+                   
 
                 }
             }
-            return null;
+             
+           return null;
         }
     }
 

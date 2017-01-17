@@ -181,7 +181,7 @@
     <Compile Include="Controladores\FotoManagerController.cs" />
     <Compile Include="Controladores\GrupoEdadController.cs" />
     <Compile Include="Controladores\IdiomaController.cs" />
-    <Compile Include="Controladores\InformeController.cs" />
+    <Compile Include="Controladores\ConsultaController.cs" />
     <Compile Include="Controladores\ItemController.cs" />
     <Compile Include="Controladores\PrecioTemporadaController.cs" />
     <Compile Include="Controladores\ProveedorController.cs" />
@@ -205,7 +205,7 @@
     <Compile Include="Infraestructura\ImplementacionInterfaces\FotoOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\GrupoEdadOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\IdiomaOperaciones.cs" />
-    <Compile Include="Infraestructura\ImplementacionInterfaces\InformeOperaciones.cs" />
+    <Compile Include="Infraestructura\ImplementacionInterfaces\ConsultaOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\ItemOperaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\Operaciones.cs" />
     <Compile Include="Infraestructura\ImplementacionInterfaces\PrecioPorTemporadaOperaciones.cs" />
@@ -222,7 +222,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infraestructura\Interfaces\IOperacionesExcursionActividad.cs" />
-    <Compile Include="Infraestructura\Interfaces\IOperacionesFotoConfiguracion.cs" />
     <Compile Include="Infraestructura\Interfaces\IOperacionesFotos.cs" />
     <Compile Include="Infraestructura\Interfaces\IOperacionesPasarelaPago.cs" />
     <Compile Include="Infraestructura\Interfaces\IOperacionesPuntoRecogida.cs" />

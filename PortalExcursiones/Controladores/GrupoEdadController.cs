@@ -17,33 +17,31 @@ namespace PortalExcursiones.Controladores
             opcomun = _opcomun;
             multiple = _multiple;
         }
-
-        [Route]
-        public HttpResponseMessage Post([FromBody] grupoedad grupoedad)
-        {
-            return opcomun.Crear(grupoedad, this.ModelState);
-        }
-
+               
         [Route("crearmultiple")]
         [HttpPost]
+        [Authorize(Roles="proveedor")]
         public HttpResponseMessage CrearMultiple([FromBody] List<grupoedad> grupoedad)
         {
             return multiple.Crear(grupoedad, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Put([FromBody]grupoedad grupoedad)
         {
             return opcomun.Actualizar(grupoedad, this.ModelState);
         }
 
         [Route]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Get(int pag_actual = 1, int regxpag = 10)
         {
             return opcomun.Todos(pag_actual, regxpag);
         }
 
         [Route("{id}")]
+        [Authorize(Roles = "proveedor")]
         public HttpResponseMessage Get(string id)
         {
             return opcomun.BusquedaPorId(id);
